@@ -27,12 +27,10 @@ public class Painter extends JFrame{
     private int height;
 
     public Painter() throws IOException{
-        System.out.println("neues Objekt vom Typ \"createImage\" wurde erzeugt");
         this.addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e){
                 super.componentResized(e);
-                System.out.println("Aktuelle Fenstergroesse: "+e.getComponent().getSize());
                 try {
                     drawImage(e.getComponent().getWidth(), e.getComponent().getHeight(), backGroundColor, pixelColor);
                 } catch (IOException e1) {
@@ -68,7 +66,6 @@ public class Painter extends JFrame{
         /**
          * A new Panel is created, which inherits all the Elements shown in the Application.
          * */
-        System.out.println("Erzeugen des Panels mit einer Hoehe von: "+hoehe+" und einer Breite von: "+breite);
         panel = new MyJPanel();
         panel.setPreferredSize(new Dimension(breite, hoehe));
         panel.setLocation(50, 50);
@@ -87,8 +84,6 @@ public class Painter extends JFrame{
          * */
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Save");
-        menu.setMnemonic(KeyEvent.VK_A);
-        menu.getAccessibleContext().setAccessibleDescription("The only menu in this program that has menu items");
         JMenuItem save = new JMenuItem("save picture");
         menu.add(save);
         menuBar.add(menu);
@@ -113,7 +108,6 @@ public class Painter extends JFrame{
         /**
          * The BufferedImage buff is used to set the pixels based on RGB values.
          * */
-        System.out.println("Bild wird neu gezeichnet.");
         buff = new BufferedImage(breite, hoehe, BufferedImage.TYPE_INT_RGB);
 
 
