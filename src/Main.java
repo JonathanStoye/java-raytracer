@@ -1,4 +1,6 @@
-import Aufgabe1.CreateImage;
+import Aufgabe1.Painter;
+
+import java.io.IOException;
 
 /**
  * Created by Jonathan on 28.04.15.
@@ -7,6 +9,5 @@ import Aufgabe1.CreateImage;
 public class Main {
 
     public static void main(String [] args) {
-
     }
 }
