@@ -8,10 +8,8 @@ import javax.swing.*;
 
 /**
  * Created by Jonathan on 28.04.15.
- * This class opens a dialog to choose a image, which get display afterwards
+ * This class opens a dialog to choose a image, which gets displayed afterwards
  */
-
-
 public class ShowImage extends Panel {
 
     BufferedImage image;
@@ -23,15 +21,16 @@ public class ShowImage extends Panel {
             int result = fileChooser.showOpenDialog(null);
 
             if (result == JFileChooser.APPROVE_OPTION) {
-                File file = fileChooser.getSelectedFile();
+                final File file = fileChooser.getSelectedFile();
                 image = ImageIO.read(file);
                 this.setSize(image.getWidth(), image.getHeight());
             }
         } catch (IOException ie) {
-            System.out.println("Error:"+ie.getMessage());
+            System.out.println("Error: " + ie.getMessage());
         }
     }
 
+    @Override
     public void paint(Graphics g) {
         g.drawImage(image, 0, 0, null);
     }
