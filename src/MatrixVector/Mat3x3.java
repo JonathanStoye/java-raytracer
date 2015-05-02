@@ -6,7 +6,7 @@ package MatrixVector;
  * provides the methods to multiply it with a Matrix, a Vector or a Point
  * implements tests to assure its functionality
  */
-public class Mat3x3 {
+public final class Mat3x3 {
 
     public final Double m11;
     public final Double m12;
