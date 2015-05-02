@@ -33,7 +33,7 @@ public class ShowImage extends Panel {
     }
 
     public void paint(Graphics g) {
-        g.drawImage( image, 0, 0, null);
+        g.drawImage(image, 0, 0, null);
     }
 
     public static void main(String args[]) throws Exception {

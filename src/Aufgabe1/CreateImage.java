@@ -83,5 +83,4 @@ public class CreateImage extends JFrame{
         setVisible(true);
         setBackground(Color.BLACK);
     }
-
 }
