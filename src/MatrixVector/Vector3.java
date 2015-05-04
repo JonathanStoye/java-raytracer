@@ -45,7 +45,9 @@ public final class Vector3 {
     }
 
     /**
-     *
+     * Subtracts the given Normal3 from the current Vector3.
+     * @param n Normal3, supposed to be subtracted from the given Vector3.
+     * @return Substraction Normal3 from Vector3.
      * */
     public Vector3 sub(Normal3 n){
         Vector3 result = new Vector3((this.x-n.x), (this.y-n.y), (this.z-n.z));
@@ -53,7 +55,9 @@ public final class Vector3 {
     }
 
     /**
-     *
+     * Multiplies the given Value with the current Vector3.
+     * @param c Value of the scalar
+     * @return result of the scalar multiplication
      * */
     public Vector3 mul(Double c){
         Vector3 result = new Vector3((this.x*c), (this.y*c), (this.z*c));
@@ -61,7 +65,9 @@ public final class Vector3 {
     }
 
     /**
-     *
+     * Multiplies the given Vector3 with the current Vector3.
+     * @param v Vector supposed to be multiplied with the current.
+     * @return result of the vector multiplication
      * */
     public Double dot(Vector3 v){
         Double result = (this.x*v.x) + (this.y*v.y) + (this.z*v.z);
@@ -69,7 +75,9 @@ public final class Vector3 {
     }
 
     /**
-     *
+     * Multiplies the given Normal3 with the current Vector3
+     * @param n Normal, supposed to be multiplied with the current Vector3.
+     * @return result of the vector multiplication.
      * */
     public Double dot(Normal3 n){
         Double result = (this.x*n.x) + (this.y*n.y) + (this.z*n.z);
@@ -77,7 +85,8 @@ public final class Vector3 {
     }
 
     /**
-     *
+     * Normalizes the current Vector3 using his length (norm)
+     * @return normalized Vector3
      * */
     public Vector3 normalized(){
         Double norm = Math.sqrt(this.x*this.x) + (this.y*this.y) + (this.z*this.z);
@@ -86,15 +95,18 @@ public final class Vector3 {
     }
 
     /**
-     *
+     * Converts the current Vector into a Normal3
+     * @return Normal3 based on the current Vector3
      * */
     public Normal3 asNormal(){
-        Normal3 result = new Normal3 (this.x, this.y, this.z);
+        Normal3 result = new Normal3 (this.y*this.z-(this.z*this.y), (this.z*this.x)-(this.x*this.z), (this.x*this.y)-(this.y*this.x));
         return result;
     }
 
     /**
-     *
+     * Reflects the current Vector3 using the given Normal3
+     * @param n Normal3, used to reflect the current Vector
+     * @return reflected Vector3
      * */
     public Vector3 reflectedOn (Normal3 n){
         Vector3 result = this.add(n.mul(n.dot(this.mul(2.0))));
@@ -102,7 +114,9 @@ public final class Vector3 {
     }
 
     /**
-     *
+     * Calculates the cross product between the current and a given Vector3
+     * @param v given Vector3, used to be the right part of the cross product
+     * @result the cross product as a new Vector3.
      * */
     public Vector3 x(Vector3 v){
         Double a = this.y*v.z - this.z*v.y;
