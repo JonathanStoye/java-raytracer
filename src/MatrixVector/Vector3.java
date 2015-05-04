@@ -10,7 +10,7 @@ public final class Vector3 {
     public final Double x;
     public final Double y;
     public final Double z;
-    public Double magnitude;
+    public final Double magnitude;
 
     /**
      * Initiates the Vektor with the given Values.
@@ -22,6 +22,7 @@ public final class Vector3 {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.magnitude = Math.sqrt(this.x*this.x + this.y*this.y + this.z*this.z);
     }
 
     /**
@@ -89,8 +90,7 @@ public final class Vector3 {
      * @return normalized Vector3
      * */
     public Vector3 normalized(){
-        Double norm = Math.sqrt(this.x*this.x) + (this.y*this.y) + (this.z*this.z);
-        Vector3 result = new Vector3(this.x*(1/norm), this.y*(1/norm), this.z*(1/norm));
+        Vector3 result = new Vector3(this.x*(1/this.magnitude), this.y*(1/this.magnitude), this.z*(1/this.magnitude));
         return result;
     }
 
@@ -99,7 +99,7 @@ public final class Vector3 {
      * @return Normal3 based on the current Vector3
      * */
     public Normal3 asNormal(){
-        Normal3 result = new Normal3 (this.y*this.z-(this.z*this.y), (this.z*this.x)-(this.x*this.z), (this.x*this.y)-(this.y*this.x));
+        Normal3 result = new Normal3 (this.x, this.y, this.z);
         return result;
     }
 
@@ -145,6 +145,92 @@ public final class Vector3 {
         result = 31 * result + y.hashCode();
         result = 31 * result + z.hashCode();
         return result;
+    }
+
+    private static void testVectorMulequalsNormal(){
+        Vector3 a = new Vector3(1.0,2.0,3.0);
+        a = a.mul(0.5);
+        Normal3 b = new Normal3(0.5, 1.0, 1.5);
+
+        if (a.equals(b)) {
+            Debugging.log("test Vector Multiplication equals Normal successful");
+        }
+        else {
+            Debugging.log("test Vector Multiplication equals Normal not successful");
+        }
+    }
+
+    private static void testNormalAdd(){
+        Normal3 a = new Normal3(1.0,2.0,3.0);
+        Normal3 b = new Normal3(3.0,2.0,1.0);
+        Normal3 c = a.add(b);
+        Vector3 v = new Vector3(4.0,4.0,4.0);
+
+        if (c.equals(v)) {
+            Debugging.log("Addition of Normals successful");
+        }
+        else {
+            Debugging.log("Addition of Normals not successful");
+        }
+    }
+
+    private static void testDotNormVec(){
+        Normal3 n = new Normal3(1.0, 0.0, 0.0);
+        Vector3 v = new Vector3(1.0, 0.0, 0.0);
+
+        if (n.dot(v) == 1.0) {
+            Debugging.log("test Norm - Vector Multiplication successful");
+        }
+        else {
+            Debugging.log("test Norm - Vector Multiplication not successful");
+        }
+    }
+    private static void testDotVecNorm(){
+        Normal3 n = new Normal3(1.0, 0.0, 0.0);
+        Vector3 v = new Vector3(1.0, 0.0, 0.0);
+
+        if (v.dot(n) == 1.0) {
+            Debugging.log("test Vector - Norm Multiplication successful");
+        }
+        else {
+            Debugging.log("test Vector - Norm Multiplication not successful");
+        }
+    }
+
+    private static void testDotVecVec(){
+        Vector3 v1 = new Vector3(1.0, 0.0, 0.0);
+        Vector3 v2 = new Vector3(1.0, 0.0, 0.0);
+
+        if (v1.dot(v2) == 1.0) {
+            Debugging.log("test Vector Multiplication successful");
+        }
+        else {
+            Debugging.log("test Vector Multiplication not successful");
+        }
+    }
+
+    private static void testMagn(){
+        Vector3 v = new Vector3(1.0, 1.0, 1.0);
+
+        if (v.magnitude == Math.sqrt(3)) {
+            Debugging.log("test Vector magnitude successful");
+        }
+        else {
+            Debugging.log("test Vector magnitude not successful");
+        }
+    }
+
+
+    public static void test() {
+        /**
+         * Tests zur Aufgabenstellung
+         * */
+        testVectorMulequalsNormal();
+        testNormalAdd();
+        testDotNormVec();
+        testDotVecNorm();
+        testDotVecVec();
+        testMagn();
     }
 
 }
