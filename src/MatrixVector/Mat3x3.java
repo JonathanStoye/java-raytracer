@@ -1,4 +1,5 @@
 package MatrixVector;
+import utilities.Debugging;
 
 /**
  * Created by Jonathan on 01.05.15.
@@ -171,10 +172,10 @@ public final class Mat3x3 {
         final Mat3x3 prod = m.mul(e);
 
         if (prod.equals(m)) {
-            System.out.println("testUnitMatrixMultiplication successful");
+            Debugging.log("testUnitMatrixMultiplication successful");
         }
         else {
-            System.out.println("testUnitMatrixMultiplication not successful");
+            Debugging.log("testUnitMatrixMultiplication not successful");
         }
     }
 
@@ -187,10 +188,10 @@ public final class Mat3x3 {
         final Vector3 prod = e.mul(v);
 
         if (prod.equals(v)) {
-            System.out.println("testMatrixVectorMultiplication successful");
+            Debugging.log("testMatrixVectorMultiplication successful");
         }
         else {
-            System.out.println("testMatrixVectorMultiplication not successful");
+            Debugging.log("testMatrixVectorMultiplication not successful");
         }
     }
 
@@ -204,10 +205,10 @@ public final class Mat3x3 {
         final Mat3x3 goal = new Mat3x3(3.0, 2.0, 1.0, 6.0, 5.0, 4.0, 9.0, 8.0, 7.0);
 
         if (prod.equals(goal)) {
-            System.out.println("testMatrixMultiplication successful");
+            Debugging.log("testMatrixMultiplication successful");
         }
         else {
-            System.out.println("testMatrixMultiplication not successful");
+            Debugging.log("testMatrixMultiplication not successful");
         }
     }
 
@@ -223,10 +224,10 @@ public final class Mat3x3 {
         final Mat3x3 goal = new Mat3x3(8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0, 8.0);
 
         if (prod.equals(goal)) {
-            System.out.println("testColumnChange successful");
+            Debugging.log("testColumnChange successful");
         }
         else {
-            System.out.println("testColumnChange not successful");
+            Debugging.log("testColumnChange not successful");
         }
     }
 }

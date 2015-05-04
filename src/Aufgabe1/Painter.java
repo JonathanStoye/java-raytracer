@@ -12,6 +12,7 @@ import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import utilities.Debugging;
 
 /**
  * The Class Painter creates an Image based on a JFrame and will be filled up with a Pane and an Image. *
