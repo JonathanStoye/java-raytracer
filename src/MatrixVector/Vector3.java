@@ -1,6 +1,5 @@
 package MatrixVector;
-
-import java.util.Vector;
+import utilities.Debugging;
 
 /**
  * Created by David on 04.05.2015
@@ -128,14 +127,14 @@ public final class Vector3 {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
+        if (this.x == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Vector3 vector3 = (Vector3) o;
 
-        if (!x.equals(vector3.x)) return false;
-        if (!y.equals(vector3.y)) return false;
-        return z.equals(vector3.z);
+        if (!(this.x.equals(vector3.x))) return false;
+        if (!(this.y.equals(vector3.y))) return false;
+        return this.z.equals(vector3.z);
 
     }
 
@@ -149,10 +148,10 @@ public final class Vector3 {
 
     private static void testVectorMulequalsNormal(){
         Vector3 a = new Vector3(1.0,2.0,3.0);
-        a = a.mul(0.5);
-        Normal3 b = new Normal3(0.5, 1.0, 1.5);
-
-        if (a.equals(b)) {
+        Normal3 b = new Normal3(0.5,1.0,1.5);
+        Vector3 r = a.mul(0.5);
+        System.out.println(a.mul(0.5).equals(b));
+        if (r.equals(b)) {
             Debugging.log("test Vector Multiplication equals Normal successful");
         }
         else {
@@ -220,6 +219,85 @@ public final class Vector3 {
         }
     }
 
+    private static void testSub(){
+        Vector3 v = new Vector3(1.0,1.0,1.0);
+        Normal3 n = new Normal3(2.0,2.0,0.0);
+        Vector3 r = new Vector3(2.0,2.0,0.0);
+
+        if (v.sub(n).equals(r)) {
+            Debugging.log("test Vector Substraction successful");
+        }
+        else {
+            Debugging.log("test Vector Substraction not successful");
+        }
+    }
+
+    private static void testSub2(){
+        Vector3 v = new Vector3(1.0,1.0,1.0);
+        Normal3 n = new Normal3(4.0,3.0,2.0);
+        Vector3 r = new Vector3(-3.0,-2.0,-1.0);
+
+        if (v.sub(n).equals(r)) {
+            Debugging.log("test Vector Substraction successful");
+        }
+        else {
+            Debugging.log("test Vector Substraction not successful");
+        }
+
+    }
+
+    private static void testAdd(){
+        Vector3 v = new Vector3(1.0,1.0,1.0);
+        Normal3 n = new Normal3(4.0,3.0,2.0);
+        Vector3 r = new Vector3(5.0,4.0,3.0);
+
+        if (v.add(n).equals(r)) {
+            Debugging.log("test Vector Addition successful");
+        }
+        else {
+            Debugging.log("test Vector Addition not successful");
+        }
+
+    }
+
+    private static void testMul(){
+        Vector3 v = new Vector3(1.0,1.0,1.0);
+        Vector3 r = new Vector3(3.0,3.0,3.0);
+
+        if (v.mul(3.0).equals(r)) {
+            Debugging.log("test Vector Multiplication with scalar successful");
+        }
+        else {
+            Debugging.log("test Vector Multiplication with scalar not successful");
+        }
+
+    }
+
+    private static void testReflectedOn1(){
+        Vector3 v = new Vector3(-0.707,0.707,0.0);
+        Normal3 n = new Normal3(0.0,1.0,0.0);
+        Vector3 r= new Vector3(0.707,0.707,0.0);
+
+        if (v.reflectedOn(n).equals(r)) {
+            Debugging.log("test Vector Reflection successful");
+        }
+        else {
+            Debugging.log("test Vector Reflection not successful");
+        }
+    }
+
+    private static void testReflectedOn2(){
+        Vector3 v = new Vector3(0.707,0.707,0.0);
+        Normal3 n = new Normal3(1.0,0.0,0.0);
+        Vector3 r= new Vector3(0.707,-0.707,0.0);
+
+        if (v.reflectedOn(n).equals(r)) {
+            Debugging.log("test Vector Reflection successful");
+        }
+        else {
+            Debugging.log("test Vector Reflection not successful");
+        }
+    }
 
     public static void test() {
         /**
@@ -231,6 +309,12 @@ public final class Vector3 {
         testDotVecNorm();
         testDotVecVec();
         testMagn();
+        testAdd();
+        testSub();
+        testSub2();
+        testMul();
+        testReflectedOn1();
+        testReflectedOn2();
     }
 
 }
