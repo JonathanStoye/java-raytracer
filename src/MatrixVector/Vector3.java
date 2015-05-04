@@ -2,6 +2,7 @@ package MatrixVector;
 import utilities.Debugging;
 
 /**
+ * Class Vector 3 is used to represent Object as 3-dimensional vectors
  * Created by David on 04.05.2015
  */
 public final class Vector3 {
