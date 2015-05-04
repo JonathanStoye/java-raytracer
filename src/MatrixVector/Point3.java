@@ -1,5 +1,7 @@
 package MatrixVector;
 
+import utilities.Debugging;
+
 /**
  * Created by Jonathan on 01.05.15.
  * Point3 represents a point in a 3 dimensional coordinate system
@@ -69,22 +71,22 @@ public final class Point3 {
          * tests adding vectors
          */
         final Point3 sum1 = p.add(v);
-        if (sum1.equals(addGoalP)) System.out.println("Vector3 add() successful");
-        else System.out.println("Vector3 add() not successful");
+        if (sum1.equals(addGoalP)) Debugging.log("Vector3 add() successful");
+        else Debugging.log("Vector3 add() not successful");
 
         /**
          * tests subtracting vectors
          */
         final Point3 sum2 = p.sub(v);
-        if (sum2.equals(subGoalP)) System.out.println("Vector3 sub() successful");
-        else System.out.println("Vector3 sub() not successful");
+        if (sum2.equals(subGoalP)) Debugging.log("Vector3 sub() successful");
+        else Debugging.log("Vector3 sub() not successful");
 
         /**
          * tests subtracting points
          */
         final Vector3 sum3 = p.sub(p2);
-        if (sum3.equals(goalV)) System.out.println("Point3 sub() successful");
-        else System.out.println("Point3 sub() not successful");
+        if (sum3.equals(goalV)) Debugging.log("Point3 sub() successful");
+        else Debugging.log("Point3 sub() not successful");
     }
 
     @Override
