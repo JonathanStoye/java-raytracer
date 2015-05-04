@@ -108,7 +108,12 @@ public final class Vector3 {
      * @return reflected Vector3
      * */
     public Vector3 reflectedOn (Normal3 n){
-        Vector3 result = this.add(n.mul(n.dot(this.mul(2.0))));
+//        Vector3 result = this.add(n.mul(n.dot(this.mul(2.0))));
+        //(2.0)?(n)?(s)?(v)=r
+        Double s = this.dot(n);
+        Vector3 no = new Vector3(n.x, n.y, n.z);
+        no = no.mul(s).mul(2.0);
+        Vector3 result = no.sub(this.asNormal());
         return result;
     }
 
@@ -127,7 +132,7 @@ public final class Vector3 {
 
     @Override
     public boolean equals(Object o) {
-        if (this.x == o) return true;
+        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         Vector3 vector3 = (Vector3) o;
@@ -135,7 +140,17 @@ public final class Vector3 {
         if (!(this.x.equals(vector3.x))) return false;
         if (!(this.y.equals(vector3.y))) return false;
         return this.z.equals(vector3.z);
+    }
 
+    public boolean equals(Normal3 o) {
+        if (this.asNormal() == o) return true;
+        if (o == null) return false;
+
+        Normal3 vector3 = o;
+
+        if (!(this.x.equals(vector3.x))) return false;
+        if (!(this.y.equals(vector3.y))) return false;
+        return this.z.equals(vector3.z);
     }
 
     @Override
@@ -150,7 +165,6 @@ public final class Vector3 {
         Vector3 a = new Vector3(1.0,2.0,3.0);
         Normal3 b = new Normal3(0.5,1.0,1.5);
         Vector3 r = a.mul(0.5);
-        System.out.println(a.mul(0.5).equals(b));
         if (r.equals(b)) {
             Debugging.log("test Vector Multiplication equals Normal successful");
         }
@@ -222,13 +236,13 @@ public final class Vector3 {
     private static void testSub(){
         Vector3 v = new Vector3(1.0,1.0,1.0);
         Normal3 n = new Normal3(2.0,2.0,0.0);
-        Vector3 r = new Vector3(2.0,2.0,0.0);
+        Vector3 r = new Vector3(-1.0,-1.0,1.0);
 
         if (v.sub(n).equals(r)) {
-            Debugging.log("test Vector Substraction successful");
+            Debugging.log("test Vector Substraction1 successful");
         }
         else {
-            Debugging.log("test Vector Substraction not successful");
+            Debugging.log("test Vector Substraction1 not successful");
         }
     }
 
@@ -238,10 +252,10 @@ public final class Vector3 {
         Vector3 r = new Vector3(-3.0,-2.0,-1.0);
 
         if (v.sub(n).equals(r)) {
-            Debugging.log("test Vector Substraction successful");
+            Debugging.log("test Vector Substraction2 successful");
         }
         else {
-            Debugging.log("test Vector Substraction not successful");
+            Debugging.log("test Vector Substraction2 not successful");
         }
 
     }
@@ -276,13 +290,14 @@ public final class Vector3 {
     private static void testReflectedOn1(){
         Vector3 v = new Vector3(-0.707,0.707,0.0);
         Normal3 n = new Normal3(0.0,1.0,0.0);
+        Vector3 check = v.reflectedOn(n);
         Vector3 r= new Vector3(0.707,0.707,0.0);
 
         if (v.reflectedOn(n).equals(r)) {
-            Debugging.log("test Vector Reflection successful");
+            Debugging.log("test Vector Reflection1 successful");
         }
         else {
-            Debugging.log("test Vector Reflection not successful");
+            Debugging.log("test Vector Reflection1 not successful");
         }
     }
 
@@ -292,10 +307,10 @@ public final class Vector3 {
         Vector3 r= new Vector3(0.707,-0.707,0.0);
 
         if (v.reflectedOn(n).equals(r)) {
-            Debugging.log("test Vector Reflection successful");
+            Debugging.log("test Vector Reflection2 successful");
         }
         else {
-            Debugging.log("test Vector Reflection not successful");
+            Debugging.log("test Vector Reflection2 not successful");
         }
     }
 
