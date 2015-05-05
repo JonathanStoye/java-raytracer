@@ -154,9 +154,8 @@ public final class Mat3x3 {
 
     /**
      * this function is used to test the functionality of this class
-     * @param args
      */
-    public static void main (String[] args) {
+    public static void test() {
         testUnitMatrixMultiplication();
         testMatrixMultiplication();
         testColumnChange();
