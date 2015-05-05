@@ -21,31 +21,33 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		
-		File file; // File wo image reingeladen wird
+		File file;  /* Variable für File */
 		
-		//Filter
+		/*Filter*/
 		FileFilter filter = new FileNameExtensionFilter("Bilder", "gif", "png", "jpg");
 				
-		//OpenDialog
+		/* OpenDialog */
 		JFileChooser fc = new JFileChooser();
+		fc.setAcceptAllFileFilterUsed(false); /*"Alle-Dateien-Filter aus */
 		fc.addChoosableFileFilter(filter);
+		fc.setMultiSelectionEnabled(false); /* keine Multiselection*/
 		fc.showOpenDialog(null);
 		
-		//Bild übergeben
+		/* Bild übergeben */
 		file = fc.getSelectedFile();
 		
 		
-		//Bild laden
+		/* Bild laden */
 		Image img = ImageIO.read(file);
 
 		
-		//In JFrame laden
+		/* In JFrame laden */
 		JFrame frame = new JFrame();
 		frame.setTitle("CG I - Übung 1");
 		frame.setResizable(false);
-		frame.setSize(img.getWidth(fc), img.getHeight(fc)); // Größe des Fensters auf Bildgröße anpassen
+		frame.setSize(img.getWidth(fc), img.getHeight(fc)); /* Größe des Fensters auf Bildgröße anpassen */
 		
-		JLabel l = new JLabel(new ImageIcon(img)); // Bild auf label
+		JLabel l = new JLabel(new ImageIcon(img)); /* Bild auf label */
 		frame.add(l);
 		
 		frame.setVisible(true);
