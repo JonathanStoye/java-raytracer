@@ -14,5 +14,6 @@ public class Main {
     public static void main(String [] args) {
         Mat3x3.test();
         Vector3.test();
+        system.out.println("test");
     }
 }
