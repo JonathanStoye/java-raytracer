@@ -131,7 +131,7 @@ public class Painter extends JFrame{
 
     }
 
-    public static void main(String [] args) {
+    public void test() {
         try {
             Painter test = new Painter();
             test.drawImage(640, 480, 0xFF000000, 0xFFFF0000);
