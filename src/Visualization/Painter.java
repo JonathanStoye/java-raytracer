@@ -1,5 +1,7 @@
 package Visualization;
 
+import Utilities.Debugging;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -146,9 +148,11 @@ public class Painter extends JFrame{
         try {
             Painter test = new Painter();
             test.drawImage(640, 480, 0xFF000000, 0xFFFF0000);
+            test.setVisible(false);
             String path = "test.png";
             File file = new File(path);
             test.save(file);
+            Debugging.log("test Painter successful");
         } catch (IOException e) {
             e.printStackTrace();
         }
