@@ -6,7 +6,7 @@ import java.io.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 
-import utilities.Debugging;
+import Utilities.Debugging;
 
 /**
  * Created by Jonathan on 28.04.15.
