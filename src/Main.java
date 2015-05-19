@@ -1,5 +1,7 @@
 import MatrixVector.Mat3x3;
 import MatrixVector.Vector3;
+import Visualization.Painter;
+import Visualization.ShowImage;
 
 /**
  * Created by Jonathan on 28.04.15.
@@ -8,7 +10,13 @@ import MatrixVector.Vector3;
 public class Main {
 
     public static void main(String [] args) {
+        testAll();
+    }
+
+    private static void testAll() {
         Mat3x3.test();
         Vector3.test();
+        Painter.test();
+        ShowImage.test();
     }
 }
