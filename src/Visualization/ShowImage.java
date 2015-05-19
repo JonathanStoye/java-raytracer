@@ -1,4 +1,4 @@
-package Aufgabe1;
+package Visualization;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;

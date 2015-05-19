@@ -1,18 +1,13 @@
-package Aufgabe1;
+package Visualization;
 
-import sun.swing.MenuItemLayoutHelper;
 import javax.imageio.ImageIO;
 import javax.swing.*;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.MenuListener;
-import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import utilities.Debugging;
 
 /**
  * The Class Painter creates an Image based on a JFrame and will be filled up with a Pane and an Image. *
