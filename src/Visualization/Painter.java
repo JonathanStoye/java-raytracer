@@ -90,11 +90,7 @@ public class Painter extends JFrame{
             if (fc.showSaveDialog(save) == JFileChooser.APPROVE_OPTION) {
                 String path = fc.getSelectedFile().getPath()+".png";
                 File imageFile = new File(path);
-                try {
-                    ImageIO.write(buff, "png", imageFile);
-                } catch (IOException e1) {
-                    e1.printStackTrace();
-                }
+                save(imageFile);
             }
         });
         this.setJMenuBar(menuBar);
@@ -132,12 +128,27 @@ public class Painter extends JFrame{
     }
 
     /**
+     * saves the given file
+     * @param file
+     */
+    private void save(File file) {
+        try {
+            ImageIO.write(buff, "png", file);
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+    }
+
+    /**
      * used to test the functionality of this class
      */
-    public void test() {
+    public static void test() {
         try {
             Painter test = new Painter();
             test.drawImage(640, 480, 0xFF000000, 0xFFFF0000);
+            String path = "test.png";
+            File file = new File(path);
+            test.save(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
