@@ -65,10 +65,9 @@ public class ShowImage extends JFrame {
 
     /**
      * creates a new instance of this and sets the needed parameters
-     * @param args
      * @throws Exception
      */
-    public static void main(String args[]) throws Exception {
+    public void test() throws Exception {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         ShowImage frame = new ShowImage();
         frame.setLocation((int) screenSize.getWidth() / 2 - frame.getWidth() / 2, (int) screenSize.getHeight() / 2 - frame.getHeight() / 2);

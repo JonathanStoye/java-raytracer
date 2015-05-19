@@ -131,6 +131,9 @@ public class Painter extends JFrame{
 
     }
 
+    /**
+     * used to test the functionality of this class
+     */
     public void test() {
         try {
             Painter test = new Painter();
