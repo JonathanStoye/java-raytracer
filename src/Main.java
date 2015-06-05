@@ -1,5 +1,6 @@
 import MatrixVector.Mat3x3;
 import MatrixVector.Vector3;
+import Scene.Color;
 import Visualization.Painter;
 import Visualization.ShowImage;
 
@@ -18,5 +19,6 @@ public class Main {
         Vector3.test();
         Painter.test();
         ShowImage.test();
+        Color.test();
     }
 }

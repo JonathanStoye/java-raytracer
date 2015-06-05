@@ -10,7 +10,7 @@ public class Ray {
     private static Point3 origin;
     private static Vector3 direction;
 
-    public void Ray(Point3 origin, Vector3 direction) {
+    public Ray(Point3 origin, Vector3 direction) {
         this.origin = origin;
         this.direction = direction;
     }
