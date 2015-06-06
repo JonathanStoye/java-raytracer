@@ -23,7 +23,7 @@ public abstract class Geometry {
 
     /**
      * Determines wether the given ray is hitting the current object.
-     * @param ray specific ray, which is potentially hitting the current object.
+     * @param ray if the form is hit, the method returns a Hit object giving information of the t-value, ray and hit Geometry-object.
      */
     public abstract Hit hit(final Ray ray);
 }
