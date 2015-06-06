@@ -23,6 +23,6 @@ public class Camera {
     }
 
     public Ray rayfor(int w, int h, int x, int y) {
-
+        return null;
     }
 }

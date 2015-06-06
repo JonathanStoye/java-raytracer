@@ -22,6 +22,6 @@ public class PerspectiveCamera {
         }
 
         public Ray rayFor(int w, int h, int x, int y) {
-
+            return null;
         }
 }
