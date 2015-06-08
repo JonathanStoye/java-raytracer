@@ -7,8 +7,8 @@ import MatrixVector.Vector3;
  * Created by Jonathan on 05.06.15.
  */
 public class Ray {
-    public static Point3 origin;
-    public static Vector3 direction;
+    public final Point3 origin;
+    public final Vector3 direction;
 
     public Ray(Point3 origin, Vector3 direction) {
         this.origin = origin;
