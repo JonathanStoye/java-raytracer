@@ -108,7 +108,7 @@ public class ShowImage extends JFrame {
 
     /**
      * test all class functionality fully automated
-     * relies on the generated testPicture of Painter
+     * relies on the generated testPicture of PaintDiagonal
      */
     public static void test() {
         File file = new File("test.png");
