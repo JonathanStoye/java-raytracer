@@ -41,14 +41,13 @@ public class Painter extends JFrame{
         this.worldHeight = worldHeight;
         this.pixels = pixels;
         this.setupFrame();
-
     }
 
     private void setupFrame(){
         this.parent = new JFrame();
         this.parent.setVisible(true);
         this.parent.setResizable(true);
-        this.parent.setSize(new Dimension((int) (60+worldHeight), (int) (60+worldWidth)));
+        this.parent.setSize(new Dimension((int) (worldWidth+16), (int) (60+worldHeight)));
         this.setupPanel(this.parent);
         this.parent.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setupMenuBar(this.parent);
@@ -57,7 +56,7 @@ public class Painter extends JFrame{
     private void setupPanel(JFrame currentParent){
         panel = new MyJPanel();
         panel.setPreferredSize(new Dimension((int) worldWidth, (int) worldHeight));
-        panel.setLocation(10, 10);
+        panel.setLocation(0, 0);
         currentParent.add(panel);
     }
 
