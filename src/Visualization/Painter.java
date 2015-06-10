@@ -1,17 +1,10 @@
 package Visualization;
 
-import Scene.Color;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.*;
-import java.awt.event.*;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -21,8 +14,6 @@ import java.io.IOException;
 public class Painter extends JFrame{
     private double worldWidth;
     private double worldHeight;
-    private double frameWidth;
-    private double frameHeight;
     private int[] pixels;
     private JFrame parent;
     private BufferedImage image;
