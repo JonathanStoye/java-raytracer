@@ -89,24 +89,18 @@ public class Painter extends JFrame{
         }
     }
 
-
-
     public void draw(){
         this.image = new BufferedImage((int) worldWidth, (int)worldHeight, BufferedImage.TYPE_INT_RGB);
-        for(int h=0; h<worldWidth; h++){
-            for (int w=0; w<worldHeight; w++){
-                image.setRGB(h, w*3, pixels[h*3]);
+        for(int i=0; i<worldHeight; i++){
+            for (int x=0; x<worldWidth; x++){
+                drawPixel(i, x, pixels[i]);
             }
         }
 
     }
 
-    private void drawPixel() {
-
-    }
-
-    private void drawPixel(double x, double y, Color color) {
-
+    private void drawPixel(int y, int x, int colorValue) {
+        this.image.setRGB(x, y, colorValue);
     }
 
 }
