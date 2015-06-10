@@ -10,6 +10,7 @@ import java.io.IOException;
 
 /**
  * Created by Jonathan on 09.06.15.
+ * Implemented by David on 10.06.2015.
  */
 public class Painter extends JFrame{
     private double worldWidth;
