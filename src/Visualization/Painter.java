@@ -13,8 +13,8 @@ import java.io.IOException;
  * Implemented by David on 10.06.2015.
  */
 public class Painter extends JFrame{
-    private double worldWidth;
-    private double worldHeight;
+    private int worldWidth;
+    private int worldHeight;
     private int[] pixels;
     private JFrame parent;
     private BufferedImage image;
@@ -28,7 +28,7 @@ public class Painter extends JFrame{
         }
     }
 
-    public Painter(double worldWidth, double worldHeight, int[] pixels) {
+    public Painter(int worldWidth, int worldHeight, int[] pixels) {
         this.worldWidth = worldWidth;
         this.worldHeight = worldHeight;
         this.pixels = pixels;
