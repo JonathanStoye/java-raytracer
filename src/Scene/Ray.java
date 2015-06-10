@@ -16,7 +16,8 @@ public class Ray {
     }
 
     public Point3 at(double t) {
-        return null;
+        Point3 p = this.origin.add(this.direction.mul(t));
+        return p;
     }
 
     public double tOf(Point3 p) {

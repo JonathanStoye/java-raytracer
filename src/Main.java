@@ -1,7 +1,8 @@
 import MatrixVector.Mat3x3;
 import MatrixVector.Vector3;
 import Scene.Color;
-import Visualization.Painter;
+import Scene.Raytracer;
+import Visualization.PaintDiagonal;
 import Visualization.ShowImage;
 
 /**
@@ -11,13 +12,14 @@ import Visualization.ShowImage;
 public class Main {
 
     public static void main(String [] args) {
-        testAll();
+        //testAll();
+        Raytracer raytracer = new Raytracer(100, 100);
     }
 
     private static void testAll() {
         Mat3x3.test();
         Vector3.test();
-        Painter.test();
+        PaintDiagonal.test();
         ShowImage.test();
         Color.test();
     }
