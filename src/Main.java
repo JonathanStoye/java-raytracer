@@ -22,20 +22,19 @@ public class Main {
         ShowImage.test();
         Color.test();
         */
-    // TEST Array für alle Pixel 10x10 pixel jeweils drei rgb-Werte
-        int[] testPixelArray = new int[]{
-                0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,
-                0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,
-                0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,
-                0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,
-                0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,
-                0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,
-                0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,
-                0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,
-                0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,
-                0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,0xffffffff,
-        };
-        Painter test = new Painter(10, 10, testPixelArray);
+    // TEST Array für alle Pixel in diesem Fall 200x200.
+        //
+        int[] testPixelArray = new int[40000];
+
+        // filling testArray with RGB= Blue = 0xFF0000FF;
+        // Syntax: 0xff (Hexadezimal representation)
+        //             00      (first two values for RED;
+        //               00    (second to values for GREEN;
+        //                 00  (thirs two values for BLUE;
+        for (int i=0; i<=39999; i++){
+            testPixelArray[i]=0xff0000ff;
+        }
+        Painter test = new Painter(200, 200, testPixelArray);
         test.draw();
 
     }
