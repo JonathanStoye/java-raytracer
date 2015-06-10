@@ -47,7 +47,7 @@ public class ShowImage extends JFrame {
      */
     @Override
     public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, null);
+        g.drawImage(this.image, 0, 0, null);
     }
 
     /**

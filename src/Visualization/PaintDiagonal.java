@@ -108,7 +108,7 @@ public class PaintDiagonal extends JFrame{
         /**
          * The Image is filled with the pixels colored by the preferred RGB-Value.
          * */
-         for(int i=0; i<height;i++){
+        for(int i=0; i<height;i++){
             for(int w=0; w<width; w++){
                 buff.setRGB(w, i, backGroundColor);
             }
