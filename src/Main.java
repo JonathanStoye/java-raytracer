@@ -26,10 +26,10 @@ public class Main {
         //
         int[] testPixelArray = new int[40000];
 
-        // filling testArray with RGB= Blue = 0xFF0000FF;
-        // Syntax: 0xff (Hexadezimal representation)
+        // filling testArray with RGB= Blue = 0xFF0000FF; (Hexadezimal representation)
+        // Syntax: 0xff
         //             00      (first two values for RED;
-        //               00    (second to values for GREEN;
+        //               00    (second two values for GREEN;
         //                 00  (thirs two values for BLUE;
         for (int i=0; i<=39999; i++){
             testPixelArray[i]=0xff0000ff;
