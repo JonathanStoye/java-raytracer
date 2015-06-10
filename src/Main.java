@@ -17,10 +17,27 @@ public class Main {
     }
 
     private static void testAll() {
+        /*
         Mat3x3.test();
         Vector3.test();
         PaintDiagonal.test();
         ShowImage.test();
         Color.test();
+        */
+    // TEST Array für alle Pixel in diesem Fall 200x200.
+        //
+        int[] testPixelArray = new int[40000];
+
+        // filling testArray with RGB= Blue = 0xFF0000FF; (Hexadezimal representation)
+        // Syntax: 0xff
+        //             00      (first two values for RED;
+        //               00    (second two values for GREEN;
+        //                 00  (thirs two values for BLUE;
+        for (int i=0; i<=39999; i++){
+            testPixelArray[i]=0xff0000ff;
+        }
+        Painter test = new Painter(200, 200, testPixelArray);
+        test.draw();
+
     }
 }
