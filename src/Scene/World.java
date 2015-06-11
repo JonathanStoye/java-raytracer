@@ -19,21 +19,21 @@ public class World {
      * @param ray ray to compare if this.object got hit by it
      * @return the smallest hit value
      */
-    public double hit(Ray ray) {
-        Double t = null;
+    public Hit hit(Ray ray) {
+        Hit hit = null;
         for (Geometry geo : objects){
             Hit currentHit = geo.hit(ray);
 
-            if ( currentHit != null && t != null) {
-                if (currentHit.t < t) {
-                    t = currentHit.t;
+            if ( currentHit != null && hit != null) {
+                if (currentHit.t < hit.t) {
+                    hit = currentHit;
                 }
             }
             else {
-                t = currentHit.t;
+                hit = currentHit;
             }
         }
-        return t;
+        return hit;
     }
 
     public static void test() {

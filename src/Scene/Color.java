@@ -57,11 +57,24 @@ public class Color {
     }
 
     /**
+     * return the color as a hexadecimal value
+     * @return the hexadecimal color value
+     */
+    public int asHex() {
+        return (int) (Math.round(r*255)*256*256+Math.round(g*255)*256+Math.round(b*255));
+    }
+
+    private static void testAsHex() {
+        final Color color = new Color(1.0, 0, 0);
+        Debugging.log("color: " + color.asHex());
+    }
+
+    /**
      * test the add() function
      */
     private static void testAdd() {
-        Color color = new Color(0.0, 0.0, 0.0);
-        Color addColor = new Color(0.3, 0.3, 0.3);
+        final Color color = new Color(0.0, 0.0, 0.0);
+        final Color addColor = new Color(0.3, 0.3, 0.3);
         color.add(addColor);
         if (color.equals(addColor)) {
             Debugging.log("test Color.add() successful");
@@ -75,8 +88,8 @@ public class Color {
      * test the sub() function
      */
     private static void testSub() {
-        Color color = new Color(0.6, 0.6, 0.6);
-        Color subColor = new Color(0.3, 0.3, 0.3);
+        final Color color = new Color(0.6, 0.6, 0.6);
+        final Color subColor = new Color(0.3, 0.3, 0.3);
         color.sub(subColor);
         if (color.equals(subColor)) {
             Debugging.log("test Color.sub() successful");
@@ -90,9 +103,9 @@ public class Color {
      * test the mul() function with a color
      */
     private static void testMul() {
-        Color color = new Color(0.2, 0.2, 0.2);
-        Color mulColor = new Color(0.3, 0.3, 0.3);
-        Color sumColor = new Color(0.06, 0.06, 0.06);
+        final Color color = new Color(0.2, 0.2, 0.2);
+        final Color mulColor = new Color(0.3, 0.3, 0.3);
+        final Color sumColor = new Color(0.06, 0.06, 0.06);
 
         color.mul(mulColor);
         if (color.equals(sumColor)) {
@@ -107,9 +120,9 @@ public class Color {
      * test the mul() function with a skalar
      */
     private static void testMulS() {
-        Color color = new Color(0.2, 0.2, 0.2);
-        double skalar = 0.3;
-        Color sumColor = new Color(0.06, 0.06, 0.06);
+        final Color color = new Color(0.2, 0.2, 0.2);
+        final double skalar = 0.3;
+        final Color sumColor = new Color(0.06, 0.06, 0.06);
 
         color.mul(skalar);
         if (color.equals(sumColor)) {
@@ -128,6 +141,7 @@ public class Color {
         testSub();
         testMul();
         testMulS();
+        testAsHex();
     }
 
     @Override
