@@ -110,30 +110,11 @@ public class Sphere extends Geometry{
         Ray testRayOutsideUpperBorder = new Ray(new Point3(0.0, 76.0, 0), new Vector3(100.0, 0.0, 0.0));
         Ray testRayOutsideLowerBorder = new Ray(new Point3(0.0, 24.0, 0), new Vector3(100.0, 0.0, 0.0));
         Ray TestRay3DimensionalPositiveZAtSphereBorder = new Ray(new Point3(0.0, 50.0, 25.0), new Vector3(100.0, 0.0, 0.0));
+        Ray TestRay3DimensionalPositiveZBetweenMiddleAndBorder = new Ray(new Point3(0.0, 50.0, 12.5), new Vector3(100.0, 0.0, 0.0));
         Ray TestRay3DimensionalNegativeZAtSphereBorder  = new Ray(new Point3(0.0, 50.0, -25.0), new Vector3(100.0, 0.0, 0.0));
         Ray TestRay3DimensionalPositiveZOutsideSphereBorder = new Ray(new Point3(0.0, 50.0, 26.0), new Vector3(100.0, 0.0, 0.0));
         Ray TestRay3DimensionalNegativeZOutsideSphereBorder  = new Ray(new Point3(0.0, 50.0, -26.0), new Vector3(100.0, 0.0, 0.0));
         Sphere testSphere = new Sphere(new Point3(50.0,50.0,0.0), 25.0, new Color(1,0,0));
-        if (testSphere.hit(TestRay3DimensionalPositiveZAtSphereBorder) != null){
-            Debugging.log("Successful: Vector TestRay3DimensionalPositiveZAtSphereBorder is hitting the Sphere at t= " + testSphere.hit(TestRay3DimensionalPositiveZAtSphereBorder).t );
-        }else{
-            Debugging.log("Unsuccessful: Vector TestRay3DimensionalPositiveZAtSphereBorder is not hitting the Sphere.");
-        }
-        if(testSphere.hit(TestRay3DimensionalNegativeZAtSphereBorder) != null){
-            Debugging.log("Successful: Vector TestRay3DimensionalNegativeZAtSphereBorder is hitting the Sphere at t= " + testSphere.hit(TestRay3DimensionalNegativeZAtSphereBorder).t);
-        } else{
-            Debugging.log("Unsuccessful: Vector TestRay3DimensionalNegativeZAtSphereBorder is not hitting the Sphere.");
-        }
-        if(testSphere.hit(TestRay3DimensionalPositiveZOutsideSphereBorder) == null){
-            Debugging.log("Successful: Vector TestRay3DimensionalPositiveZOutsideSphereBorder ist not hitting the Sphere");
-        } else {
-            Debugging.log("Unsuccessful: Vector TestRay3DimensionalPositiveZOutsideSphereBorder is hitting the Sphere at t=" + testSphere.hit(TestRay3DimensionalPositiveZOutsideSphereBorder).t);
-        }
-        if(testSphere.hit(TestRay3DimensionalNegativeZOutsideSphereBorder) == null){
-            Debugging.log("Successful: Vector TestRay3DimensionalNegativeZOutsideSphereBorder is not hitting the Sphere");
-        }else {
-            Debugging.log("Unsuccessful: Vector TestRay3DimensionalNegativeZOutsideSphereBorder is hitting the Sphere at t=" + testSphere.hit(TestRay3DimensionalNegativeZOutsideSphereBorder).t);
-        }
         if (testSphere.hit(testRayMiddle) != null) {
             Debugging.log("Successful: Vector testRayMiddle is hitting Sphere at t=" + testSphere.hit(testRayMiddle).t);
         }else {
@@ -156,7 +137,7 @@ public class Sphere extends Geometry{
             Debugging.log("Unsuccessful: Vector testRayLowerBorder is not hitting Sphere.");
         }
         if(testSphere.hit(testRayOutsideUpperBorder) == null){
-            Debugging.log("Successful: testRayOutsideUpperBorder is not hitting the Sphere.");
+            Debugging.log("Successful: Vector testRayOutsideUpperBorder is not hitting the Sphere.");
         } else{
             Debugging.log("Unsuccessful: Vector testRayOutsideUpperBorder is hitting the Sphere at t= " + testSphere.hit(testRayOutsideUpperBorder).t);
         }
@@ -165,7 +146,31 @@ public class Sphere extends Geometry{
         } else{
             Debugging.log("Unsuccessful: Vector testRayOutsideLowerBorder is hitting the sphere at t=" + testSphere.hit(testRayOutsideLowerBorder).t);
         }
-
+        if (testSphere.hit(TestRay3DimensionalPositiveZAtSphereBorder) != null){
+            Debugging.log("Successful: Vector TestRay3DimensionalPositiveZAtSphereBorder is hitting the Sphere at t= " + testSphere.hit(TestRay3DimensionalPositiveZAtSphereBorder).t );
+        }else{
+            Debugging.log("Unsuccessful: Vector TestRay3DimensionalPositiveZAtSphereBorder is not hitting the Sphere.");
+        }
+        if(testSphere.hit(TestRay3DimensionalPositiveZBetweenMiddleAndBorder) != null){
+            Debugging.log("Successful: Vector TestRay3DimensionalPositiveZBetweenMiddleAndBorder is hitting the Sphere at t= " + testSphere.hit(TestRay3DimensionalPositiveZBetweenMiddleAndBorder).t);
+        }else {
+            Debugging.log("Unsuccessful: Vector TestRay3DimensionalPositiveZBetweenMiddleAndBorder is not hitting the Sphere.");
+        }
+        if(testSphere.hit(TestRay3DimensionalNegativeZAtSphereBorder) != null){
+            Debugging.log("Successful: Vector TestRay3DimensionalNegativeZAtSphereBorder is hitting the Sphere at t= " + testSphere.hit(TestRay3DimensionalNegativeZAtSphereBorder).t);
+        } else{
+            Debugging.log("Unsuccessful: Vector TestRay3DimensionalNegativeZAtSphereBorder is not hitting the Sphere.");
+        }
+        if(testSphere.hit(TestRay3DimensionalPositiveZOutsideSphereBorder) == null){
+            Debugging.log("Successful: Vector TestRay3DimensionalPositiveZOutsideSphereBorder is not hitting the Sphere");
+        } else {
+            Debugging.log("Unsuccessful: Vector TestRay3DimensionalPositiveZOutsideSphereBorder is hitting the Sphere at t=" + testSphere.hit(TestRay3DimensionalPositiveZOutsideSphereBorder).t);
+        }
+        if(testSphere.hit(TestRay3DimensionalNegativeZOutsideSphereBorder) == null){
+            Debugging.log("Successful: Vector TestRay3DimensionalNegativeZOutsideSphereBorder is not hitting the Sphere");
+        }else {
+            Debugging.log("Unsuccessful: Vector TestRay3DimensionalNegativeZOutsideSphereBorder is hitting the Sphere at t=" + testSphere.hit(TestRay3DimensionalNegativeZOutsideSphereBorder).t);
+        }
 
     }
 
