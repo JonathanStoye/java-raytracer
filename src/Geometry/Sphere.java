@@ -2,6 +2,7 @@ package Geometry;
 
 import MatrixVector.*;
 import Scene.*;
+import Utilities.Debugging;
 
 /**
  * Class sphere is used to describe a sphere in the 3-dimensional coordinate System
@@ -95,4 +96,50 @@ public class Sphere extends Geometry{
         return null;
 
     }
+
+    public static void testHit(){
+        // Test-Values
+        Ray testRayMiddle = new Ray(new Point3(0.0, 50.0, 0), new Vector3(100.0, 0.0, 0.0));
+        Ray testRayBetweenMiddleAndUpperBorder = new Ray(new Point3(0.0, 62.5, 0), new Vector3(100.0, 0.0, 0.0));
+        Ray testRayUpperBorder = new Ray(new Point3(0.0, 75.0, 0), new Vector3(100.0, 0.0, 0.0));
+        Ray testRayLowerBorder = new Ray(new Point3(0.0, 25.0, 0), new Vector3(100.0, 0.0, 0.0));
+        Ray testRayOutsideUpperBorder = new Ray(new Point3(0.0, 76.0, 0), new Vector3(100.0, 0.0, 0.0));
+        Ray testRayOutsideLowerBorder = new Ray(new Point3(0.0, 24.0, 0), new Vector3(100.0, 0.0, 0.0));
+        Sphere testSphere = new Sphere(new Point3(50.0,50.0,0.0), 25.0, new Color(1,0,0));
+        if (testSphere.hit(testRayMiddle) != null) {
+            Debugging.log("Successful: Vector testRayMiddle is hitting Sphere at t=" + testSphere.hit(testRayMiddle).t);
+        }else {
+            Debugging.log("Unsuccessful: Vector tet RayMiddle is not hitting the Sphere.");
+        }
+        if (testSphere.hit(testRayBetweenMiddleAndUpperBorder) != null){
+            Debugging.log("Successful: Vector testRayBetweenMiddleAndUpperBorder is hitting Sphere at t=" + testSphere.hit(testRayBetweenMiddleAndUpperBorder).t );
+        }else {
+            Debugging.log("Unsuccessful: Vector testRayBetweenMiddleAndUpperBorder ist not hitting Sphere.");
+        }
+
+        if(testSphere.hit(testRayUpperBorder) != null){
+            Debugging.log("Successful: Vector testRayUpperBorder is hitting Sphere at t=" + testSphere.hit(testRayUpperBorder).t);
+        }else{
+            Debugging.log("Unsuccessful: Vector testRayUpperBorder is not hitting Sphere.");
+        }
+        if(testSphere.hit(testRayLowerBorder) != null){
+            Debugging.log("Successful: Vector testRayLowerBorder is hitting Sphere at t=" + testSphere.hit(testRayLowerBorder).t);
+        }else{
+            Debugging.log("Unsuccessful: Vector testRayLowerBorder is not hitting Sphere.");
+        }
+        if(testSphere.hit(testRayOutsideUpperBorder) == null){
+            Debugging.log("Successful: testRayOutsideUpperBorder is not hitting the Sphere.");
+        } else{
+            Debugging.log("Unsuccessful: Vector testRayOutsideUpperBorder is hitting the Sphere at t= " + testSphere.hit(testRayOutsideUpperBorder).t);
+        }
+        if(testSphere.hit(testRayOutsideLowerBorder) == null){
+            Debugging.log("Successful: Vector testRayOutsideLowerBorder is not hitting the sphere.");
+        } else{
+            Debugging.log("Unsuccessful: Vector testRayOutsideLowerBorder is hitting the sphere at t=" + testSphere.hit(testRayOutsideLowerBorder).t);
+        }
+
+
+    }
+
+
 }
