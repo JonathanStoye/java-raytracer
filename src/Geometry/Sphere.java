@@ -96,22 +96,40 @@ public class Sphere extends Geometry{
             }
             return new Hit(tValue, ray, this);
         }
-
         return null;
-
     }
 
     public static void testHit(){
-        // Test-Values
+        // Test-Vectors are all pointing to the Sphere in the direction of the x-axis
+        // All vectors have a length of 100;
+        // Pointing directly at the center of the Sphere with z=0:
         Ray testRayMiddle = new Ray(new Point3(0.0, 50.0, 0), new Vector3(100.0, 0.0, 0.0));
+
+        // Pointing at a point between Center and Border:
         Ray testRayBetweenMiddleAndUpperBorder = new Ray(new Point3(0.0, 62.5, 0), new Vector3(100.0, 0.0, 0.0));
+
+        // Pointing at the Upper Border of the Sphere with z=0:
         Ray testRayUpperBorder = new Ray(new Point3(0.0, 75.0, 0), new Vector3(100.0, 0.0, 0.0));
+
+        // Pointing at the Lower Border of the Sphere with z=0:
         Ray testRayLowerBorder = new Ray(new Point3(0.0, 25.0, 0), new Vector3(100.0, 0.0, 0.0));
+
+        // Pointing at the Lower Border of the Sphere with z=0:
         Ray testRayOutsideUpperBorder = new Ray(new Point3(0.0, 76.0, 0), new Vector3(100.0, 0.0, 0.0));
+
+        // Pointing one Pixel below the Border of the Sphere with z=0: (not visible)
         Ray testRayOutsideLowerBorder = new Ray(new Point3(0.0, 24.0, 0), new Vector3(100.0, 0.0, 0.0));
+
+        // Pointing at the Border of the sphere but on the positive z-axis: (visible)
         Ray TestRay3DimensionalPositiveZAtSphereBorder = new Ray(new Point3(0.0, 50.0, 25.0), new Vector3(100.0, 0.0, 0.0));
+
+        // Pointing at a Point between the Center and Border but with z=12.5: (visible with 0.25<t>0.5)
         Ray TestRay3DimensionalPositiveZBetweenMiddleAndBorder = new Ray(new Point3(0.0, 50.0, 12.5), new Vector3(100.0, 0.0, 0.0));
+
+        // Pointing at the Border of the sphere but on the negative z-axis: (visible)
         Ray TestRay3DimensionalNegativeZAtSphereBorder  = new Ray(new Point3(0.0, 50.0, -25.0), new Vector3(100.0, 0.0, 0.0));
+
+        // Pointing at the Border of the sphrere but on the negative z-axis
         Ray TestRay3DimensionalPositiveZOutsideSphereBorder = new Ray(new Point3(0.0, 50.0, 26.0), new Vector3(100.0, 0.0, 0.0));
         Ray TestRay3DimensionalNegativeZOutsideSphereBorder  = new Ray(new Point3(0.0, 50.0, -26.0), new Vector3(100.0, 0.0, 0.0));
         Sphere testSphere = new Sphere(new Point3(50.0,50.0,0.0), 25.0, new Color(1,0,0));
@@ -171,8 +189,5 @@ public class Sphere extends Geometry{
         }else {
             Debugging.log("Unsuccessful: Vector TestRay3DimensionalNegativeZOutsideSphereBorder is hitting the Sphere at t=" + testSphere.hit(TestRay3DimensionalNegativeZOutsideSphereBorder).t);
         }
-
     }
-
-
 }
