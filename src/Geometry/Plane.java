@@ -1,6 +1,7 @@
 package Geometry;
 import MatrixVector.*;
 import Scene.*;
+import Utilities.Debugging;
 
 /**
  * Created by Jonathan on 05.06.15.
@@ -38,7 +39,7 @@ public class Plane extends Geometry {
      */
     @Override
     public Hit hit(final Ray ray){
-        // if the dot produkt of the direction vector and the normal vector of the plane is null.
+        // if the dot product of the direction vector and the normal vector of the plane is null.
         // then they are orthognally to each other. Meaning the ray is not hitting the plane (paralel to it)
         // or it is part of it (infinite number of intersections).
         if (ray.direction.dot(n) == 0) {
@@ -57,6 +58,35 @@ public class Plane extends Geometry {
             return new Hit(t, ray, this);
         } else {
             return null;
+        }
+    }
+
+    public static void testHit(){
+        Plane testPlane = new Plane(new Point3(50.0,50.0,0.0), new Normal3(0.0, 1.0, 0.0), new Color(0, 0, 1));
+
+        //Testvector, that is not hitting the Plane:
+        Ray testRay1 = new Ray(new Point3(0.0, 60.0, 0), new Vector3(100.0, 0.0, 0.0));
+
+        //Testvector, that is hitting the Plane:
+        Ray testRay2 = new Ray(new Point3(50.0, 60.0, 0), new Vector3(0.0, -20.0, 0.0));
+
+        //Testvector, which is pointing away from the plane:
+        Ray testRay3 = new Ray(new Point3(0.0, 60.0, 0), new Vector3(10.0, 10.0, 0.0));
+
+        if (testPlane.hit(testRay1) == null){
+            Debugging.log("Successful: testRay1 is parallel to the Plane and therefor not hitting the Plane");
+        }else {
+            Debugging.log("Unsuccesssful: testRay1 is hitting the Plane at t=" + testPlane.hit(testRay1).t );
+        }
+        if(testPlane.hit(testRay2) != null){
+            Debugging.log("Successful: restRay2 is hitting the Plane at t="+ testPlane.hit(testRay2).t);
+        } else {
+            Debugging.log("Unsuccessful: restRay2 is not the Plane.");
+        }
+        if (testPlane.hit(testRay3) == null){
+            Debugging.log("Successful: testRay3 is pointing away from the Plane and therefore is not hitting the Plane");
+        }else {
+            Debugging.log("Unsuccesssful: testRay3 is hitting the Plane at t=" + testPlane.hit(testRay3).t );
         }
     }
 }
