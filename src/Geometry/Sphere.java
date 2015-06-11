@@ -53,8 +53,8 @@ public class Sphere extends Geometry{
         // We need a, b and c to get the value of t, which is necessary in order to define a Hit-object.
         // The formular for t looks like this:
         //
-        //      -b +- SQRT{ (b*b) - -4*a*c }
-        // t = ---------------------------
+        //      -b +- SQRT{ (b*b) - (4*a*c) }
+        // t = -------------------------------
         //                  2*a
         //
         // There is a known rule which says that d = b*b - 4*a*c;
@@ -64,7 +64,7 @@ public class Sphere extends Geometry{
         // If d < = there are no interceptions.
         if (d<0) return null;
 
-        // The forumlar now looks like this:
+        // The formula now looks like this:
         //
         //      -b +- SQRT{d}
         // t = --------------
@@ -79,7 +79,7 @@ public class Sphere extends Geometry{
         // if d = 0 there is one intersection
         // if d > 0 there are thwo intersections
         //
-        // We don't have to check if the t < 0 because in this case the sphere is not visible to the viewer.
+        // If t < 0 because in this case the sphere is not visible to the viewer.
         //
         // We check tNegative first, because it is obviously smaller than tPositive.
         if (tNegative > 0.0000001){
@@ -89,8 +89,12 @@ public class Sphere extends Geometry{
         }
 
         // But there is one possible result left, when there is only one intersection:
-        if (d==0 && (tPositive>0.0000001)){
-            return new Hit(tPositive, ray, this);
+        if (d==0){
+            final double tValue = -b / (2*a);
+            if (tValue < 0.0000001){
+                return null;
+            }
+            return new Hit(tValue, ray, this);
         }
 
         return null;
@@ -105,7 +109,31 @@ public class Sphere extends Geometry{
         Ray testRayLowerBorder = new Ray(new Point3(0.0, 25.0, 0), new Vector3(100.0, 0.0, 0.0));
         Ray testRayOutsideUpperBorder = new Ray(new Point3(0.0, 76.0, 0), new Vector3(100.0, 0.0, 0.0));
         Ray testRayOutsideLowerBorder = new Ray(new Point3(0.0, 24.0, 0), new Vector3(100.0, 0.0, 0.0));
+        Ray TestRay3DimensionalPositiveZAtSphereBorder = new Ray(new Point3(0.0, 50.0, 25.0), new Vector3(100.0, 0.0, 0.0));
+        Ray TestRay3DimensionalNegativeZAtSphereBorder  = new Ray(new Point3(0.0, 50.0, -25.0), new Vector3(100.0, 0.0, 0.0));
+        Ray TestRay3DimensionalPositiveZOutsideSphereBorder = new Ray(new Point3(0.0, 50.0, 26.0), new Vector3(100.0, 0.0, 0.0));
+        Ray TestRay3DimensionalNegativeZOutsideSphereBorder  = new Ray(new Point3(0.0, 50.0, -26.0), new Vector3(100.0, 0.0, 0.0));
         Sphere testSphere = new Sphere(new Point3(50.0,50.0,0.0), 25.0, new Color(1,0,0));
+        if (testSphere.hit(TestRay3DimensionalPositiveZAtSphereBorder) != null){
+            Debugging.log("Successful: Vector TestRay3DimensionalPositiveZAtSphereBorder is hitting the Sphere at t= " + testSphere.hit(TestRay3DimensionalPositiveZAtSphereBorder).t );
+        }else{
+            Debugging.log("Unsuccessful: Vector TestRay3DimensionalPositiveZAtSphereBorder is not hitting the Sphere.");
+        }
+        if(testSphere.hit(TestRay3DimensionalNegativeZAtSphereBorder) != null){
+            Debugging.log("Successful: Vector TestRay3DimensionalNegativeZAtSphereBorder is hitting the Sphere at t= " + testSphere.hit(TestRay3DimensionalNegativeZAtSphereBorder).t);
+        } else{
+            Debugging.log("Unsuccessful: Vector TestRay3DimensionalNegativeZAtSphereBorder is not hitting the Sphere.");
+        }
+        if(testSphere.hit(TestRay3DimensionalPositiveZOutsideSphereBorder) == null){
+            Debugging.log("Successful: Vector TestRay3DimensionalPositiveZOutsideSphereBorder ist not hitting the Sphere");
+        } else {
+            Debugging.log("Unsuccessful: Vector TestRay3DimensionalPositiveZOutsideSphereBorder is hitting the Sphere at t=" + testSphere.hit(TestRay3DimensionalPositiveZOutsideSphereBorder).t);
+        }
+        if(testSphere.hit(TestRay3DimensionalNegativeZOutsideSphereBorder) == null){
+            Debugging.log("Successful: Vector TestRay3DimensionalNegativeZOutsideSphereBorder is not hitting the Sphere");
+        }else {
+            Debugging.log("Unsuccessful: Vector TestRay3DimensionalNegativeZOutsideSphereBorder is hitting the Sphere at t=" + testSphere.hit(TestRay3DimensionalNegativeZOutsideSphereBorder).t);
+        }
         if (testSphere.hit(testRayMiddle) != null) {
             Debugging.log("Successful: Vector testRayMiddle is hitting Sphere at t=" + testSphere.hit(testRayMiddle).t);
         }else {
