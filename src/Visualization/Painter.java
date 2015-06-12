@@ -37,7 +37,7 @@ public class Painter extends JFrame{
 
     private void setupFrame(){
         this.setVisible(true);
-        this.setResizable(true);
+        this.setResizable(false);
         this.setupPanel();
         this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         this.setupMenuBar();
