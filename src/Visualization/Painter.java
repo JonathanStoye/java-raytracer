@@ -13,8 +13,8 @@ import java.io.IOException;
  * Implemented by David on 10.06.2015.
  */
 public class Painter extends JFrame{
-    private int worldWidth;
-    private int worldHeight;
+    private int imageWidth;
+    private int imageHeight;
     private int[] pixels;
     private JFrame parent;
     private BufferedImage image;
@@ -28,31 +28,30 @@ public class Painter extends JFrame{
         }
     }
 
-    public Painter(int worldWidth, int worldHeight, int[] pixels) {
-        this.worldWidth = worldWidth;
-        this.worldHeight = worldHeight;
+    public Painter(int imageWidth, int imageHeight, int[] pixels) {
+        this.imageWidth = imageWidth;
+        this.imageHeight = imageHeight;
         this.pixels = pixels;
         this.setupFrame();
     }
 
     private void setupFrame(){
-        this.parent = new JFrame();
-        this.parent.setVisible(true);
-        this.parent.setResizable(true);
-        this.parent.setSize(new Dimension((int) (worldWidth+16), (int) (60+worldHeight)));
-        this.setupPanel(this.parent);
-        this.parent.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        this.setupMenuBar(this.parent);
+        this.setVisible(true);
+        this.setResizable(true);
+        this.setupPanel();
+        this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        this.setupMenuBar();
+        this.setSize(new Dimension(imageWidth, imageHeight + 20));
     }
 
-    private void setupPanel(JFrame currentParent){
+    private void setupPanel(){
         panel = new MyJPanel();
-        panel.setPreferredSize(new Dimension((int) worldWidth, (int) worldHeight));
+        panel.setPreferredSize(new Dimension(imageWidth, imageHeight));
         panel.setLocation(0, 0);
-        currentParent.add(panel);
+        this.add(panel);
     }
 
-    private void setupMenuBar(JFrame currentParent){
+    private void setupMenuBar(){
         JMenuBar menuBar = new JMenuBar();
         JMenu menu = new JMenu("Save");
         JMenuItem save = new JMenuItem("save picture");
@@ -68,8 +67,8 @@ public class Painter extends JFrame{
                 save(imageFile);
             }
         });
-        currentParent.setJMenuBar(menuBar);
-        currentParent.setVisible(true);
+        this.setJMenuBar(menuBar);
+        this.setVisible(true);
     }
 
     private void save(File file) {
@@ -81,17 +80,13 @@ public class Painter extends JFrame{
     }
 
     public void draw(){
-        this.image = new BufferedImage((int) worldWidth, (int)worldHeight, BufferedImage.TYPE_INT_RGB);
-        for(int i=0; i<worldHeight; i++){
-            for (int x=0; x<worldWidth; x++){
-                drawPixel(i, x, pixels[i]);
+        this.image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
+        for(int y = 0, i = 0; y < imageHeight; y++){
+            for (int x = 0; x < imageWidth; x++){
+                this.image.setRGB(x, y, pixels[i]);
+                i++;
             }
         }
-
+        this.repaint();
     }
-
-    private void drawPixel(int y, int x, int colorValue) {
-        this.image.setRGB(x, y, colorValue);
-    }
-
 }
