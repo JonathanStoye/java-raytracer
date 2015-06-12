@@ -81,10 +81,9 @@ public class Painter extends JFrame{
 
     public void draw(){
         this.image = new BufferedImage(imageWidth, imageHeight, BufferedImage.TYPE_INT_RGB);
-        for(int y = 0, i = 0; y < imageHeight; y++){
+        for(int y = 0; y < imageHeight; y++){
             for (int x = 0; x < imageWidth; x++){
-                this.image.setRGB(x, y, pixels[i]);
-                i++;
+                this.image.setRGB(x, y, pixels[y * imageWidth + x]);
             }
         }
         this.repaint();
