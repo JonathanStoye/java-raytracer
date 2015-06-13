@@ -193,7 +193,6 @@ public class Raytracer {
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
-                    System.out.println(ray.origin.x + "; " + ray.origin.y + "; " + ray.origin.z);
                 }
             }
         }
