@@ -36,14 +36,15 @@ public abstract class Camera {
         //          g
         //  w = - -----
         //         |g|
-        this.w = g.mul(1.0/g.magnitude).mul(-1.0);
+        this.w = g.mul(1.0 /g.magnitude).mul(-1.0);
 
         // Now calculationg vector u
         // The formuar for this vector looks like this
         //      t x w
         // u = ---------
         //      |t x w|
-        this.u = t.x(w).mul(1.0/t.x(w).magnitude);
+
+        this.u = (t.x(w)).mul(1.0 / t.x(w).magnitude);
 
         // Now calculating vector v
         // The formular for this vector looks like this
