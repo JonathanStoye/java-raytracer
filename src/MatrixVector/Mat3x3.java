@@ -42,7 +42,12 @@ public final class Mat3x3 {
         this.m31 = m31;
         this.m32 = m32;
         this.m33 = m33;
-        this.determinant = m11 * m22 * m33 + m12 * m23 * m31 + m13 * m21 * m32 - m31 * m22 * m13 - m32 * m23 * m11 - m33 * m21 * m12;
+        this.determinant =  (this.m11 * this.m22 * this.m33) +
+                            (this.m12 * this.m23 * this.m31) +
+                            (this.m13 * this.m21 * this.m32) -
+                            (this.m31 * this.m22 * this.m13) -
+                            (this.m32 * this.m23 * this.m11) -
+                            (this.m33 * this.m21 * this.m12);
     }
 
     /**
@@ -95,8 +100,8 @@ public final class Mat3x3 {
      * @param v the vector to replace the first column of this
      * @return a new Mat3x3 with the first column of v and the other columns of this
      */
-    public Mat3x3 changeCol1(Vector3 v) {
-        return new Mat3x3(v.x, v.y, v.z, this.m21, this.m22, this.m23, this.m31, this.m32, this.m33);
+    public Mat3x3 changeCol1(final Vector3 v) {
+        return new Mat3x3(v.x,this.m12,this.m13,v.y,this.m22,this.m23,v.z,this.m32,this.m33);
     }
 
     /**
@@ -104,8 +109,8 @@ public final class Mat3x3 {
      * @param v the vector to replace the second column of this
      * @return a new Mat3x3 with the second column of v and the other columns of this
      */
-    public Mat3x3 changeCol2(Vector3 v) {
-        return new Mat3x3(this.m11, this.m12, this.m13, v.x, v.y, v.z, this.m31, this.m32, this.m33);
+    public Mat3x3 changeCol2(final Vector3 v) {
+        return new Mat3x3(this.m11,v.x,this.m13,this.m21,v.y,this.m23,this.m31,v.z,this.m33);
     }
 
     /**
@@ -113,8 +118,8 @@ public final class Mat3x3 {
      * @param v the vector to replace the third column of this
      * @return a new Mat3x3 with the third column of v and the other columns of this
      */
-    public Mat3x3 changeCol3(Vector3 v) {
-        return new Mat3x3(this.m11, this.m12, this.m13, this.m21, this.m22, this.m23, v.x, v.y, v.z);
+    public Mat3x3 changeCol3(final Vector3 v) {
+        return new Mat3x3(this.m11,this.m12,v.x,this.m21,this.m22,v.y,this.m31,this.m32,v.z);
     }
 
     @Override
