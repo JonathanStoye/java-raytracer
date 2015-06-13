@@ -1,6 +1,7 @@
 package Scene;
 
 import Camera.OrthographicCamera;
+import Camera.PerspectiveCamera;
 import Geometry.*;
 import MatrixVector.Normal3;
 import MatrixVector.Point3;
@@ -23,26 +24,18 @@ public class Raytracer {
         this.height = height;
         this.width = width;
         this.pixels = new int[this.width * this.height];
+    }
 
-        Geometry[] objects = new Geometry[4];
-
-        Sphere sphere =     new Sphere(  new Point3(this.width / 2, this.height / 2, 80), 100,                            new Color(1, 1, 1));
-        Triangle triangle = new Triangle(new Point3(100, 100, 150), new Point3(100, 900, 150), new Point3(900, 100, 150), new Color(1, 0, 0));
-        Plane plane =       new Plane(   new Point3(100, 500, 140), new Normal3(0.0, 0.0, 0.0),                           new Color(0, 1, 0));
-        Plane plane2 =      new Plane(   new Point3(100, 600, 130), new Normal3(0.0, 0.0, 0.0),                           new Color(0, 0, 1));
-
-        objects[0] = sphere;
-        objects[1] = triangle;
-        objects[2] = plane2;
-        objects[3] = plane;
-
+    public void testScene1(){
+        Geometry[] objects = new Geometry[1];
+        Plane plane =       new Plane(   new Point3(0.0, -1.0, 0.0), new Normal3(0.0, 1.0, 0.0),                           new Color(0, 1, 0));
+        objects[0] = plane;
 
         World world = new World(objects, new Color(0, 0, 0));
-        OrthographicCamera camera = new OrthographicCamera(new Point3(this.width, 0, 0), new Vector3(0.0, 0.0, 1.0), new Vector3(0.0, 1.0, 0.0), 1.0);
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
 
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
-//                Ray ray = new Ray(new Point3(x, y, 0), new Vector3((double) x, (double) y, 1000.0));
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
@@ -56,5 +49,166 @@ public class Raytracer {
 
         Painter p = new Painter(this.width, this.height, this.pixels);
         p.draw();
+    }
+
+
+    public void testScene2(){
+        Geometry[] objects = new Geometry[1];
+
+        Sphere sphere = new Sphere( new Point3(0.0, 0.0, -3.0), 0.5, new Color(1, 0, 0));
+        objects[0] = sphere;
+
+        World world = new World(objects, new Color(0, 0, 0));
+
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
+
+
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if (hit != null) {
+                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                }
+                else {
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
+            }
+        }
+
+        Painter p = new Painter(this.width, this.height, this.pixels);
+        p.draw();
+    }
+
+
+    public void testScene3(){
+        Geometry[] objects = new Geometry[1];
+
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new Color(0,0,1));
+
+        objects[0] = box;
+
+        World world = new World(objects, new Color(0, 0, 0));
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(3.0,3.0,3.0), new Vector3(-3.0,-3.0,-3.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
+
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if (hit != null) {
+                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                }
+                else {
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
+            }
+        }
+
+        Painter p = new Painter(this.width, this.height, this.pixels);
+        p.draw();
+    }
+
+
+    public void testScene4(){
+        Geometry[] objects = new Geometry[1];
+
+        Triangle triangle = new Triangle(new Point3(-0.5,0.5,-3.0), new Point3(0.5,0.5,-3.0), new Point3(0.5,-0.5,-3.0), new Color(1, 0, 1));
+
+        objects[0] = triangle;
+
+
+        World world = new World(objects, new Color(0, 0, 0));
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
+
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if (hit != null) {
+                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                }
+                else {
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
+            }
+        }
+
+        Painter p = new Painter(this.width, this.height, this.pixels);
+        p.draw();
+    }
+
+
+    public void testScene5(){
+        Geometry[] objects = new Geometry[2];
+
+        Sphere sphere1 = new Sphere( new Point3(-1.0,0.0,-3.0), 0.5, new Color(1, 0, 0));
+        Sphere sphere2 = new Sphere( new Point3(1.0,0.0,-6.0), 0.5, new Color(1, 0, 0));
+
+        objects[0] = sphere1;
+        objects[1] = sphere2;
+
+
+        World world = new World(objects, new Color(0, 0, 0));
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
+
+
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if (hit != null) {
+                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                }
+                else {
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
+            }
+        }
+
+        Painter p = new Painter(this.width, this.height, this.pixels);
+        p.draw();
+    }
+
+
+    public void testScene6(){
+        Geometry[] objects = new Geometry[2];
+
+        Sphere sphere1 = new Sphere( new Point3(-1.0,0.0,-3.0), 0.5, new Color(1, 0, 0));
+        Sphere sphere2 = new Sphere( new Point3(1.0,0.0,-6.0), 0.5, new Color(1, 0, 0));
+
+        objects[0] = sphere1;
+        objects[1] = sphere2;
+
+
+        World world = new World(objects, new Color(0, 0, 0));
+        OrthographicCamera camera = new OrthographicCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), 3);
+
+
+//        System.out.println("Testray hit at: " + sphere1.hit(new Ray(new Point3(-1.5,-0.5,0.0), new Vector3(0.0,0.0,-1.0))).t);
+
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if (hit != null) {
+                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                }
+                else {
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
+            }
+        }
+
+        Painter p = new Painter(this.width, this.height, this.pixels);
+        p.draw();
+    }
+
+    public void testAllScenes(){
+        this.testScene1();
+        this.testScene2();
+        this.testScene3();
+        this.testScene4();
+        this.testScene5();
+        this.testScene6();
     }
 }
