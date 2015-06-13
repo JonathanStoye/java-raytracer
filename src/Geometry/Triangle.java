@@ -56,14 +56,16 @@ public class Triangle extends Geometry{
 
         // First we have to check if the determinant of the given Matrix is null
         // if so the linear system of equotations is not solvable.
-        if (linearEquationSystem.determinant == 0)return null;
+        if (linearEquationSystem.determinant == 0){
+            return null;
+        }
 
         // The linear system of equotations is solvable using "The Rule of Cramer"
         // it looks like this:
         //
-        //      det(A1)            det(A2)            det(A3)
-        // ? = --------   and ? = --------   and t = --------
-        //      det(A)             det(A)             det(A)
+        //         det(A1)                det(A2)            det(A3)
+        // beta = --------   and gamme = --------   and t = --------
+        //         det(A)                 det(A)             det(A)
         //
         // A1, A2 and A3 are standing for the columns of the matrix
 
@@ -77,13 +79,60 @@ public class Triangle extends Geometry{
         final double gamma = matrixA2.determinant / linearEquationSystem.determinant;
         final double t = matrixA3.determinant / linearEquationSystem.determinant;
 
-        // Now we have to check, if the values correspond to the following rule.
-        // If so, then they are definitely intercepted by the ray
-        if (beta < 0 || gamma < 0 || beta + gamma > 1 || t < 0.00000001) {
+        // Now we have to check, if the values do correspond to the following rule.
+        // If so, then they are definitely NOT intercepted by the ray
+        if (beta < 0 || gamma < 0 || beta + gamma != 1 || t<0.00000001) {
             return null;
         }
 
         // As we now know that the ray is hitting the triangle, we can return a Hit-object giving the necessary information.
         return new Hit(t, ray, this);
+
+
+    }
+
+    /*
+    Hashcode(), equals() and toString() are overwritten:
+   */
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = super.hashCode();
+        result = prime * result + ((a == null) ? 0 : a.hashCode());
+        result = prime * result + ((b == null) ? 0 : b.hashCode());
+        result = prime * result + ((c == null) ? 0 : c.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!super.equals(obj))
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Triangle other = (Triangle) obj;
+        if (a == null) {
+            if (other.a != null)
+                return false;
+        } else if (!a.equals(other.a))
+            return false;
+        if (b == null) {
+            if (other.b != null)
+                return false;
+        } else if (!b.equals(other.b))
+            return false;
+        if (c == null) {
+            if (other.c != null)
+                return false;
+        } else if (!c.equals(other.c))
+            return false;
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Triangle [a = " + a + ", b = " + b + ", c = " + c + "]";
     }
 }
