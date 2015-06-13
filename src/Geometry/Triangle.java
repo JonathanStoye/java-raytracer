@@ -35,7 +35,7 @@ public class Triangle extends Geometry{
      * @return Hit object which describes the t-value
      */
     @Override
-    public Hit hit(Ray ray) {
+    public Hit hit(final Ray ray) {
 
         // This Matrix is used at first to store the x, y and z values of the Points
         // In order to find out the intersection, we need to use a linear system of equations
@@ -64,7 +64,7 @@ public class Triangle extends Geometry{
         // it looks like this:
         //
         //         det(A1)                det(A2)            det(A3)
-        // beta = --------   and gamme = --------   and t = --------
+        // beta = --------   and gamma = --------   and t = --------
         //         det(A)                 det(A)             det(A)
         //
         // A1, A2 and A3 are standing for the columns of the matrix
@@ -81,14 +81,11 @@ public class Triangle extends Geometry{
 
         // Now we have to check, if the values do correspond to the following rule.
         // If so, then they are definitely NOT intercepted by the ray
-        if (beta < 0 || gamma < 0 || beta + gamma != 1 || t<0.00000001) {
+        if (beta < 0 || gamma < 0 || Math.ceil(beta+gamma) != 1.0 || t<0.00000001) {
             return null;
         }
-
         // As we now know that the ray is hitting the triangle, we can return a Hit-object giving the necessary information.
         return new Hit(t, ray, this);
-
-
     }
 
     /*
