@@ -51,9 +51,9 @@ public class PerspectiveCamera extends Camera{
         //            tan a             2                  2
         //
         // In order to ensure better readability we declare three variables standing for the big brackets in the formular
-        final double firstBracket = h/2/Math.tan(this.angle/2.0);
+        final double firstBracket = (double) h/2.0/Math.tan(this.angle/2.0);
         final double xBracket = (double)x-(((double)w-1.0)/2.0);
-        final double yBracket = (double)y-(((double)w-1.0)/2.0);
+        final double yBracket = (double)y-(((double)h-1.0)/2.0);
 
         // Finally the calculation for r is made.
         final Vector3 r = this.w.mul(-1.0).mul(firstBracket).add(this.u.mul(xBracket).add(v.mul(yBracket)));
@@ -61,6 +61,8 @@ public class PerspectiveCamera extends Camera{
         // The Direction is based on the vector r
         // But it has zo be normalised
         final Vector3 d = r.normalized();
+
+        final double space = ((double) h  / 2.0) / Math.tan(this.angle/2.0);
 
         // Nor returning the Ray
         return new Ray(o, d);
