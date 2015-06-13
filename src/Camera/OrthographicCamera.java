@@ -42,9 +42,9 @@ public class OrthographicCamera extends Camera{
     public Ray rayFor(int w, int h, int x, int y) {
         // In order to calculate an orthographic ray, we need this formula:
         //
-        //                        (w-1)                     (h-1)
-        //                     x- -----               y-    -----
-        //                          2                         2
+        //                        (w-1)                          (h-1)
+        //                     x- -----                    y-    -----
+        //                          2                              2
         // o = e + a * s * ( -------------- ) * u + s * ( --------------- ) * v
         //                      (w-1)                        (h-1)
 
@@ -55,8 +55,11 @@ public class OrthographicCamera extends Camera{
         final double xBracket = ( ( x - ( (double)w-1.0) / 2.0 ) / ( (double) w - 1.0 ) );
         final double yBracket = ( ( y - ( (double)h-1.0) / 2.0 ) / ( (double) h - 1.0 ) );
 
+        final double xScalar = a*s*xBracket;
+        final double yScalar = s*yBracket;
+
         // Now the orthographic vector is calculated.
-        final Point3 orthographicPosition = (this.e.add(this.u.mul((a*this.s*(xBracket))).add(this.v.mul(this.s*yBracket))));
+        final Point3 orthographicPosition = (this.e.add(this.u.mul(xScalar).add(this.v.mul(yScalar))));
 
         // The direction of all rays of the orthographic camera are based on this formular
         // d = - w;
