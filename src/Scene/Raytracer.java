@@ -181,10 +181,8 @@ public class Raytracer {
 
 
         World world = new World(objects, new Color(0, 0, 0));
-        OrthographicCamera camera = new OrthographicCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), 3);
+        OrthographicCamera camera = new OrthographicCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), 10.0);
 
-
-//        System.out.println("Testray hit at: " + sphere1.hit(new Ray(new Point3(-1.5,-0.5,0.0), new Vector3(0.0,0.0,-1.0))).t);
 
         for (int y = 0; y < this.height; y++) {
             for (int x = 0; x < this.width; x++) {
@@ -195,6 +193,7 @@ public class Raytracer {
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
+                    System.out.println(ray.origin.x + "; " + ray.origin.y + "; " + ray.origin.z);
                 }
             }
         }
