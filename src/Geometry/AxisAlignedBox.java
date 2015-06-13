@@ -10,8 +10,9 @@ import java.util.ArrayList;
  * @author d.derichs
  */
 public class AxisAlignedBox extends Geometry{
-    public static Point3 lbf;
-    public static Point3 run;
+    public final Point3 lbf;
+    public final Point3 run;
+    public final Plane[] axisAlignedBoxPlanes;
 
     /**
      * Initializes an AxisAlignedBox who's lines are always orthogonal to the axes of the current coordinate system.
@@ -24,6 +25,7 @@ public class AxisAlignedBox extends Geometry{
         super(color);
         this.lbf=lbf;
         this.run=run;
+        this.axisAlignedBoxPlanes = new Plane[6];
     }
 
     @Override
@@ -33,14 +35,13 @@ public class AxisAlignedBox extends Geometry{
         // in order to describe these Planes we just need a known Point and a normal vector.
         // the Points lbf and run are given
         // the normal-vector are defined by basic mathematics
-        Plane[] axisAlignedBoxPlanes = new Plane[]{
-                new Plane(run, new Normal3(0.0,1.0,0.0), this.color),
-                new Plane(run, new Normal3(1.0,0.0,0.0), this.color),
-                new Plane(run, new Normal3(0.0,0.0,1.0), this.color),
-                new Plane(lbf, new Normal3(-1.0,0.0,0.0), this.color),
-                new Plane(lbf, new Normal3(0.0,-1.0,0.0), this.color),
-                new Plane(lbf, new Normal3(0.0,0.0,-1.0), this.color)
-        };
+        this.axisAlignedBoxPlanes[0] = new Plane(run, new Normal3(0.0,1.0,0.0), this.color);
+        this.axisAlignedBoxPlanes[1] = new Plane(run, new Normal3(1.0,0.0,0.0), this.color);
+        this.axisAlignedBoxPlanes[2] = new Plane(run, new Normal3(0.0,0.0,1.0), this.color);
+        this.axisAlignedBoxPlanes[3] = new Plane(run, new Normal3(-1.0,0.0,0.0), this.color);
+        this.axisAlignedBoxPlanes[4] = new Plane(run, new Normal3(0.0,-1.0,0.0), this.color);
+        this.axisAlignedBoxPlanes[5] = new Plane(run, new Normal3(0.0,0.0,-1.0), this.color);
+
 
         // Now we need to find out which planes are hit by the given Ray.
         // Therefore an ArrayList is declared in order to find out all hits of the planes
@@ -71,7 +72,7 @@ public class AxisAlignedBox extends Geometry{
             // We also Check that for the x-axis-normal-vector pointing "to the left"
             if(temporaryPlane.n.equals(new Normal3(1.0, 0.0, 0.0)) || temporaryPlane.n.equals(new Normal3(-1.0, 0.0, 0.0))){
                 // Now we have to check, if the current intersectionPoint is actually visible for the viewer.
-                // This is necessary because there are always two Planes parralel to the z-axis
+                // This is necessary because there are always two Planes parallel to the z-axis
                 // We use the given Box-Points-values to check this.
                 if (lbf.y <= intersectionPoint.y && intersectionPoint.y <= run.y && lbf.z <= intersectionPoint.z && intersectionPoint.z <= run.z) {
                     visibleHits.add(hit);
