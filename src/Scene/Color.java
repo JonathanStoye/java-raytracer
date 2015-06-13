@@ -12,8 +12,27 @@ public class Color {
 
     public Color (double r, double g, double b) {
         this.r = r;
-        this.g = r;
-        this.b = r;
+        this.g = g;
+        this.b = b;
+
+        if(this.r < 0)
+            this.r = 0;
+
+        if(this.g < 0)
+            this.g = 0;
+
+        if(this.b < 0)
+            this.b = 0;
+
+
+        if(this.r > 1)
+            this.r = 1;
+
+        if(this.g > 1)
+            this.g = 1;
+
+        if(this.b > 1)
+            this.b = 1;
     }
 
     /**
@@ -61,7 +80,11 @@ public class Color {
      * @return the hexadecimal color value
      */
     public int asHex() {
-        return (int) (Math.round(r*255)*256*256+Math.round(g*255)*256+Math.round(b*255));
+        int red = (int) (r * 0xff);
+        int green = (int) (g * 0xff);
+        int blue = (int) (b * 0xff);
+        int rgb = ((red & 0xff) << 16) | ((green & 0xff) << 8) | (blue & 0xff);
+        return rgb;
     }
 
     private static void testAsHex() {

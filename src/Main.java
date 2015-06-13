@@ -14,7 +14,8 @@ public class Main {
     public static void main(String [] args) {
         //testAll();
 //        Color.test();
-        Raytracer raytracer = new Raytracer(100, 100);
+        Raytracer raytracer = new Raytracer(1000, 1000);
+
     }
 
     private static void testAll() {

@@ -7,7 +7,7 @@ import Geometry.*;
  */
 public class World {
     private final Geometry[] objects;
-    private final Color backgroundColor;
+    public final Color backgroundColor;
 
     public World(Geometry[] objects, Color backgroundColor) {
         this.objects = objects;
@@ -21,16 +21,17 @@ public class World {
      */
     public Hit hit(Ray ray) {
         Hit hit = null;
-        for (Geometry geo : objects){
+        for (Geometry geo : objects) {
             Hit currentHit = geo.hit(ray);
-
-            if ( currentHit != null && hit != null) {
-                if (currentHit.t < hit.t) {
+            if (currentHit != null) {
+                if (hit == null) {
                     hit = currentHit;
                 }
-            }
-            else {
-                hit = currentHit;
+                else if (hit != null) {
+                    if (currentHit.t < hit.t) {
+                        hit = currentHit;
+                    }
+                }
             }
         }
         return hit;
