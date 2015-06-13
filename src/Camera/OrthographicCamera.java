@@ -52,15 +52,15 @@ public class OrthographicCamera extends Camera{
         final double a = (double) w / (double) h;
 
         // In order to ensure better readability we declare two variables standing for the two big brackets in the formular
-        final double xBracket = x - ( (( (double)w-1.0) / 2 ) / ( (double) w - 1.0 ) );
-        final double yBracket = y - ( (( (double)h-1.0) / 2 ) / ( (double) h - 1.0 ) );
+        final double xBracket = (double) x - ( (( (double)w-1.0) / 2.0 ) / ( (double) w - 1.0 ) );
+        final double yBracket = (double) y - ( (( (double)h-1.0) / 2.0 ) / ( (double) h - 1.0 ) );
 
         // Now the orthographic vector is calculated.
-        final Point3 orthographicPosition = this.e.add(this.u.mul((a*this.s*(xBracket))).add(this.v.mul(s*yBracket)));
+        final Point3 orthographicPosition = (this.e.add(this.u.mul((a*this.s*(xBracket))).add(this.v.mul(this.s*yBracket))));
 
         // The direction of all rays of the orthographic camera are based on this formular
         // d = - w;
-        final Vector3 direction = this.w.mul(-1.0);
+        Vector3 direction = this.w.mul(-1.0);
 
         return new Ray (orthographicPosition, direction);
     }
