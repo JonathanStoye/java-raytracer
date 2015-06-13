@@ -51,4 +51,22 @@ public class Normal3 {
         return result;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Normal3 otherNormal3 = (Normal3) obj;
+        if (Double.doubleToLongBits(x) != Double.doubleToLongBits(otherNormal3.x))
+            return false;
+        if (Double.doubleToLongBits(y) != Double.doubleToLongBits(otherNormal3.y))
+            return false;
+        if (Double.doubleToLongBits(z) != Double.doubleToLongBits(otherNormal3.z))
+            return false;
+        return true;
+    }
+
 }
