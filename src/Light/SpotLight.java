@@ -29,13 +29,17 @@ public class SpotLight extends Light {
 
     @Override
     public boolean illuminates(Point3 point) {
-        final Vector3 diffVector = this.directionFrom(point);
-        double angle = diffVector.dot(this.direction) / diffVector.magnitude * this.direction.magnitude;
 
-        if (angle <= this.halfAngle)
+        final Vector3 diffVector = this.directionFrom(point).mul(-1.0);
+
+        double angle = (diffVector.dot(this.direction)) / (diffVector.magnitude * this.direction.magnitude);
+        angle = Math.acos(angle);
+
+        if (angle <= this.halfAngle){
             return true;
-        else
-            return false;
+        }
+
+        return false;
     }
 
     @Override
