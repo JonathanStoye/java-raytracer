@@ -313,6 +313,80 @@ public class Raytracer {
         p.draw();
     }
 
+    public void testPhongLightningDirectional(){
+        Geometry[] objects = new Geometry[4];
+//    public PhongMaterial(Color diffuse, Color spekular, int exponent)
+        Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
+        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64));
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64));
+        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new PhongMaterial(new Color(0.999, 0.999, 0), new Color (1.0,1.0,1.0), 64));
+
+        objects[0] = plane;
+        objects[1] = sphere;
+        objects[2] = box;
+        objects[3] = triangle;
+//     public World(Geometry[] objects, Color backgroundColor, Color ambientLight, List<Light> lights)
+        List<Light> lights = new ArrayList<Light>();
+//        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(4.0, 4.0, 4.0)));
+        lights.add(new DirectionalLight(new Color(1.0,1.0,1.0), new Vector3(-1.0,-1.0,-1.0)));
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.5,0.5,0.5), lights);
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
+
+
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if (hit != null) {
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                }
+                else {
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
+            }
+        }
+
+        Painter p = new Painter(this.width, this.height, this.pixels);
+        p.draw();
+    }
+
+    public void testPhongLightningSpotLight(){
+        Geometry[] objects = new Geometry[4];
+//    public PhongMaterial(Color diffuse, Color spekular, int exponent)
+        Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
+        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64));
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64));
+        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new PhongMaterial(new Color(1.0, 1.0, 0), new Color (1.0,1.0,1.0), 64));
+
+        objects[0] = plane;
+        objects[1] = sphere;
+        objects[2] = box;
+        objects[3] = triangle;
+//     public World(Geometry[] objects, Color backgroundColor, Color ambientLight, List<Light> lights)
+        List<Light> lights = new ArrayList<Light>();
+//        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(4.0, 4.0, 4.0)));
+        lights.add(new SpotLight(new Color(1.0,1.0,1.0), new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), Math.PI/14));
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(-0.0,-0.0,-0.0), lights);
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
+
+
+        for (int y = 0; y < this.height; y++) {
+            for (int x = 0; x < this.width; x++) {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if (hit != null) {
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                }
+                else {
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
+            }
+        }
+
+        Painter p = new Painter(this.width, this.height, this.pixels);
+        p.draw();
+    }
+
     public void testAllScenes(){
         this.testScene1();
         this.testScene2();
