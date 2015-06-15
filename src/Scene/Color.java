@@ -82,10 +82,16 @@ public class Color {
      * @param skalar given skalar to multiply this with
      */
     public Color mul(double skalar) {
-        final Color finalColor = null;
-        finalColor.r = this.r * skalar;
-        finalColor.g = this.g * skalar;
-        finalColor.b = this.b * skalar;
+
+        // old (was not working because of NullPointerException)
+//        final Color finalColor = null;
+//        finalColor.r = this.r * skalar;
+//        finalColor.g = this.g * skalar;
+//        finalColor.b = this.b * skalar;
+
+        // new (is working)
+        final Color finalColor = new Color((this.r*skalar),(this.g*skalar),(this.b*skalar));
+
         return finalColor;
     }
 
