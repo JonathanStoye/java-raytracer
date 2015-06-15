@@ -21,7 +21,7 @@ public class PointLight extends Light{
      */
     public PointLight(Color color, Point3 position){
         super(color);
-        this.position=position;
+        this.position = position;
     }
 
     /**
@@ -31,7 +31,7 @@ public class PointLight extends Light{
      */
     @Override
     public boolean illuminates(Point3 point) {
-        return false;
+        return true;
     }
 
     /**
@@ -41,6 +41,6 @@ public class PointLight extends Light{
      */
     @Override
     public Vector3 directionFrom(Point3 point) {
-        return null;
+        return this.position.sub(point);
     }
 }

@@ -13,14 +13,14 @@ import java.awt.*;
 public abstract class Light {
 
     // Color of the Light
-    final public Color color;
+    public final Color color;
 
     /**
      * Initiates the Light-Object using the given Color
      * @param color Color of the Light
      */
     public Light(Color color){
-        this.color=color;
+        this.color = color;
     }
 
     /**
