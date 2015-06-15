@@ -2,6 +2,7 @@ package Material;
 
 import Light.Light;
 import MatrixVector.Normal3;
+import MatrixVector.Point3;
 import MatrixVector.Vector3;
 import Scene.*;
 
@@ -41,6 +42,7 @@ public class PhongMaterial extends Material{
             // if the Point is illuminated by the current light source, then the color is added.
             if(currentLight.illuminates(hit.ray.at(hit.t))){
                 // Vector pointing to the light source
+                Point3 bla = hit.ray.at(hit.t);
                 Vector3 l = currentLight.directionFrom(hit.ray.at(hit.t)).normalized();
                 // Vector which is reflected by the Material using the Normal n
                 Vector3 rn = l.reflectedOn(n);
