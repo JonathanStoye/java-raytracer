@@ -31,6 +31,11 @@ public class Triangle extends Geometry{
         this.a=a;
         this.b=b;
         this.c=c;
+        // Between the two calculated Vectors for example b-a and c-a is a plane.
+        // the cross-prodct "method.x()" is basically the normal vector for this plane
+        // we normalize this vector, because then it has a length of 1.
+        // We also declare it asNormal in order to make sure, that we can use it as a normal-vector.
+        // This is important, for example when we calculate a Hit-object during interceptions.
         this.normalOnA = this.b.sub(this.a).x(this.c.sub(this.a)).normalized().asNormal();
         this.normalOnB = this.c.sub(this.b).x(this.a.sub(this.b)).normalized().asNormal();
         this.normalOnC = this.a.sub(this.c).x(this.b.sub(this.c)).normalized().asNormal();
@@ -95,7 +100,7 @@ public class Triangle extends Geometry{
 
         // In order to use PhongLightning, we need to calculate a Normal for the hit point.
         // This is why we calculate it here.
-        final Normal3 hitNormal = normalOnA.mul(1.0 - beta - gamma).add(normalOnB.mul(beta).add(normalOnC.mul(gamma)));
+        final Normal3 hitNormal = normalOnA;
 
         // As we now know that the ray is hitting the triangle, we can return a Hit-object giving the necessary information.
         return new Hit(t, ray, this, hitNormal);
