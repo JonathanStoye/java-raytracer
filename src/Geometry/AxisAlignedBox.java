@@ -3,6 +3,7 @@ package Geometry;
 import MatrixVector.*;
 import Scene.*;
 import java.util.ArrayList;
+import Material.*;
 
 /**
  * Created by Jonathan on 05.06.15.
@@ -19,10 +20,10 @@ public class AxisAlignedBox extends Geometry{
      * In order to describe the Box, we need to create a few Planes that can be used to describe the box.
      * @param lbf LEFT BELOW FAR edge of the box (linke, untere, ferne Ecke)
      * @param run RIGT UPPER NEAR edge of the box (rechte, obere, nahe Ecke)
-     * @param color Color of the Box
+     * @param material Material of the Box
      */
-    public AxisAlignedBox(Point3 lbf, Point3 run, Color color){
-        super(color);
+    public AxisAlignedBox(Point3 lbf, Point3 run, Material material){
+        super(material);
         this.lbf=lbf;
         this.run=run;
         this.axisAlignedBoxPlanes = new Plane[6];
@@ -35,12 +36,12 @@ public class AxisAlignedBox extends Geometry{
         // in order to describe these Planes we just need a known Point and a normal vector.
         // the Points lbf and run are given
         // the normal-vector are defined by basic mathematics
-        this.axisAlignedBoxPlanes[0] = new Plane(run, new Normal3(0.0,1.0,0.0), this.color);
-        this.axisAlignedBoxPlanes[1] = new Plane(run, new Normal3(1.0,0.0,0.0), this.color);
-        this.axisAlignedBoxPlanes[2] = new Plane(run, new Normal3(0.0,0.0,1.0), this.color);
-        this.axisAlignedBoxPlanes[3] = new Plane(run, new Normal3(-1.0,0.0,0.0), this.color);
-        this.axisAlignedBoxPlanes[4] = new Plane(run, new Normal3(0.0,-1.0,0.0), this.color);
-        this.axisAlignedBoxPlanes[5] = new Plane(run, new Normal3(0.0,0.0,-1.0), this.color);
+        this.axisAlignedBoxPlanes[0] = new Plane(run, new Normal3(0.0,1.0,0.0), this.material);
+        this.axisAlignedBoxPlanes[1] = new Plane(run, new Normal3(1.0,0.0,0.0), this.material);
+        this.axisAlignedBoxPlanes[2] = new Plane(run, new Normal3(0.0,0.0,1.0), this.material);
+        this.axisAlignedBoxPlanes[3] = new Plane(run, new Normal3(-1.0,0.0,0.0), this.material);
+        this.axisAlignedBoxPlanes[4] = new Plane(run, new Normal3(0.0,-1.0,0.0), this.material);
+        this.axisAlignedBoxPlanes[5] = new Plane(run, new Normal3(0.0,0.0,-1.0), this.material);
 
 
         // Now we need to find out which planes are hit by the given Ray.
