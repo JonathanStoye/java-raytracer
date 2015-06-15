@@ -48,7 +48,8 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                    Color color = hit.geo.material.colorFor(hit, world);
+                    pixels[y * this.width + x] = color.asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
