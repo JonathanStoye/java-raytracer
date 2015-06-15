@@ -1,5 +1,7 @@
 package Material;
 
+import Geometry.*;
+import Geometry.Triangle;
 import Light.Light;
 import MatrixVector.Normal3;
 import MatrixVector.Point3;
