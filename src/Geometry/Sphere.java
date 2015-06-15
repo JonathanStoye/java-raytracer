@@ -84,9 +84,9 @@ public class Sphere extends Geometry{
         //
         // We check tNegative first, because it is obviously smaller than tPositive.
         if (tNegative > 0.0000001){
-            return new Hit(tNegative, ray, this, new Normal3(0.0,0.0,0.0));
+            return new Hit(tNegative, ray, this, ray.at(tNegative).sub(this.c).normalized().asNormal());
         } else if (tPositive > 0.0000001){
-            return new Hit(tPositive, ray, this, new Normal3(0.0,0.0,0.0));
+            return new Hit(tPositive, ray, this, ray.at(tPositive).sub(this.c).normalized().asNormal());
         }
 
         // But there is one possible result left, when there is only one intersection:
@@ -95,7 +95,7 @@ public class Sphere extends Geometry{
             if (tValue < 0.0000001){
                 return null;
             }
-            return new Hit(tValue, ray, this, new Normal3(0.0,0.0,0.0));
+            return new Hit(tValue, ray, this, ray.at(tValue).sub(this.c).normalized().asNormal());
         }
         return null;
     }
