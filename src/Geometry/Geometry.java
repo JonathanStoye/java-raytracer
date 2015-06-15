@@ -1,5 +1,6 @@
 package Geometry;
 
+import Material.Material;
 import Scene.*;
 
 /**
@@ -9,16 +10,16 @@ import Scene.*;
  */
 public abstract class Geometry {
     /**
-     * Color of the form
+     * Material of the form
      */
-    public final Color color;
+    public final Material material;
 
     /**
      * Initializes the geometric form with the given parameter.
-     * @param inputColor Specifies the color of a certain geometric form
+     * @param material Specifies the material of a certain geometric form
      */
-    Geometry (Color inputColor){
-        this.color = inputColor;
+    Geometry (Material material){
+        this.material = material;
     }
 
     /**
