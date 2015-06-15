@@ -92,8 +92,13 @@ public class Triangle extends Geometry{
         if (beta < 0 || gamma < 0 || Math.ceil(beta+gamma) != 1.0 || t<0.00000001) {
             return null;
         }
+
+        // In order to use PhongLightning, we need to calculate a Normal for the hit point.
+        // This is why we calculate it here.
+        final Normal3 hitNormal = normalOnA.mul(1.0 - beta - gamma).add(normalOnB.mul(beta).add(normalOnC.mul(gamma)));
+
         // As we now know that the ray is hitting the triangle, we can return a Hit-object giving the necessary information.
-        return new Hit(t, ray, this, new Normal3(0.0,0.0,0.0));
+        return new Hit(t, ray, this, hitNormal);
     }
 
     /*
