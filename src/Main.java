@@ -1,9 +1,4 @@
-import MatrixVector.Mat3x3;
-import MatrixVector.Vector3;
-import Scene.Color;
 import Scene.Raytracer;
-import Visualization.PaintDiagonal;
-import Visualization.ShowImage;
 
 /**
  * Created by Jonathan on 28.04.15.
@@ -15,7 +10,7 @@ public class Main {
         //testAll();
 //        Color.test();
         Raytracer raytracer = new Raytracer(800, 600);
-        raytracer.testLightning2();
+        raytracer.testPhongLightning();
     }
 
     private static void testAll() {
