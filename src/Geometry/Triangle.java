@@ -11,9 +11,13 @@ import Material.*;
  * @author d.derichs
  */
 public class Triangle extends Geometry{
-    public Point3 a;
-    public Point3 b;
-    public Point3 c;
+    public final Point3 a;
+    public final Point3 b;
+    public final Point3 c;
+
+    public final Normal3 normalOnA;
+    public final Normal3 normalOnB;
+    public final Normal3 normalOnC;
 
     /**
      * Initializes the triangle with the given parameters
@@ -27,6 +31,9 @@ public class Triangle extends Geometry{
         this.a=a;
         this.b=b;
         this.c=c;
+        this.normalOnA = this.b.sub(this.a).x(this.c.sub(this.a)).normalized().asNormal();
+        this.normalOnB = this.c.sub(this.b).x(this.a.sub(this.b)).normalized().asNormal();
+        this.normalOnC = this.a.sub(this.c).x(this.b.sub(this.c)).normalized().asNormal();
     }
 
     /**
