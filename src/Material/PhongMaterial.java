@@ -38,16 +38,17 @@ public class PhongMaterial extends Material{
         // Whenever the light illuminates the interception point of the hit object the color is calculated and added to c.
         for (int i=0; i<world.lights.size(); i++){
             Light currentLight = world.lights.get(i);
-            // Vector pointing to the light source
-            Vector3 l = currentLight.directionFrom(hit.ray.at(hit.t)).normalized();
-            // Vector which is reflected by the Material using the Normal n
-            Vector3 rn = l.reflectedOn(n);
-            // Color of the current Light (cl)
-            Color cl = currentLight.color;
-            // Sum of all the light generated colors
-            Color phongColor = ((cd.mul(cl)).mul(Math.max(0, n.dot(l)))).add(cs.mul(cl).mul(Math.pow((Math.max(0,e.dot(rn))), exponent)));
             // if the Point is illuminated by the current light source, then the color is added.
             if(currentLight.illuminates(hit.ray.at(hit.t))){
+                // Vector pointing to the light source
+                Vector3 l = currentLight.directionFrom(hit.ray.at(hit.t)).normalized();
+                // Vector which is reflected by the Material using the Normal n
+                Vector3 rn = l.reflectedOn(n);
+                // Color of the current Light (cl)
+                Color cl = currentLight.color;
+                // Sum of all the light generated colors
+                Color phongColor = ((cd.mul(cl)).mul(Math.max(0, n.dot(l)))).add(cs.mul(cl).mul(Math.pow((Math.max(0,e.dot(rn))), exponent)));
+                // Color is added to the return value
                 c = c.add(phongColor);
             }
         }
