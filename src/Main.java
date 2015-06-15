@@ -15,8 +15,7 @@ public class Main {
         //testAll();
 //        Color.test();
         Raytracer raytracer = new Raytracer(800, 600);
-        raytracer.testAllScenes();
-
+        raytracer.testLightning2();
     }
 
     private static void testAll() {
