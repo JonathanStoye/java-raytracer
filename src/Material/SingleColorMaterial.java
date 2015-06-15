@@ -2,8 +2,7 @@ package Material;
 
 import Scene.Hit;
 import Scene.World;
-
-import java.awt.*;
+import Scene.Color;
 
 /**
  * Class SingleColorMaterial is used to describe the simplest Material, which only has a Color.

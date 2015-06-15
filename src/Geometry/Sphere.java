@@ -1,5 +1,6 @@
 package Geometry;
 
+import Material.Material;
 import MatrixVector.*;
 import Scene.*;
 import Utilities.Debugging;
@@ -20,10 +21,10 @@ public class Sphere extends Geometry{
      * Initializes a sphere with the given Values
      * @param c central Point of the sphere
      * @param r radius of the sphere
-     * @param color Color of the Geometric object sphere
+     * @param material material of the Geometric object sphere
      */
-    public Sphere( Point3 c, double r, Color color){
-        super(color);
+    public Sphere( Point3 c, double r, Material material){
+        super(material);
         this.c=c;
         this.r=r;
     }
