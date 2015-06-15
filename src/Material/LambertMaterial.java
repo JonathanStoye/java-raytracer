@@ -1,37 +1,37 @@
 package Material;
 
-import Scene.Hit;
-import Scene.World;
-import Scene.Color;
+import Scene.*;
+
 
 /**
- * Created by Jonathan on 09.06.15.
- *
- * LambertMaterial is the Material for a perfect diffuse reflecting material.
+ * Class LambertMaterial describes a perfect diffus reflective object.
+ * Created by David on 15.06.15
+ * @author David Derichs
  */
-public class LambertMaterial extends Material {
+public class LambertMaterial extends Material{
 
     public final Color color;
 
-    public LambertMaterial(Color color) {
-        this.color = color;
+    /**
+     * Initiates the LambertMaterial using the given basic Color.
+     * @param color
+     */
+    LambertMaterial(Color color){
+        this.color=color;
     }
 
     /**
-     * calculates the color for given hit with
-     *
-     * (formula)
-     *
+     * Determines which color a certain hit interception point has concerning the light sources in the room.
      * @param hit Hit object which is analysed
      * @param world World object which is used to get information about the light in the current scene.
-     * @return the calculated Colr
+     * @return Color of the interception point.
      */
     @Override
     public Color colorFor(Hit hit, World world) {
-        Color returnColor;
 
-        returnColor = this.color.mul(world.ambientLight);
-
-        return returnColor;
+        Color c;
+        // this is the interception point.
+        hit.ray.at(hit.t);
+        return null;
     }
 }

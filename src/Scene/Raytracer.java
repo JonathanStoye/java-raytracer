@@ -3,12 +3,14 @@ package Scene;
 import Camera.OrthographicCamera;
 import Camera.PerspectiveCamera;
 import Geometry.*;
+import Material.SingleColorMaterial;
 import MatrixVector.Normal3;
 import MatrixVector.Point3;
 import MatrixVector.Vector3;
 import Utilities.Debugging;
 import Visualization.Painter;
 import javafx.scene.control.TreeItem;
+import Scene.*;
 
 import java.awt.*;
 
@@ -16,28 +18,19 @@ import java.awt.*;
  * Created by Jonathan on 05.06.15.
  */
 public class Raytracer {
-
     private final int width;
     private final int height;
     private final int[] pixels;
 
-    /**
-     * set width and height of the scene and calculates the amount of pixels accordingly
-     * @param width width of the scene
-     * @param height height of the scene
-     */
     public Raytracer(int width, int height) {
         this.height = height;
         this.width = width;
         this.pixels = new int[this.width * this.height];
     }
 
-    /**
-     * test setups for different scenes
-     */
     public void testScene1(){
         Geometry[] objects = new Geometry[1];
-        Plane plane =       new Plane(   new Point3(0.0, -1.0, 0.0), new Normal3(0.0, 1.0, 0.0),                           new Color(0, 1, 0));
+        Plane plane =       new Plane(   new Point3(0.0, -1.0, 0.0), new Normal3(0.0, 1.0, 0.0), new SingleColorMaterial(new Scene.Color(0, 1, 0)));
         objects[0] = plane;
 
         World world = new World(objects, new Color(0, 0, 0));
@@ -48,8 +41,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    Color color = hit.geo.material.colorFor(hit, world);
-                    pixels[y * this.width + x] = color.asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -65,7 +57,7 @@ public class Raytracer {
     public void testScene2(){
         Geometry[] objects = new Geometry[1];
 
-        Sphere sphere = new Sphere( new Point3(0.0, 0.0, -3.0), 0.5, new Color(1, 0, 0));
+        Sphere sphere = new Sphere( new Point3(0.0, 0.0, -3.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)));
         objects[0] = sphere;
 
         World world = new World(objects, new Color(0, 0, 0));
@@ -78,7 +70,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -94,7 +86,7 @@ public class Raytracer {
     public void testScene3(){
         Geometry[] objects = new Geometry[1];
 
-        AxisAlignedBox box = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new Color(0,0,1));
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new SingleColorMaterial(new Color(0,0,1)));
 
         objects[0] = box;
 
@@ -106,7 +98,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -122,7 +114,7 @@ public class Raytracer {
     public void testScene4(){
         Geometry[] objects = new Geometry[1];
 
-        Triangle triangle = new Triangle(new Point3(-0.5,0.5,-3.0), new Point3(0.5,0.5,-3.0), new Point3(0.5,-0.5,-3.0), new Color(1, 0, 1));
+        Triangle triangle = new Triangle(new Point3(-0.5,0.5,-3.0), new Point3(0.5,0.5,-3.0), new Point3(0.5,-0.5,-3.0), new SingleColorMaterial(new Scene.Color(1, 0, 1)));
 
         objects[0] = triangle;
 
@@ -135,7 +127,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -151,8 +143,8 @@ public class Raytracer {
     public void testScene5(){
         Geometry[] objects = new Geometry[2];
 
-        Sphere sphere1 = new Sphere( new Point3(-1.0,0.0,-3.0), 0.5, new Color(1, 0, 0));
-        Sphere sphere2 = new Sphere( new Point3(1.0,0.0,-6.0), 0.5, new Color(1, 0, 0));
+        Sphere sphere1 = new Sphere( new Point3(-1.0,0.0,-3.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)));
+        Sphere sphere2 = new Sphere( new Point3(1.0,0.0,-6.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)));
 
         objects[0] = sphere1;
         objects[1] = sphere2;
@@ -167,7 +159,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -183,8 +175,8 @@ public class Raytracer {
     public void testScene6(){
         Geometry[] objects = new Geometry[2];
 
-        Sphere sphere1 = new Sphere( new Point3(-1.0,0.0,-3.0), 0.5, new Color(1, 0, 0));
-        Sphere sphere2 = new Sphere( new Point3(1.0,0.0,-6.0), 0.5, new Color(1, 0, 0));
+        Sphere sphere1 = new Sphere( new Point3(-1.0,0.0,-3.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)));
+        Sphere sphere2 = new Sphere( new Point3(1.0,0.0,-6.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)));
 
         objects[0] = sphere1;
         objects[1] = sphere2;
@@ -199,7 +191,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.color.asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();

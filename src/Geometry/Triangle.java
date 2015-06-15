@@ -2,6 +2,7 @@ package Geometry;
 
 import MatrixVector.*;
 import Scene.*;
+import Material.*;
 
 /**
  * Created by Jonathan on 05.06.15.
@@ -10,22 +11,29 @@ import Scene.*;
  * @author d.derichs
  */
 public class Triangle extends Geometry{
-    public Point3 a;
-    public Point3 b;
-    public Point3 c;
+    public final Point3 a;
+    public final Point3 b;
+    public final Point3 c;
+
+    public final Normal3 normalOnA;
+    public final Normal3 normalOnB;
+    public final Normal3 normalOnC;
 
     /**
      * Initializes the triangle with the given parameters
      * @param a Point a of the triangle
      * @param b Point b of the triangle
-     * @param c Point c of the triangle     *
-     * @param color Color of the Geometric form triangle
+     * @param c Point c of the triangle
+     * @param material material of the Geometric form triangle
      */
-    public Triangle(Point3 a, Point3 b, Point3 c, Color color){
-        super(color);
+    public Triangle(Point3 a, Point3 b, Point3 c, Material material){
+        super(material);
         this.a=a;
         this.b=b;
         this.c=c;
+        this.normalOnA = this.b.sub(this.a).x(this.c.sub(this.a)).normalized().asNormal();
+        this.normalOnB = this.c.sub(this.b).x(this.a.sub(this.b)).normalized().asNormal();
+        this.normalOnC = this.a.sub(this.c).x(this.b.sub(this.c)).normalized().asNormal();
     }
 
     /**
@@ -85,7 +93,7 @@ public class Triangle extends Geometry{
             return null;
         }
         // As we now know that the ray is hitting the triangle, we can return a Hit-object giving the necessary information.
-        return new Hit(t, ray, this);
+        return new Hit(t, ray, this, new Normal3(0.0,0.0,0.0));
     }
 
     /*
