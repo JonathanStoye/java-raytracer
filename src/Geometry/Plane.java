@@ -56,7 +56,7 @@ public class Plane extends Geometry {
         // d ist the direction-vector of the ray
         final double t = (a.sub(ray.origin).dot(n)) / (ray.direction.dot(n));
         if (t > 0){
-            return new Hit(t, ray, this, new Normal3(0.0,0.0,0.0));
+            return new Hit(t, ray, this, this.n);
         } else {
             return null;
         }
