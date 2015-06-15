@@ -118,10 +118,46 @@ public class Color {
         return rgb;
     }
 
-    private static void testAsHex() {
-        final Color color = new Color(1.0, 0, 0);
-        Debugging.log("color: " + color.asHex());
+    /**
+     * return the color as a hexadecimal value
+     * @return the hexadecimal color value
+     */
+    public int redAsHex() {
+        int red = (int) (r * 0xff);
+        int green = (int) (0 * 0xff);
+        int blue = (int) (0 * 0xff);
+        int rgb = ((red & 0xff) << 16) | ((green & 0xff) << 8) | (blue & 0xff);
+        return rgb;
     }
+
+    /**
+     * return the color as a hexadecimal value
+     * @return the hexadecimal color value
+     */
+    public int greenAsHex() {
+        int red = (int) (0 * 0xff);
+        int green = (int) (g * 0xff);
+        int blue = (int) (0 * 0xff);
+        int rgb = ((red & 0xff) << 16) | ((green & 0xff) << 8) | (blue & 0xff);
+        return rgb;
+    }
+    /**
+     *
+     * return the color as a hexadecimal value
+     * @return the hexadecimal color value
+     */
+    public int blueAsHex() {
+        int red = (int) (0 * 0xff);
+        int green = (int) (0 * 0xff);
+        int blue = (int) (b * 0xff);
+        int rgb = ((red & 0xff) << 16) | ((green & 0xff) << 8) | (blue & 0xff);
+        return rgb;
+    }
+
+//    private static void testAsHex() {
+//        final Color color = new Color(1.0, 0, 0);
+//        Debugging.log("color: " + color.asHex());
+//    }
 
     /**
      * test the add() function
@@ -193,7 +229,7 @@ public class Color {
         testSub();
         testMul();
         testMulS();
-        testAsHex();
+//        testAsHex();
     }
 
     @Override
