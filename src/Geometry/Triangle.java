@@ -2,6 +2,7 @@ package Geometry;
 
 import MatrixVector.*;
 import Scene.*;
+import Material.*;
 
 /**
  * Created by Jonathan on 05.06.15.
@@ -19,10 +20,10 @@ public class Triangle extends Geometry{
      * @param a Point a of the triangle
      * @param b Point b of the triangle
      * @param c Point c of the triangle     *
-     * @param color Color of the Geometric form triangle
+     * @param material material of the Geometric form triangle
      */
-    public Triangle(Point3 a, Point3 b, Point3 c, Color color){
-        super(color);
+    public Triangle(Point3 a, Point3 b, Point3 c, Material material){
+        super(material);
         this.a=a;
         this.b=b;
         this.c=c;
@@ -85,7 +86,7 @@ public class Triangle extends Geometry{
             return null;
         }
         // As we now know that the ray is hitting the triangle, we can return a Hit-object giving the necessary information.
-        return new Hit(t, ray, this);
+        return new Hit(t, ray, this, new Normal3(0.0,0.0,0.0));
     }
 
     /*

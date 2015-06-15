@@ -2,6 +2,7 @@ package Geometry;
 import MatrixVector.*;
 import Scene.*;
 import Utilities.Debugging;
+import Material.*;
 
 /**
  * Created by Jonathan on 05.06.15.
@@ -24,10 +25,10 @@ public class Plane extends Geometry {
      * Initializes the plane with given parameters
      * @param a basic vector of the plane
      * @param n normal vector of the plane
-     * @param color color of the plane
+     * @param material Material of the plane
      */
-    public Plane(final Point3 a, final Normal3 n, final Color color) {
-        super(color);
+    public Plane(final Point3 a, final Normal3 n, final Material material) {
+        super(material);
         this.a=a;
         this.n=n;
     }
@@ -55,14 +56,14 @@ public class Plane extends Geometry {
         // d ist the direction-vector of the ray
         final double t = (a.sub(ray.origin).dot(n)) / (ray.direction.dot(n));
         if (t > 0){
-            return new Hit(t, ray, this);
+            return new Hit(t, ray, this, new Normal3(0.0,0.0,0.0));
         } else {
             return null;
         }
     }
 
     public static void testHit(){
-        Plane testPlane = new Plane(new Point3(50.0,50.0,0.0), new Normal3(0.0, 1.0, 0.0), new Color(0, 0, 1));
+        Plane testPlane = new Plane(new Point3(50.0,50.0,0.0), new Normal3(0.0, 1.0, 0.0), new SingleColorMaterial(new Color(0,1,0)));
 
         //Testvector, that is not hitting the Plane:
         Ray testRay1 = new Ray(new Point3(0.0, 60.0, 0), new Vector3(100.0, 0.0, 0.0));

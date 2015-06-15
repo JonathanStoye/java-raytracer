@@ -1,9 +1,9 @@
 package Geometry;
 
-import Material.Material;
 import MatrixVector.*;
 import Scene.*;
 import Utilities.Debugging;
+import Material.*;
 
 /**
  * Class sphere is used to describe a sphere in the 3-dimensional coordinate System
@@ -21,7 +21,7 @@ public class Sphere extends Geometry{
      * Initializes a sphere with the given Values
      * @param c central Point of the sphere
      * @param r radius of the sphere
-     * @param material material of the Geometric object sphere
+     * @param material Material of the Geometric object sphere
      */
     public Sphere( Point3 c, double r, Material material){
         super(material);
@@ -84,9 +84,9 @@ public class Sphere extends Geometry{
         //
         // We check tNegative first, because it is obviously smaller than tPositive.
         if (tNegative > 0.0000001){
-            return new Hit(tNegative, ray, this);
+            return new Hit(tNegative, ray, this, new Normal3(0.0,0.0,0.0));
         } else if (tPositive > 0.0000001){
-            return new Hit(tPositive, ray, this);
+            return new Hit(tPositive, ray, this, new Normal3(0.0,0.0,0.0));
         }
 
         // But there is one possible result left, when there is only one intersection:
@@ -95,7 +95,7 @@ public class Sphere extends Geometry{
             if (tValue < 0.0000001){
                 return null;
             }
-            return new Hit(tValue, ray, this);
+            return new Hit(tValue, ray, this, new Normal3(0.0,0.0,0.0));
         }
         return null;
     }
@@ -133,7 +133,8 @@ public class Sphere extends Geometry{
         // Pointing at the Border of the sphrere but on the negative z-axis
         Ray TestRay3DimensionalPositiveZOutsideSphereBorder = new Ray(new Point3(0.0, 50.0, 26.0), new Vector3(100.0, 0.0, 0.0));
         Ray TestRay3DimensionalNegativeZOutsideSphereBorder  = new Ray(new Point3(0.0, 50.0, -26.0), new Vector3(100.0, 0.0, 0.0));
-        Sphere testSphere = new Sphere(new Point3(50.0,50.0,0.0), 25.0, new Color(1,0,0));
+        Sphere testSphere = new Sphere(new Point3(50.0, 50.0, 0.0), 25.0, new SingleColorMaterial(new Color(1, 0, 0)) {
+        });
         if (testSphere.hit(testRayMiddle) != null) {
             Debugging.log("Successful: Vector testRayMiddle is hitting Sphere at t=" + testSphere.hit(testRayMiddle).t);
         }else {
