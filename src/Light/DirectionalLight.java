@@ -28,8 +28,10 @@ public class DirectionalLight extends Light {
         return true;
     }
 
+    // The DirectionFROM an illuminated Point is always the same.
+    // It is Pointing against the lignt's direction.
     @Override
     public Vector3 directionFrom(Point3 point) {
-        return null;
+        return direction.mul(-1.0).normalized();
     }
 }
