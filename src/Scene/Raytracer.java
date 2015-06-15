@@ -16,16 +16,25 @@ import java.awt.*;
  * Created by Jonathan on 05.06.15.
  */
 public class Raytracer {
+
     private final int width;
     private final int height;
     private final int[] pixels;
 
+    /**
+     * set width and height of the scene and calculates the amount of pixels accordingly
+     * @param width width of the scene
+     * @param height height of the scene
+     */
     public Raytracer(int width, int height) {
         this.height = height;
         this.width = width;
         this.pixels = new int[this.width * this.height];
     }
 
+    /**
+     * test setups for different scenes
+     */
     public void testScene1(){
         Geometry[] objects = new Geometry[1];
         Plane plane =       new Plane(   new Point3(0.0, -1.0, 0.0), new Normal3(0.0, 1.0, 0.0),                           new Color(0, 1, 0));

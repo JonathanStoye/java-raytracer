@@ -39,40 +39,48 @@ public class Color {
      * adds a given color to this by adding each channel of the given color to the according channel of this
      * @param color color to add to this
      */
-    public void add(Color color) {
-        this.r += color.r;
-        this.g += color.g;
-        this.b += color.b;
+    public Color add(Color color) {
+        final Color finalColor = null;
+        finalColor.r = this.r + color.r;
+        finalColor.g = this.g + color.g;
+        finalColor.b = this.b + color.b;
+        return finalColor;
     }
 
     /**
      * subtracts a given color to this by subtracting each channel of the given color to the according channel of this
      * @param color color to subtract from this
      */
-    public void sub(Color color) {
-        this.r -= color.r;
-        this.g -= color.g;
-        this.b -= color.b;
+    public Color sub(Color color) {
+        final Color finalColor = null;
+        finalColor.r = this.r - color.r;
+        finalColor.g = this.g - color.g;
+        finalColor.b = this.b - color.b;
+        return finalColor;
     }
 
     /**
      * mulitplies given color with this by multiplying each channel of the given to with the according channel of this
      * @param color color to multiply this with
      */
-    public void mul(Color color) {
-        this.r = this.r * color.r;
-        this.g = this.g * color.g;
-        this.b = this.b * color.b;
+    public Color mul(Color color) {
+        final Color finalColor = null;
+        finalColor.r = this.r * color.r;
+        finalColor.g = this.g * color.g;
+        finalColor.b = this.b * color.b;
+        return finalColor;
     }
 
     /**
      * mulitplies given skalar with this by multiplying each channel of the given to with the given skalar
      * @param skalar given skalar to multiply this with
      */
-    public void mul(double skalar) {
-        this.r = this.r * skalar;
-        this.g = this.g * skalar;
-        this.b = this.b * skalar;
+    public Color mul(double skalar) {
+        final Color finalColor = null;
+        finalColor.r = this.r * skalar;
+        finalColor.g = this.g * skalar;
+        finalColor.b = this.b * skalar;
+        return finalColor;
     }
 
     /**
@@ -98,8 +106,8 @@ public class Color {
     private static void testAdd() {
         final Color color = new Color(0.0, 0.0, 0.0);
         final Color addColor = new Color(0.3, 0.3, 0.3);
-        color.add(addColor);
-        if (color.equals(addColor)) {
+        final Color sumColor = color.add(addColor);
+        if (sumColor.equals(addColor)) {
             Debugging.log("test Color.add() successful");
         }
         else {
@@ -113,8 +121,8 @@ public class Color {
     private static void testSub() {
         final Color color = new Color(0.6, 0.6, 0.6);
         final Color subColor = new Color(0.3, 0.3, 0.3);
-        color.sub(subColor);
-        if (color.equals(subColor)) {
+        final Color sumColor = color.sub(subColor);
+        if (sumColor.equals(subColor)) {
             Debugging.log("test Color.sub() successful");
         }
         else {
@@ -128,10 +136,9 @@ public class Color {
     private static void testMul() {
         final Color color = new Color(0.2, 0.2, 0.2);
         final Color mulColor = new Color(0.3, 0.3, 0.3);
-        final Color sumColor = new Color(0.06, 0.06, 0.06);
-
-        color.mul(mulColor);
-        if (color.equals(sumColor)) {
+        final Color expectedSumColor = new Color(0.06, 0.06, 0.06);
+        final Color sumColor = color.mul(mulColor);
+        if (sumColor.equals(expectedSumColor)) {
             Debugging.log("test Color.mul() with color successful");
         }
         else {
@@ -145,10 +152,9 @@ public class Color {
     private static void testMulS() {
         final Color color = new Color(0.2, 0.2, 0.2);
         final double skalar = 0.3;
-        final Color sumColor = new Color(0.06, 0.06, 0.06);
-
-        color.mul(skalar);
-        if (color.equals(sumColor)) {
+        final Color expectedSumColor = new Color(0.06, 0.06, 0.06);
+        final Color sumColor = color.mul(skalar);
+        if (sumColor.equals(expectedSumColor)) {
             Debugging.log("test Color.mul() with skalar successful");
         }
         else {
