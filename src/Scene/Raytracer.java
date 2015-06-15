@@ -424,7 +424,16 @@ public class Raytracer {
         p.draw();
     }
 
-    public void testAllScenes(){
+    public void testAllLightningScenes(){
+        testLightning1();
+        testLambertLightning();
+        testPhongLightning();
+        testPhongLightningDirectional();
+        testPhongLightningSpotLight();
+        testPhongLightningSpotLightandAmbientLight();
+    }
+
+    public void testAllsimpleScenes(){
         this.testScene1();
         this.testScene2();
         this.testScene3();
