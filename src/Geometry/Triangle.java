@@ -23,7 +23,7 @@ public class Triangle extends Geometry{
      * Initializes the triangle with the given parameters
      * @param a Point a of the triangle
      * @param b Point b of the triangle
-     * @param c Point c of the triangle     *
+     * @param c Point c of the triangle
      * @param material material of the Geometric form triangle
      */
     public Triangle(Point3 a, Point3 b, Point3 c, Material material){
