@@ -10,7 +10,7 @@ public class Main {
         //testAll();
 //        Color.test();
         Raytracer raytracer = new Raytracer(800, 600);
-        raytracer.testPhongLightningSpotLight();
+        raytracer.testAllLightningScenes();
     }
 
     private static void testAll() {
