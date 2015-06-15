@@ -1,6 +1,9 @@
 package Scene;
 
 import Geometry.*;
+import Light.Light;
+
+import java.util.List;
 
 /**
  * Created by Jonathan on 05.06.15.
@@ -8,10 +11,21 @@ import Geometry.*;
 public class World {
     private final Geometry[] objects;
     public final Color backgroundColor;
+    public final Color ambientLight;
+    public final List<Light> lights;
+
+    public World(Geometry[] objects, Color backgroundColor, Color ambientLight, List<Light> lights) {
+        this.objects = objects;
+        this.backgroundColor = backgroundColor;
+        this.ambientLight = ambientLight;
+        this.lights = lights;
+    }
 
     public World(Geometry[] objects, Color backgroundColor) {
         this.objects = objects;
         this.backgroundColor = backgroundColor;
+        this.ambientLight = null;
+        this.lights = null;
     }
 
     /**
