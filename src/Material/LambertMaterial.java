@@ -32,20 +32,19 @@ public class LambertMaterial extends Material{
     @Override
     public Color colorFor(Hit hit, World world) {
 
-        Color c = new Color(0,0,0);
-
+        // Normal of the hit object
+        Normal3 n = hit.n;
+        // Setting up Variables cd (color diffus), ca (color ambient) and c (return value "Color").
         Color cd = this.color;
         Color ca = world.ambientLight;
-        c = cd.mul(ca);
+        Color c = cd.mul(ca);
 
         // Every source of light is now checked.
-        // Whenever the light illuminates the interception point of the hit object the color is added to c.
+        // Whenever the light illuminates the interception point of the hit object the color is calculated and added to c.
         for (int i=0; i<world.lights.size(); i++){
             Light currentLight = world.lights.get(i);
             // Vector pointing to the light source
             Vector3 l = currentLight.directionFrom(hit.ray.at(hit.t)).normalized();
-            // Normal of the hit object
-            Normal3 n = hit.n;
             // Color of the current Light (cl)
             Color cl = currentLight.color;
             // Sum of all the light generated colors
