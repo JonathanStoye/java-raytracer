@@ -64,10 +64,16 @@ public class Color {
      * @param color color to multiply this with
      */
     public Color mul(Color color) {
-        final Color finalColor = null;
-        finalColor.r = this.r * color.r;
-        finalColor.g = this.g * color.g;
-        finalColor.b = this.b * color.b;
+
+       // Old (was not working because of NullPointerException):
+//        final Color finalColor = null;
+//        finalColor.r = this.r * color.r;
+//        finalColor.g = this.g * color.g;
+//        finalColor.b = this.b * color.b;
+
+        // new (is working)
+        final Color finalColor = new Color((this.r * color.r),(this.g * color.g),(this.b * color.b));
+
         return finalColor;
     }
 
