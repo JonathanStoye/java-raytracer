@@ -2,8 +2,7 @@ package Light;
 
 import MatrixVector.Point3;
 import MatrixVector.Vector3;
-
-import java.awt.*;
+import Scene.*;
 
 /**
  * Created by David on 14.06.15.
@@ -13,7 +12,7 @@ import java.awt.*;
 public abstract class Light {
 
     // Color of the Light
-    public final Color color;
+    public final Scene.Color color;
 
     /**
      * Initiates the Light-Object using the given Color

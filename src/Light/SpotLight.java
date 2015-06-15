@@ -2,8 +2,7 @@ package Light;
 
 import MatrixVector.Point3;
 import MatrixVector.Vector3;
-
-import java.awt.*;
+import Scene.*;
 
 /**
  * Created by Jonathan on 09.06.15.

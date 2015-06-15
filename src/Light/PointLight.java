@@ -2,8 +2,7 @@ package Light;
 
 import MatrixVector.Point3;
 import MatrixVector.Vector3;
-
-import java.awt.*;
+import Scene.*;
 
 /**
  * Class PointLight represents an instance of a PointLight in the Scene
