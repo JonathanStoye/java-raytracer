@@ -1,26 +1,33 @@
 package Material;
 
-import Scene.*;
+import Scene.Hit;
+import Scene.World;
+
+import java.awt.*;
 
 /**
- * Created by Jonathan on 09.06.15.
+ * Class SingleColorMaterial is used to describe the simplest Material, which only has a Color.
+ * Created by David on 15.06.15.
  */
-public class SingleColorMaterial extends Material {
+public class SingleColorMaterial extends Material{
+    final public Color color;
 
-    public final Color color;
-
-    public SingleColorMaterial(Color color) {
-        this.color = color;
+    /**
+     * Initiates the Material using the given Color.
+     * @param color
+     */
+    public SingleColorMaterial(Color color){
+        this.color=color;
     }
 
     /**
-     * simply return this.color for every hit
+     * Just returns the Color of the Material
      * @param hit Hit object which is analysed
-     * @param world World object which is used to get information about the light in the current scene.
-     * @return this.color
+     * @param world World objekct which is used to get information about the light in the current scene.
+     * @return Color of the Material
      */
     @Override
-    public Scene.Color colorFor(Hit hit, World world) {
+    public Color colorFor(Hit hit, World world) {
         return this.color;
     }
 }
