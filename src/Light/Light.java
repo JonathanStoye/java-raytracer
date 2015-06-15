@@ -2,8 +2,8 @@ package Light;
 
 import MatrixVector.Point3;
 import MatrixVector.Vector3;
+import Scene.Color;
 
-import java.awt.*;
 
 /**
  * Created by David on 14.06.15.
