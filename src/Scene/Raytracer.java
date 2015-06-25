@@ -45,7 +45,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -74,7 +74,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -102,7 +102,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -131,7 +131,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -163,7 +163,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -195,7 +195,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -229,7 +229,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -265,7 +265,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -279,7 +279,7 @@ public class Raytracer {
 
     public void testPhongLightning(){
         Geometry[] objects = new Geometry[4];
-//    public PhongMaterial(Color diffuse, Color spekular, int exponent)
+//    public PhongMaterial(Color diffuse, Color specular, int exponent)
         Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
         Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64));
         AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64));
@@ -301,7 +301,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -315,7 +315,7 @@ public class Raytracer {
 
     public void testPhongLightningDirectional(){
         Geometry[] objects = new Geometry[4];
-//    public PhongMaterial(Color diffuse, Color spekular, int exponent)
+//    public PhongMaterial(Color diffuse, Color specular, int exponent)
         Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
         Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64));
         AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64));
@@ -338,7 +338,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -352,7 +352,7 @@ public class Raytracer {
 
     public void testPhongLightningSpotLight(){
         Geometry[] objects = new Geometry[4];
-//    public PhongMaterial(Color diffuse, Color spekular, int exponent)
+//    public PhongMaterial(Color diffuse, Color specular, int exponent)
         Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
         Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64));
         AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64));
@@ -375,7 +375,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
@@ -389,7 +389,7 @@ public class Raytracer {
 
     public void testPhongLightningSpotLightandAmbientLight(){
         Geometry[] objects = new Geometry[4];
-//    public PhongMaterial(Color diffuse, Color spekular, int exponent)
+//    public PhongMaterial(Color diffuse, Color specular, int exponent)
         Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
         Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64));
         AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64));
@@ -412,7 +412,7 @@ public class Raytracer {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
                 if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world).asHex();
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 }
                 else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
