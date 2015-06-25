@@ -63,7 +63,9 @@ public class ReflectiveMaterial extends Material{
                 c = c.add(phongColor);
             }
         }
-        // Reflected Vector using the Normal of the Hit point
+        // Now the Color of the reflected Ray at the current Rays hit point is calculated.
+        // This is made by an instance of Recursive Tracer given by the inputs of this method colorFor()
+        // If the Ray is hitting another Material, then the Color is added to the Color c.
         Vector3 rd = e.reflectedOn(hit.n);
         Color cr = this.reflection.mul(tracer.trace(new Ray(hit.ray.at(hit.t - 0.00000001), rd)));
         c = c.add(cr);
