@@ -1,7 +1,5 @@
 package Material;
 
-import Geometry.*;
-import Geometry.Triangle;
 import Light.Light;
 import MatrixVector.Normal3;
 import MatrixVector.Point3;
@@ -15,12 +13,12 @@ import Scene.*;
  */
 public class PhongMaterial extends Material{
     public final Color diffuse;
-    public final Color spekular;
+    public final Color specular;
     public final int exponent;
 
     public PhongMaterial(Color diffuse, Color spekular, int exponent){
         this.diffuse=diffuse;
-        this.spekular=spekular;
+        this.specular =spekular;
         this.exponent=exponent;
     }
 
@@ -34,7 +32,7 @@ public class PhongMaterial extends Material{
         // Setting up Variables cd (color diffus), ca (color ambient), cs (color specular) and c (return value "Color").
         Color cd = this.diffuse;
         Color ca = world.ambientLight;
-        Color cs = this.spekular;
+        Color cs = this.specular;
         Color c = cd.mul(ca);
 
         // Every source of light is now checked.
