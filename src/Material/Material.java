@@ -18,5 +18,5 @@ public abstract class Material {
      * @param world World objekct which is used to get information about the light in the current scene.
      * @return Color object which is describing the color of the analysed hit.
      */
-    public abstract Scene.Color colorFor(Hit hit, World world);
+    public abstract Scene.Color colorFor(Hit hit, World world, RecursiveTracer recursiveTracer);
 }

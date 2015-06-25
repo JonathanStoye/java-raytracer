@@ -27,7 +27,7 @@ public class SingleColorMaterial extends Material{
      * @return Color of the Material
      */
     @Override
-    public Scene.Color colorFor(Hit hit, World world) {
+    public Scene.Color colorFor(Hit hit, World world, RecursiveTracer tracer) {
         return this.color;
     }
 }

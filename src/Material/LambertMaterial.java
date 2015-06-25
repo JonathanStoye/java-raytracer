@@ -30,7 +30,7 @@ public class LambertMaterial extends Material{
      * @return Color of the interception point.
      */
     @Override
-    public Color colorFor(Hit hit, World world) {
+    public Color colorFor(Hit hit, World world, RecursiveTracer tracer) {
 
         // Normal of the hit object
         Normal3 n = hit.n;

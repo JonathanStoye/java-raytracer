@@ -4,9 +4,7 @@ import Light.Light;
 import MatrixVector.Normal3;
 import MatrixVector.Point3;
 import MatrixVector.Vector3;
-import Scene.Color;
-import Scene.Hit;
-import Scene.World;
+import Scene.*;
 
 /**
  * The class ReflectiveMaterial is used to describe PhongMaterial which is also reflecting light.
@@ -34,7 +32,7 @@ public class ReflectiveMaterial extends Material{
         this.reflection=reflection;
     }
     @Override
-    public Color colorFor(Hit hit, World world) {
+    public Color colorFor(Hit hit, World world, RecursiveTracer tracer) {
 
         // Normal of the hit object
         Normal3 n = hit.n;
@@ -56,15 +54,21 @@ public class ReflectiveMaterial extends Material{
                 Point3 bla = hit.ray.at(hit.t);
                 Vector3 l = currentLight.directionFrom(hit.ray.at(hit.t)).normalized();
                 // Vector which is reflected by the Material using the Normal n
-                Vector3 rn = l.reflectedOn(n);
+                Vector3 rl = l.reflectedOn(n);
                 // Color of the current Light (cl)
                 Color cl = currentLight.color;
                 // Sum of all the light generated colors
-                Color phongColor = ((cd.mul(cl)).mul(Math.max(0, n.dot(l)))).add(cs.mul(cl).mul(Math.pow((Math.max(0,e.dot(rn))), exponent)));
+                Color phongColor = ((cd.mul(cl)).mul(Math.max(0, n.dot(l)))).add(cs.mul(cl).mul(Math.pow((Math.max(0,e.dot(rl))), exponent)));
                 // Color is added to the return value
                 c = c.add(phongColor);
             }
         }
+        // Reflected Vector using the Normal of the Hit point
+        Vector3 rd = e.reflectedOn(hit.n);
+        Color cr = this.reflection.mul(tracer.trace(new Ray(hit.ray.at(hit.t - 0.00000001), rd)));
+        c = c.add(cr);
+
+
         return c;
     }
 }
