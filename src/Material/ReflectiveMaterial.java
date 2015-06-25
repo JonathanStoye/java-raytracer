@@ -29,6 +29,7 @@ public class ReflectiveMaterial extends Material{
         this.diffuse=diffuse;
         this.specular=specular;
         this.exponent=exponent;
+        // This value is used to describe how much or in which color reflections are supposed to be displayed.
         this.reflection=reflection;
     }
     @Override
@@ -67,6 +68,9 @@ public class ReflectiveMaterial extends Material{
         // This is made by an instance of Recursive Tracer given by the inputs of this method colorFor()
         // If the Ray is hitting another Material, then the Color is added to the Color c.
         Vector3 rd = e.reflectedOn(hit.n);
+        //
+        //                                            this is the recursive function:
+        //                                    |                                               |
         Color cr = this.reflection.mul(tracer.trace(new Ray(hit.ray.at(hit.t - 0.00000001), rd)));
         c = c.add(cr);
 
