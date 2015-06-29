@@ -3,17 +3,18 @@ package Scene;
 import Camera.OrthographicCamera;
 import Camera.PerspectiveCamera;
 import Geometry.*;
+import Light.DirectionalLight;
+import Light.Light;
+import Light.PointLight;
+import Light.SpotLight;
 import Material.LambertMaterial;
 import Material.PhongMaterial;
+import Material.ReflectiveMaterial;
 import Material.SingleColorMaterial;
 import MatrixVector.Normal3;
 import MatrixVector.Point3;
 import MatrixVector.Vector3;
-import Utilities.Debugging;
 import Visualization.Painter;
-import javafx.scene.control.TreeItem;
-import Scene.*;
-import Light.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -422,6 +423,76 @@ public class Raytracer {
 
         Painter p = new Painter(this.width, this.height, this.pixels);
         p.draw();
+    }
+
+    public void testSphere()
+    {
+        Geometry[] objects = new Geometry[4];
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(0.1, 0.1, 0.1), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+        Sphere sphere1 = new Sphere(new Point3(-3.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+        Sphere sphere2 = new Sphere(new Point3(0.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+        Sphere sphere3 = new Sphere(new Point3(3.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(0.0, 0.0, 1.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+
+        objects[0] = plane;
+        objects[1] = sphere1;
+        objects[2] = sphere2;
+        objects[3] = sphere3;
+        List<Light> lights = new ArrayList<Light>();
+        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(0.0, 0.1, 0.0)));
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25, 0.25, 0.25), lights);
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
+
+        for(int y = 0; y < this.height; y++)
+        {
+            for(int x = 0; x < this.width; x++)
+            {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if(hit != null)
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
+                else
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+            }
+        }
+
+        Painter p = new Painter(this.width, this. height, this.pixels);
+        p.draw();
+    }
+
+    public void testAAB()
+    {
+        Geometry[] objects = new Geometry[2];
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 0.1, 0.0), new LambertMaterial(new Color(0.8, 0.8, 0.8)));
+        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new LambertMaterial(new Color(0.8, 0.8, 0.8)));
+
+        objects[0] = plane;
+        objects[1] = aab;
+        List<Light> lights = new ArrayList<Light>();
+        lights.add(new PointLight(new Color(0.0, 0.0, 0.0), new Point3(8.0, 8.0, 0.0)));
+        World world = new World(objects, new Color(1.0, 1.0, 1.0), new Color(0.8, 0.8, 0.8), lights);
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 0.1, 0.0), Math.PI / 4);
+
+        for(int y = 0; y < this.height; y++)
+        {
+            for(int x = 0; x < this.width; x++)
+            {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if(hit != null)
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
+                else
+                    pixels[y * this.width +x] = world.backgroundColor.asHex();
+            }
+        }
+
+        Painter p = new Painter(this.width, this.height, this.pixels);
+        p.draw();
+    }
+
+    public void testAllMaterialScenes()
+    {
+        testSphere();
+        testAAB();
     }
 
     public void testAllLightningScenes(){
