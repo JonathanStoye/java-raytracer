@@ -11,8 +11,23 @@ import Scene.*;
  */
 public abstract class Light {
 
-    // Color of the Light
+    /**
+     * Color of the Light
+     */
     public final Scene.Color color;
+    /**
+     * tells us whether or not ths light casts shadows
+     */
+    public final boolean castsShadows;
+
+    /**
+     * Initiates the Light-Object using the given Color
+     * @param color Color of the Light
+     */
+    public Light(Color color, boolean castsShadows){
+        this.color = color;
+        this.castsShadows = castsShadows;
+    }
 
     /**
      * Initiates the Light-Object using the given Color
@@ -20,14 +35,23 @@ public abstract class Light {
      */
     public Light(Color color){
         this.color = color;
+        this.castsShadows = false;
     }
 
     /**
-     * Determines wheter the given Point is illuminated by this light.
+     * Determines whether the given Point is illuminated by this light.
      * @param point Point, which is potentially illuminated by this light.
      * @return Returns a boolean value: true, if the Point is illuminated. false if the Point is not illuminated.
      */
     public abstract boolean illuminates(Point3 point);
+
+    /**
+     * Determines whether the given Point is illuminated by this light. (including calculation of shadows)
+     * @param point Point, which is potentially illuminated by this light.
+     * @param world World is needed to check if point is laying in a shadow
+     * @return Returns a boolean value: true, if the Point is illuminated. false if the Point is not illuminated.
+     */
+    public abstract boolean illuminates(Point3 point, World world);
 
     /**
      * Returns a Vector, representing the Direction from the given Point to the source of light.

@@ -38,8 +38,34 @@ public class SpotLight extends Light {
         if (angle <= this.halfAngle){
             return true;
         }
+        else {
+            return true;
+        }
+    }
 
-        return false;
+    /**
+     * Determines whether the given Point is illuminated by this light. (including calculation of shadows)
+     * @param point Point, which is potentially illuminated by this light.
+     * @param world World is needed to check if point is laying in a shadow
+     * @return Returns a boolean value: true, if the Point is illuminated. false if the Point is not illuminated.
+     */
+    @Override
+    public boolean illuminates(Point3 point, World world) {
+
+        final Vector3 diffVector = this.directionFrom(point).mul(-1.0);
+
+        double angle = (diffVector.dot(this.direction)) / (diffVector.magnitude * this.direction.magnitude);
+        angle = Math.acos(angle);
+
+        Hit hit = world.hit(new Ray(point, diffVector));
+        double t = diffVector.magnitude/1;
+
+        if (angle > this.halfAngle || (hit != null && hit.t < t)){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     @Override

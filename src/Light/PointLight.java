@@ -24,13 +24,37 @@ public class PointLight extends Light{
     }
 
     /**
-     * Determines wheter the given Point is illuminated by this light.
+     * Determines whether the given Point is illuminated by this light.
      * @param point Point, which is potentially illuminated by this light.
      * @return Returns a boolean value: true, if the Point is illuminated. false if the Point is not illuminated.
      */
     @Override
     public boolean illuminates(Point3 point) {
         return true;
+    }
+
+    /**
+     * Determines whether the given Point is illuminated by this light. (including calculation of shadows)
+     * @param point Point, which is potentially illuminated by this light.
+     * @param world World is needed to check if point is laying in a shadow
+     * @return Returns a boolean value: true, if the Point is illuminated. false if the Point is not illuminated.
+     */
+    @Override
+    public boolean illuminates(Point3 point, World world) {
+        if (!this.castsShadows) {
+            return true;
+        }
+
+        Ray ray = new Ray(point, directionFrom(point));
+        Hit hit = world.hit(ray);
+        double t = this.position.sub(point).magnitude/1;
+
+        if(hit != null && hit.t < t && hit.t > 0.0001){
+            return false;
+        }
+        else {
+            return true;
+        }
     }
 
     /**
