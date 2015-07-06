@@ -1,6 +1,6 @@
 package Visualization;
 
-import Utilities.Debugging;
+import Utillities.Debugging;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
