@@ -1,5 +1,5 @@
 package MatrixVector;
-import Utilities.Debugging;
+import utilities.Debugging;
 
 /**
  * Created by Jonathan on 01.05.15.

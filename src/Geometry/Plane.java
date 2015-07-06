@@ -1,7 +1,7 @@
 package Geometry;
 import MatrixVector.*;
 import Scene.*;
-import Utilities.Debugging;
+import utilities.Debugging;
 import Material.*;
 
 /**

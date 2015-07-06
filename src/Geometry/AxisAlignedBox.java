@@ -31,7 +31,7 @@ public class AxisAlignedBox extends Geometry{
 
     @Override
     public Hit hit(Ray ray){
-        // A box consists of six planes (dices , ger: Würfel).
+        // A box consists of six planes (dices , ger: Wï¿½rfel).
         // Therefore six planes have to be declared.
         // in order to describe these Planes we just need a known Point and a normal vector.
         // the Points lbf and run are given
@@ -55,7 +55,7 @@ public class AxisAlignedBox extends Geometry{
         }
 
         // We need to store all visible hits (intersections)
-        ArrayList<Hit> visibleHits = new ArrayList<>();
+        ArrayList<Hit> visibleHits = new ArrayList<Hit>();
 
         // Now we have to analyse the found hits
         for (Hit hit : foundHits){
