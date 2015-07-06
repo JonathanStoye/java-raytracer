@@ -481,7 +481,7 @@ public class Raytracer {
                 if(hit != null)
                     pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
                 else
-                    pixels[y * this.width +x] = world.backgroundColor.asHex();
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
             }
         }
 
