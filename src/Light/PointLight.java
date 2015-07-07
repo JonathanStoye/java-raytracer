@@ -23,6 +23,11 @@ public class PointLight extends Light{
         this.position = position;
     }
 
+    public PointLight(Color color, Point3 position, boolean castShadows){
+        super(color, castShadows);
+        this.position = position;
+    }
+
     /**
      * Determines whether the given Point is illuminated by this light.
      * @param point Point, which is potentially illuminated by this light.
@@ -42,15 +47,20 @@ public class PointLight extends Light{
     @Override
     public boolean illuminates(Point3 point, World world) {
         if (!this.castsShadows) {
-            return true;
+            return false;
         }
 
-        Ray ray = new Ray(point, directionFrom(point));
+        Ray ray = new Ray(point, directionFrom(this.position));
         Hit hit = world.hit(ray);
         double t = this.position.sub(point).magnitude/1;
 
-        if(hit != null && hit.t < t && hit.t > 0.0001){
-            return false;
+        if (hit != null) {
+            if (hit.t < t && hit.t > 0.0001) {
+                return false;
+            }
+            else {
+                return true;
+            }
         }
         else {
             return true;

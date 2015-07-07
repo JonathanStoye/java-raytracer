@@ -1,6 +1,6 @@
 package Scene;
 
-import Utilities.Debugging;
+import Utillities.Debugging;
 
 /**
  * Created by Jonathan on 05.06.15.

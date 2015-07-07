@@ -1,12 +1,13 @@
 package Visualization;
 
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.*;
+import Utillities.Debugging;
+
 import javax.imageio.ImageIO;
 import javax.swing.*;
-
-import Utilities.Debugging;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Jonathan on 28.04.15.

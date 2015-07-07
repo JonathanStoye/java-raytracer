@@ -438,8 +438,8 @@ public class Raytracer {
         objects[2] = sphere2;
         objects[3] = sphere3;
         List<Light> lights = new ArrayList<Light>();
-        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(0.0, 0.1, 0.0)));
-        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25, 0.25, 0.25), lights);
+        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(0.0, 0.1, 0.0), true));
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.8, 0.8, 0.8), lights);
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
 
         for(int y = 0; y < this.height; y++)
@@ -466,13 +466,13 @@ public class Raytracer {
     {
         Geometry[] objects = new Geometry[2];
         Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 0.1, 0.0), new LambertMaterial(new Color(0.8, 0.8, 0.8)));
-        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new LambertMaterial(new Color(0.8, 0.8, 0.8)));
+        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new LambertMaterial(new Color(1.0, 0.0, 0.0)));
 
         objects[0] = plane;
         objects[1] = aab;
         List<Light> lights = new ArrayList<Light>();
-        lights.add(new PointLight(new Color(0.0, 0.0, 0.0), new Point3(8.0, 8.0, 0.0)));
-        World world = new World(objects, new Color(1.0, 1.0, 1.0), new Color(0.8, 0.8, 0.8), lights);
+        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(8.0, 8.0, 0.0), false));
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.0, 0.0, 0.0), lights);
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 0.1, 0.0), Math.PI / 4);
 
         for(int y = 0; y < this.height; y++)
@@ -481,8 +481,10 @@ public class Raytracer {
             {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
-                if(hit != null)
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
+                if(hit != null) {
+                    RecursiveTracer recursiveTracer = new RecursiveTracer(world, 6);
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, recursiveTracer).asHex();
+                }
                 else
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
             }

@@ -23,6 +23,11 @@ public class DirectionalLight extends Light {
         this.direction = direction;
     }
 
+    public DirectionalLight(Color color, Vector3 direction, boolean castShadows){
+        super(color, castShadows);
+        this.direction = direction;
+    }
+
     /**
      * Determines whether the given Point is illuminated by this light.
      * @param point Point, which is potentially illuminated by this light.

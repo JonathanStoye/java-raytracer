@@ -1,5 +1,5 @@
 package MatrixVector;
-import Utilities.Debugging;
+import Utillities.Debugging;
 
 /**
  * Class Vector 3 is used to represent Object as 3-dimensional vectors

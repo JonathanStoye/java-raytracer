@@ -27,6 +27,13 @@ public class SpotLight extends Light {
         this.halfAngle = halfAngle;
     }
 
+    public SpotLight(Color color, Point3 position, Vector3 direction, double halfAngle, boolean castShadows) {
+        super(color, castShadows);
+        this.position = position;
+        this.direction = direction;
+        this.halfAngle = halfAngle;
+    }
+
     @Override
     public boolean illuminates(Point3 point) {
 

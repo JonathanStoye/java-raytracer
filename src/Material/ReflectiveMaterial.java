@@ -50,7 +50,7 @@ public class ReflectiveMaterial extends Material{
         for (int i=0; i<world.lights.size(); i++){
             Light currentLight = world.lights.get(i);
             // if the Point is illuminated by the current light source, then the color is added.
-            if(currentLight.illuminates(hit.ray.at(hit.t))){
+            if(currentLight.illuminates(hit.ray.at(hit.t), world)){
                 // Vector pointing to the light source
                 Point3 bla = hit.ray.at(hit.t);
                 Vector3 l = currentLight.directionFrom(hit.ray.at(hit.t)).normalized();
