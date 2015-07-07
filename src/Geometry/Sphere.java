@@ -1,13 +1,9 @@
 package Geometry;
 
-import Material.Material;
-import Material.SingleColorMaterial;
-import MatrixVector.Point3;
-import MatrixVector.Vector3;
-import Scene.Color;
-import Scene.Hit;
-import Scene.Ray;
-import utilities.Debugging;
+import MatrixVector.*;
+import Scene.*;
+import Utilities.Debugging;
+import Material.*;
 
 /**
  * Class sphere is used to describe a sphere in the 3-dimensional coordinate System

@@ -448,10 +448,13 @@ public class Raytracer {
             {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
-                if(hit != null)
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                else
+                if(hit != null) {
+                    RecursiveTracer tracer = new RecursiveTracer(world, 6);
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, tracer).asHex();
+                }
+                else {
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
             }
         }
 

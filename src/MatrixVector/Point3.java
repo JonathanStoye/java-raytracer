@@ -1,6 +1,6 @@
 package MatrixVector;
 
-import utilities.Debugging;
+import Utilities.Debugging;
 
 /**
  * Created by Jonathan on 01.05.15.
