@@ -428,19 +428,25 @@ public class Raytracer {
     public void testSphere()
     {
         Geometry[] objects = new Geometry[4];
-        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(0.1, 0.1, 0.1), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(0.1, 0.1, 0.1), new Color(0.0, 0.0, 0.0), 64, new Color(0.5, 0.5, 0.5)));
+        // red sphere
         Sphere sphere1 = new Sphere(new Point3(-3.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+        // green sphere
         Sphere sphere2 = new Sphere(new Point3(0.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+        // blue sphere
         Sphere sphere3 = new Sphere(new Point3(3.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(0.0, 0.0, 1.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
 
         objects[0] = plane;
         objects[1] = sphere1;
         objects[2] = sphere2;
         objects[3] = sphere3;
+        // lights
         List<Light> lights = new ArrayList<Light>();
-        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(0.0, 0.1, 0.0), true));
-        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.8, 0.8, 0.8), lights);
+        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(8.0, 8.0, 8.0), true));
+        // camera
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
+        // world
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25, 0.25, 0.25), lights);
 
         for(int y = 0; y < this.height; y++)
         {
@@ -465,15 +471,20 @@ public class Raytracer {
     public void testAAB()
     {
         Geometry[] objects = new Geometry[2];
+        // plane
         Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 0.1, 0.0), new LambertMaterial(new Color(0.8, 0.8, 0.8)));
+        // box
         AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new LambertMaterial(new Color(1.0, 0.0, 0.0)));
 
         objects[0] = plane;
         objects[1] = aab;
         List<Light> lights = new ArrayList<Light>();
-        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(8.0, 8.0, 0.0), false));
-        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.0, 0.0, 0.0), lights);
+        // light
+        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(8.0, 8.0, 0.0), true));
+        // camera
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 0.1, 0.0), Math.PI / 4);
+        // world
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.2, 0.2, 0.2), lights);
 
         for(int y = 0; y < this.height; y++)
         {
@@ -496,7 +507,7 @@ public class Raytracer {
 
     public void testAllMaterialScenes()
     {
-        testSphere();
+//        testSphere();
         testAAB();
     }
 

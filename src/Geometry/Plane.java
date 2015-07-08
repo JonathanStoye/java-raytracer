@@ -34,14 +34,14 @@ public class Plane extends Geometry {
     }
 
     /**
-     * Determines wether the current plane is hit by the given ray.
+     * Determines whether the current plane is hit by the given ray.
      * @param ray specific ray, which is potentially hitting the current object.
      * @return Hit object, which references the intersection value t, the current ray and the hit plane
      */
     @Override
     public Hit hit(final Ray ray){
         // if the dot product of the direction vector and the normal vector of the plane is null.
-        // then they are orthognally to each other. Meaning the ray is not hitting the plane (paralel to it)
+        // then they are orthognale to each other. Meaning the ray is not hitting the plane (parallel to it)
         // or it is part of it (infinite number of intersections).
         if (ray.direction.dot(n) == 0) {
             return null;
