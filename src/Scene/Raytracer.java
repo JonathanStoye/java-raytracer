@@ -507,7 +507,7 @@ public class Raytracer {
 
     public void testAllMaterialScenes()
     {
-//        testSphere();
+        testSphere();
         testAAB();
     }
 
