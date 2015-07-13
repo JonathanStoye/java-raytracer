@@ -543,9 +543,51 @@ public class Raytracer {
         p.draw();
     }
 
+    public void testBoxTransformation(){
 
-    public void testAllTransformations(){
-        testSphereTransformation();
+        //Setting up the Test-Box
+        Geometry[] objects = new Geometry[1];
+        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, -0.5, -0.5), new Point3(0.5, 0.5, 0.5), new LambertMaterial(new Color(1.0, 1.0, 0.0)));
+        objects[0] = aab;
+
+        //Transforming Objects
+        List<Geometry> transobjects = new ArrayList<>();
+        transobjects.add(aab);
+        Node node = new Node(new Transform().rescale(4.0, 1.0, 8.0).rotateZ(Math.toRadians(-20)).rotateY(Math.toRadians(-5)).rotationOnX(Math.toRadians(-30)), transobjects);
+
+        // lights
+        List<Light> lights = new ArrayList<Light>();
+        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(1.0, 20.0, 20.0), true));
+        // camera
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(10.0, 10.0, 10.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
+        // world
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25, 0.25, 0.25), lights);
+
+        for(int y = 0; y < this.height; y++)
+        {
+            for(int x = 0; x < this.width; x++)
+            {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = node.hit(ray);
+                if(hit != null) {
+                    RecursiveTracer tracer = new RecursiveTracer(world, 6);
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, tracer).asHex();
+                }
+                else {
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
+            }
+        }
+
+        Painter p = new Painter(this.width, this. height, this.pixels);
+        p.draw();
+    }
+
+
+    public void testAllTransformations()
+    {
+       // testSphereTransformation();
+        testBoxTransformation();
     }
 
     public void testAllMaterialScenes()
