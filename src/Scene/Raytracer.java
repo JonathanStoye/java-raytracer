@@ -513,13 +513,13 @@ public class Raytracer {
         //Transforming Objects
         List<Geometry> transobjects = new ArrayList<>();
         transobjects.add(sphere);
-        Node node = new Node(new Transform().rescale(1.5, 0.3, 1.0), transobjects);
+        Node node = new Node(new Transform().rescale(6.0, 1.2, 4.0), transobjects);
 
         // lights
         List<Light> lights = new ArrayList<Light>();
         lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(1.0, 20.0, 20.0), true));
         // camera
-        PerspectiveCamera camera = new PerspectiveCamera(new Point3(4.0, 4.0, 4.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(20.0, 20.0, 20.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
         // world
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25, 0.25, 0.25), lights);
 
