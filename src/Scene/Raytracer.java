@@ -428,8 +428,7 @@ public class Raytracer {
         Geometry[] objects = new Geometry[4];
         Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(0.1, 0.1, 0.1), new Color(0.0, 0.0, 0.0), 64, new Color(0.5, 0.5, 0.5)));
         // red sphere
-        //Sphere sphere1 = new Sphere(new Point3(-3.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
-        Sphere sphere1 = new Sphere(new Point3(0.0, 0.0, 0.0), 1, new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+        Sphere sphere1 = new Sphere(new Point3(-3.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
         // green sphere
         Sphere sphere2 = new Sphere(new Point3(0.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
         // blue sphere
@@ -473,7 +472,7 @@ public class Raytracer {
         // plane
         Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 0.1, 0.0), new LambertMaterial(new Color(0.8, 0.8, 0.8)));
         // box
-       AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new LambertMaterial(new Color(1.0, 0.0, 0.0)));
+        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new LambertMaterial(new Color(1.0, 0.0, 0.0)));
 
         objects[0] = plane;
         objects[1] = aab;
@@ -544,50 +543,9 @@ public class Raytracer {
         p.draw();
     }
 
-    public void testAABTransformation()
-    {
-        //Setting up the Test-Sphere
-        Geometry[] objects = new Geometry[1];
-        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, -0.5, -0.5), new Point3(0.5, 0.5, 0.5), new LambertMaterial(new Color(1.0, 1.0, 0.0)));
-        objects[0] = aab;
 
-        //Transforming Objects
-        List<Geometry> transobjects = new ArrayList<>();
-        transobjects.add(aab);
-        Node node = new Node(new Transform().rescale(3.0, 1.0, 8.0).rotateY(Math.toRadians(-5)).rotateZ(Math.toRadians(-10)).rotationOnX(Math.toRadians(-20)), transobjects);
-
-        // lights
-        List<Light> lights = new ArrayList<Light>();
-        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(1.0, 20.0, 20.0), true));
-        // camera
-        PerspectiveCamera camera = new PerspectiveCamera(new Point3(10.0, 10.0, 10.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
-        // world
-        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25, 0.25, 0.25), lights);
-
-        for(int y = 0; y < this.height; y++)
-        {
-            for(int x = 0; x < this.width; x++)
-            {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = node.hit(ray);
-                if(hit != null) {
-                    RecursiveTracer tracer = new RecursiveTracer(world, 6);
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, tracer).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this. height, this.pixels);
-        p.draw();
-    }
-
-    public void testAllTransformations()
-    {
+    public void testAllTransformations(){
         testSphereTransformation();
-        testAABTransformation();
     }
 
     public void testAllMaterialScenes()
