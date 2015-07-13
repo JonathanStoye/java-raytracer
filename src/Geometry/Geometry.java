@@ -18,7 +18,7 @@ public abstract class Geometry {
      * Initializes the geometric form with the given parameter.
      * @param material Specifies the color of a certain geometric form
      */
-    Geometry (Material material){
+    public Geometry(Material material){
         this.material = material;
     }
 

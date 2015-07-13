@@ -2,11 +2,10 @@ package MatrixVector;
 
 import Geometry.Geometry;
 import Material.LambertMaterial;
-import Material.SingleColorMaterial;
-import MatrixVector.Transform;
 import Scene.Color;
 import Scene.Hit;
 import Scene.Ray;
+
 import java.util.List;
 
 /**
@@ -23,8 +22,9 @@ public class Node extends Geometry{
      * @param transformationObject This object is used to transformate rays
      * @param geometryList List of geometric objects
      */
-    public Node (Transform transformationObject, List<Geometry> geometryList){
-        super (new LambertMaterial(new Color(1.0, 1.0, 1.0)));
+    public Node (Transform transformationObject, List<Geometry> geometryList)
+    {
+        super(new LambertMaterial(new Color(1.0, 1.0, 1.0)));
         this.transformationObject=transformationObject;
         this.geometryList=geometryList;
     }
