@@ -11,9 +11,7 @@ import Material.LambertMaterial;
 import Material.PhongMaterial;
 import Material.ReflectiveMaterial;
 import Material.SingleColorMaterial;
-import MatrixVector.Normal3;
-import MatrixVector.Point3;
-import MatrixVector.Vector3;
+import MatrixVector.*;
 import Visualization.Painter;
 
 import java.util.ArrayList;
@@ -503,6 +501,51 @@ public class Raytracer {
 
         Painter p = new Painter(this.width, this.height, this.pixels);
         p.draw();
+    }
+
+    public void testSphereTransformation(){
+
+        //Setting up the Test-Sphere
+        Geometry[] objects = new Geometry[1];
+        Sphere sphere = new Sphere(new Point3(0.0, 0.0, 0.0), 1, new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
+        objects[0] = sphere;
+
+        //Transforming Objects
+        List<Geometry> transobjects = new ArrayList<>();
+        transobjects.add(sphere);
+        Node node = new Node(new Transform().rescale(1.5, 0.3, 1.0), transobjects);
+
+        // lights
+        List<Light> lights = new ArrayList<Light>();
+        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(1.0, 20.0, 20.0), true));
+        // camera
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(4.0, 4.0, 4.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
+        // world
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25, 0.25, 0.25), lights);
+
+        for(int y = 0; y < this.height; y++)
+        {
+            for(int x = 0; x < this.width; x++)
+            {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = node.hit(ray);
+                if(hit != null) {
+                    RecursiveTracer tracer = new RecursiveTracer(world, 6);
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, tracer).asHex();
+                }
+                else {
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
+            }
+        }
+
+        Painter p = new Painter(this.width, this. height, this.pixels);
+        p.draw();
+    }
+
+
+    public void testAllTransformations(){
+        testSphereTransformation();
     }
 
     public void testAllMaterialScenes()
