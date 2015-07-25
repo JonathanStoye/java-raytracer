@@ -281,7 +281,7 @@ public class Raytracer {
     {
         Geometry[] objects = new Geometry[2];
         // plane
-        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 0.1, 0.0), new LambertMaterial(new Color(0.8, 0.8, 0.8)));
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 0.1, 0.0), new LambertMaterial(new Color(1, 1, 1)));
         // box
         AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new LambertMaterial(new Color(1.0, 0.0, 0.0)));
 
@@ -291,7 +291,7 @@ public class Raytracer {
         // light
         lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(8.0, 8.0, 0.0), true));
         // camera
-        PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 0.1, 0.0), Math.PI / 4);
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
         // world
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.2, 0.2, 0.2), lights);
         // render the whole thing
@@ -424,18 +424,24 @@ public class Raytracer {
 
     private void setupProgessBar() {
         this.progressBarFrame = new JFrame("Rendering...");
-        progressBarFrame.setAlwaysOnTop(true);
-        progressBarFrame.setSize(300, 110);
-        progressBarFrame.setResizable(false);
-        progressBarFrame.setLocationRelativeTo(null);
+        this.progressBarFrame.setAlwaysOnTop(true);
+        this.progressBarFrame.setSize(300, 110);
+        this.progressBarFrame.setResizable(false);
+        this.progressBarFrame.setLocationRelativeTo(null);
         JPanel panel = new JPanel();
         panel.setLayout(null);
+
+        JLabel timeRunning = new JLabel("00:00");
+        timeRunning.setVisible(true);
+        timeRunning.setHorizontalAlignment(SwingConstants.CENTER);
+        timeRunning.setVerticalAlignment(SwingConstants.TOP);
         this.progressBar = new JProgressBar(0, this.pixels.length);
         this.progressBar.setBounds(30, 15, 240, 60);
         this.progressBar.setStringPainted(true);
+        panel.add(timeRunning);
         panel.add(this.progressBar);
-        progressBarFrame.add(panel);
-        progressBarFrame.setVisible(true);
+        this.progressBarFrame.add(panel);
+        this.progressBarFrame.setVisible(true);
     }
 
     private void render(Camera camera, World world) {
@@ -443,13 +449,12 @@ public class Raytracer {
         long start = System.currentTimeMillis();
         int progress = 0;
         this.setupProgessBar();
-        for(int y = 0; y < this.height; y++)
-        {
-            for(int x = 0; x < this.width; x++)
-            {
+        for(int y = 0; y < this.height; y++) {
+            for(int x = 0; x < this.width; x++) {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
-                if(hit != null) {
+
+                if (hit != null) {
                     RecursiveTracer recursiveTracer = new RecursiveTracer(world, 6);
                     pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, recursiveTracer).asHex();
                 }

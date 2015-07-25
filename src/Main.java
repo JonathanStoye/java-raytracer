@@ -13,6 +13,7 @@ public class Main {
 //        raytracer.testAllTransformations();
 //        raytracer.testDisc();
         raytracer.testAAB();
+        raytracer.testSphere();
     }
 
     private static void testAll() {
