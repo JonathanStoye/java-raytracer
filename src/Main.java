@@ -10,7 +10,9 @@ public class Main {
         //testAll();
 //        Color.test();
         Raytracer raytracer = new Raytracer(800, 600);
-        raytracer.testAllTransformations();
+//        raytracer.testAllTransformations();
+//        raytracer.testDisc();
+        raytracer.testAAB();
     }
 
     private static void testAll() {
