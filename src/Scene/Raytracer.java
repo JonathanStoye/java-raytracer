@@ -344,6 +344,53 @@ public class Raytracer {
         render(camera, world);
     }
 
+    public void testDisc()
+    {
+        Geometry[] objects = new Geometry[2];
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(0.0, 0.0, 0.0), 64, new Color(0.5, 0.5, 0.5)));
+        // red sphere
+       Disc disc1 = new Disc(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 2000, new Color(0.5, 0.5, 0.5)), 5.0);
+        // green sphere
+        //Disc disc2 = new Disc(new Point3(0.0, 1.0, 0.0), new Normal3(1.0, 0.0, 0.0), new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)), 3.0);
+        // blue sphere
+        //Disc disc3 = new Disc(new Point3(3.0, 1.0, 0.0), new Normal3(0.0, 0.0, 1.0), new ReflectiveMaterial(new Color(0.0, 0.0, 1.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)), 4.0);
+
+        objects[0] = disc1;
+        objects[1] = plane;
+        //objects[2] = disc2;
+        //objects[3] = disc3;
+        // lights
+        List<Light> lights = new ArrayList<Light>();
+        lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(8.0, 8.0, 8.0), true));
+        // camera
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
+        // world
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.1, 0.1, 0.1), lights);
+
+        for(int y = 0; y < this.height; y++)
+        {
+            for(int x = 0; x < this.width; x++)
+            {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if(hit != null) {
+                    RecursiveTracer tracer = new RecursiveTracer(world, 6);
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, tracer).asHex();
+                }
+                else {
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+                }
+            }
+        }
+
+        Painter p = new Painter(this.width, this. height, this.pixels);
+        p.draw();
+    }
+
+    public void testGeometries()
+    {
+        testDisc();
+    }
 
     public void testAllTransformations()
     {
