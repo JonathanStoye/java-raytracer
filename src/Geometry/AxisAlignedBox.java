@@ -39,9 +39,9 @@ public class AxisAlignedBox extends Geometry{
         this.axisAlignedBoxPlanes[0] = new Plane(run, new Normal3(0.0,1.0,0.0), this.material);
         this.axisAlignedBoxPlanes[1] = new Plane(run, new Normal3(1.0,0.0,0.0), this.material);
         this.axisAlignedBoxPlanes[2] = new Plane(run, new Normal3(0.0,0.0,1.0), this.material);
-        this.axisAlignedBoxPlanes[3] = new Plane(run, new Normal3(-1.0,0.0,0.0), this.material);
-        this.axisAlignedBoxPlanes[4] = new Plane(run, new Normal3(0.0,-1.0,0.0), this.material);
-        this.axisAlignedBoxPlanes[5] = new Plane(run, new Normal3(0.0,0.0,-1.0), this.material);
+        this.axisAlignedBoxPlanes[3] = new Plane(lbf, new Normal3(-1.0,0.0,0.0), this.material);
+        this.axisAlignedBoxPlanes[4] = new Plane(lbf, new Normal3(0.0,-1.0,0.0), this.material);
+        this.axisAlignedBoxPlanes[5] = new Plane(lbf, new Normal3(0.0,0.0,-1.0), this.material);
 
 
         // Now we need to find out which planes are hit by the given Ray.
