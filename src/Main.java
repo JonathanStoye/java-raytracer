@@ -8,9 +8,10 @@ public class Main {
 
     public static void main(String [] args) {
         //testAll();
-//        Color.test();
+        //Color.test();
         Raytracer raytracer = new Raytracer(800, 600);
-        raytracer.testAllTransformations();
+        //raytracer.testSphere();
+        raytracer.testDisc();
     }
 
     private static void testAll() {
