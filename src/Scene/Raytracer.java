@@ -484,6 +484,9 @@ public class Raytracer {
         // world
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.2, 0.2, 0.2), lights);
 
+        Painter p = new Painter(this.width, this.height, this.pixels);
+
+        long start = System.currentTimeMillis();
         for(int y = 0; y < this.height; y++)
         {
             for(int x = 0; x < this.width; x++)
@@ -497,10 +500,10 @@ public class Raytracer {
                 else
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
             }
+            p.progress = y * this.width + 800;
+            p.draw();
         }
 
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
     }
 
     public void testSphereTransformation(){
