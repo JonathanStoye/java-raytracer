@@ -23,9 +23,6 @@ public class Painter extends JFrame{
     private BufferedImage image;
     private JPanel panel;
 
-    private JFrame progressBarFrame;
-    private JProgressBar progressBar;
-
 
     private class MyJPanel extends JPanel {
         public void paint(Graphics g) {
@@ -49,7 +46,6 @@ public class Painter extends JFrame{
         this.setupMenuBar();
         this.setSize(new Dimension(this.imageWidth, this.imageHeight + 20));
         this.setLocationRelativeTo(null);
-        this.setupProgessBar();
     }
 
     private void setupPanel(){
@@ -77,22 +73,6 @@ public class Painter extends JFrame{
         this.setJMenuBar(menuBar);
     }
 
-    private void setupProgessBar() {
-        this.progressBarFrame = new JFrame("Rendering...");
-        progressBarFrame.setAlwaysOnTop(true);
-        progressBarFrame.setSize(300, 110);
-        progressBarFrame.setResizable(false);
-        progressBarFrame.setLocationRelativeTo(null);
-        JPanel panel = new JPanel();
-        panel.setLayout(null);
-        this.progressBar = new JProgressBar(0, this.pixels.length);
-        this.progressBar.setBounds(30, 15, 240, 60);
-        this.progressBar.setStringPainted(true);
-        panel.add(this.progressBar);
-        progressBarFrame.add(panel);
-        progressBarFrame.setVisible(true);
-    }
-
     private void save(File file){
         try {
             ImageIO.write(image, "png", file);
@@ -107,11 +87,7 @@ public class Painter extends JFrame{
                 this.image.setRGB(x, this.imageHeight - 1 - y, this.pixels[y * this.imageWidth + x]);
             }
         }
-        this.progressBar.setValue(this.progress);
         this.repaint();
         this.setVisible(true);
-
-        if (this.progressBar.getMaximum() == this.progress)
-            this.progressBarFrame.setVisible(false);
     }
 }

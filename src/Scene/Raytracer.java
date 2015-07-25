@@ -1,5 +1,6 @@
 package Scene;
 
+import Camera.Camera;
 import Camera.OrthographicCamera;
 import Camera.PerspectiveCamera;
 import Geometry.*;
@@ -14,6 +15,7 @@ import Material.SingleColorMaterial;
 import MatrixVector.*;
 import Visualization.Painter;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,9 @@ public class Raytracer {
     private final int width;
     private final int height;
     private final int[] pixels;
+
+    private JFrame progressBarFrame;
+    private JProgressBar progressBar;
 
     public Raytracer(int width, int height) {
         this.height = height;
@@ -38,22 +43,8 @@ public class Raytracer {
 
         World world = new World(objects, new Color(0, 0, 0));
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
 
@@ -66,23 +57,8 @@ public class Raytracer {
         World world = new World(objects, new Color(0, 0, 0));
 
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
 
@@ -95,22 +71,8 @@ public class Raytracer {
 
         World world = new World(objects, new Color(0, 0, 0));
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(3.0,3.0,3.0), new Vector3(-3.0,-3.0,-3.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
 
@@ -124,22 +86,8 @@ public class Raytracer {
 
         World world = new World(objects, new Color(0, 0, 0));
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
 
@@ -155,23 +103,8 @@ public class Raytracer {
 
         World world = new World(objects, new Color(0, 0, 0));
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
 
@@ -187,23 +120,8 @@ public class Raytracer {
 
         World world = new World(objects, new Color(0, 0, 0));
         OrthographicCamera camera = new OrthographicCamera(new Point3(0.0,0.0,0.0), new Vector3(0.0,0.0,-1.0), new Vector3 (0.0,1.0,0.0), 10.0);
-
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
     public void testLightning1(){
@@ -221,23 +139,8 @@ public class Raytracer {
 
         World world = new World(objects, new Color(1.0, 0.0, 0.0));
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
     public void testLambertLightning(){
@@ -257,23 +160,8 @@ public class Raytracer {
         lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(4.0, 4.0, 4.0)));
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.5,0.5,0.5), lights);
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
     public void testPhongLightning(){
@@ -293,23 +181,8 @@ public class Raytracer {
         lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(4.0, 4.0, 4.0)));
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.5,0.5,0.5), lights);
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
     public void testPhongLightningDirectional(){
@@ -330,23 +203,8 @@ public class Raytracer {
         lights.add(new DirectionalLight(new Color(1.0,1.0,1.0), new Vector3(-1.0,-1.0,-1.0)));
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.5,0.5,0.5), lights);
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
     public void testPhongLightningSpotLight(){
@@ -367,23 +225,8 @@ public class Raytracer {
         lights.add(new SpotLight(new Color(1.0,1.0,1.0), new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), Math.PI/14));
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(-0.0,-0.0,-0.0), lights);
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
     public void testPhongLightningSpotLightandAmbientLight(){
@@ -404,23 +247,8 @@ public class Raytracer {
         lights.add(new SpotLight(new Color(1.0,1.0,1.0), new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), Math.PI/14));
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25,0.25,0.25), lights);
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(4.0,4.0,4.0), new Vector3(-1.0,-1.0,-1.0), new Vector3 (0.0,1.0,0.0), Math.PI / 4);
-
-
-        for (int y = 0; y < this.height; y++) {
-            for (int x = 0; x < this.width; x++) {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if (hit != null) {
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, null).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
     public void testSphere()
@@ -445,25 +273,8 @@ public class Raytracer {
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
         // world
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25, 0.25, 0.25), lights);
-
-        for(int y = 0; y < this.height; y++)
-        {
-            for(int x = 0; x < this.width; x++)
-            {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if(hit != null) {
-                    RecursiveTracer tracer = new RecursiveTracer(world, 6);
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, tracer).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this. height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
     public void testAAB()
@@ -483,27 +294,8 @@ public class Raytracer {
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 0.1, 0.0), Math.PI / 4);
         // world
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.2, 0.2, 0.2), lights);
-
-        Painter p = new Painter(this.width, this.height, this.pixels);
-
-        long start = System.currentTimeMillis();
-        for(int y = 0; y < this.height; y++)
-        {
-            for(int x = 0; x < this.width; x++)
-            {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = world.hit(ray);
-                if(hit != null) {
-                    RecursiveTracer recursiveTracer = new RecursiveTracer(world, 6);
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, recursiveTracer).asHex();
-                }
-                else
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-            }
-            p.progress = y * this.width + 800;
-            p.draw();
-        }
-
+        // render the whole thing
+        render(camera, world);
     }
 
     public void testSphereTransformation(){
@@ -525,25 +317,8 @@ public class Raytracer {
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(20.0, 20.0, 20.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
         // world
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25, 0.25, 0.25), lights);
-
-        for(int y = 0; y < this.height; y++)
-        {
-            for(int x = 0; x < this.width; x++)
-            {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = node.hit(ray);
-                if(hit != null) {
-                    RecursiveTracer tracer = new RecursiveTracer(world, 6);
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, tracer).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this. height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
     public void testBoxTransformation(){
@@ -565,25 +340,8 @@ public class Raytracer {
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(10.0, 10.0, 10.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
         // world
         World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.25, 0.25, 0.25), lights);
-
-        for(int y = 0; y < this.height; y++)
-        {
-            for(int x = 0; x < this.width; x++)
-            {
-                Ray ray = camera.rayFor(this.width, this.height, x, y);
-                Hit hit = node.hit(ray);
-                if(hit != null) {
-                    RecursiveTracer tracer = new RecursiveTracer(world, 6);
-                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, tracer).asHex();
-                }
-                else {
-                    pixels[y * this.width + x] = world.backgroundColor.asHex();
-                }
-            }
-        }
-
-        Painter p = new Painter(this.width, this. height, this.pixels);
-        p.draw();
+        // render the whole thing
+        render(camera, world);
     }
 
 
@@ -615,5 +373,50 @@ public class Raytracer {
         this.testScene4();
         this.testScene5();
         this.testScene6();
+    }
+
+    private void setupProgessBar() {
+        this.progressBarFrame = new JFrame("Rendering...");
+        progressBarFrame.setAlwaysOnTop(true);
+        progressBarFrame.setSize(300, 110);
+        progressBarFrame.setResizable(false);
+        progressBarFrame.setLocationRelativeTo(null);
+        JPanel panel = new JPanel();
+        panel.setLayout(null);
+        this.progressBar = new JProgressBar(0, this.pixels.length);
+        this.progressBar.setBounds(30, 15, 240, 60);
+        this.progressBar.setStringPainted(true);
+        panel.add(this.progressBar);
+        progressBarFrame.add(panel);
+        progressBarFrame.setVisible(true);
+    }
+
+    private void render(Camera camera, World world) {
+        Painter p = new Painter(this.width, this.height, this.pixels);
+        long start = System.currentTimeMillis();
+        int progress = 0;
+        this.setupProgessBar();
+        for(int y = 0; y < this.height; y++)
+        {
+            for(int x = 0; x < this.width; x++)
+            {
+                Ray ray = camera.rayFor(this.width, this.height, x, y);
+                Hit hit = world.hit(ray);
+                if(hit != null) {
+                    RecursiveTracer recursiveTracer = new RecursiveTracer(world, 6);
+                    pixels[y * this.width + x] = hit.geo.material.colorFor(hit, world, recursiveTracer).asHex();
+                }
+                else
+                    pixels[y * this.width + x] = world.backgroundColor.asHex();
+            }
+            progress = y * this.width + 800;
+            this.progressBar.setValue(progress);
+            p.draw();
+
+            if (this.progressBar.getMaximum() == progress) {
+                this.progressBarFrame.setVisible(false);
+            }
+        }
+
     }
 }
