@@ -50,7 +50,7 @@ public class LambertMaterial extends Material{
                 // Color of the current Light (cl)
                 Color cl = currentLight.color;
                 // Sum of all the light generated colors
-                Color lambertColor = (cd.mul(cl)).mul(Math.max(0, n.dot(l)));
+                Color lambertColor = (cd.mul(cl)).mul(Math.max(0, n.dot(l)*10.0));
                 // Color is added to the return value.
                 c = c.add(lambertColor);
             }
