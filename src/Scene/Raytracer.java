@@ -13,9 +13,11 @@ import Material.PhongMaterial;
 import Material.ReflectiveMaterial;
 import Material.SingleColorMaterial;
 import MatrixVector.*;
+import Utillities.Debugging;
 import Visualization.Painter;
 
 import javax.swing.*;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,6 +32,8 @@ public class Raytracer {
 
     private JFrame progressBarFrame;
     private JProgressBar progressBar;
+    private JLabel timeRunningLabel;
+    private JLabel timeTillFinishLabel;
     private final double threshold = 0.1;
 
     public Raytracer(int width, int height) {
@@ -431,16 +435,14 @@ public class Raytracer {
         this.progressBarFrame.setResizable(false);
         this.progressBarFrame.setLocationRelativeTo(null);
         JPanel panel = new JPanel();
-        panel.setLayout(null);
 
-        JLabel timeRunning = new JLabel("00:00");
-        timeRunning.setVisible(true);
-        timeRunning.setHorizontalAlignment(SwingConstants.CENTER);
-        timeRunning.setVerticalAlignment(SwingConstants.TOP);
+        this.timeRunningLabel = new JLabel("Time Running: 00:00");
+        this.timeTillFinishLabel = new JLabel("Estimated Time remaining: 00:00");
         this.progressBar = new JProgressBar(0, this.pixels.length);
         this.progressBar.setBounds(30, 15, 240, 60);
         this.progressBar.setStringPainted(true);
-        panel.add(timeRunning);
+        panel.add(this.timeRunningLabel);
+        panel.add(this.timeTillFinishLabel);
         panel.add(this.progressBar);
         this.progressBarFrame.add(panel);
         this.progressBarFrame.setVisible(true);
@@ -448,10 +450,19 @@ public class Raytracer {
 
     private void render(Camera camera, World world) {
         Painter p = new Painter(this.width, this.height, this.pixels);
-        long start = System.currentTimeMillis();
+
+        /**
+         * setup for progress visualisation
+         */
+        int start = (int) (System.currentTimeMillis() / 10);
         int progress = 0;
         this.setupProgessBar();
+        int averageTime = 0;
+        double lastAverageTime = (this.width * this.height * world.lights.size() * world.objects.length + 100000) / 100000;
+        int intervall = 60;
+
         for(int y = 0; y < this.height; y++) {
+            int timePerLine = (int) (System.currentTimeMillis());
             for(int x = 0; x < this.width; x++) {
                 Ray ray = camera.rayFor(this.width, this.height, x, y);
                 Hit hit = world.hit(ray);
@@ -463,11 +474,43 @@ public class Raytracer {
                 else
                     pixels[y * this.width + x] = world.backgroundColor.asHex();
             }
+
+            timePerLine = (int) (System.currentTimeMillis()) - timePerLine;
+
+            /**
+             * calculates and seet the progress for the progressBar
+             */
             progress = y * this.width + 800;
             this.progressBar.setValue(progress);
             p.draw();
 
-            if (this.progressBar.getMaximum() == progress) {
+            /**
+             * calculates the time it has been processed
+             */
+            int s = (int) (System.currentTimeMillis() / 10) - start;
+            String currentTime = "Time running: " + String.format("%d:%02d:%02d", s/3600, (s%3600)/60, (s%60));
+            this.timeRunningLabel.setText(String.valueOf(currentTime));
+
+            /**
+             * calculates the estimated remaining time
+             */
+            averageTime = averageTime + timePerLine;
+
+            int s2 = 0;
+            if (lastAverageTime - averageTime / intervall < 3){
+                lastAverageTime = averageTime / intervall;
+                 s2 = (int) (lastAverageTime * (this.height - y - 1) / 10);
+            }
+            else {
+                s2 = (int) (lastAverageTime * (this.height - y - 1) / 10);
+            }
+            String remainingTime = "Estimated Time remaining: " + String.format("%d:%02d:%02d", s2/3600, (s2%3600)/60, (s2%60));
+            this.timeTillFinishLabel.setText(remainingTime);
+
+            /**
+             * hides progressbarFrame if finished
+             */
+            if (this.progressBar.getMaximum() - progress < this.width * 2) {
                 this.progressBarFrame.setVisible(false);
             }
         }

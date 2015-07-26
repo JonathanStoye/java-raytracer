@@ -9,7 +9,7 @@ import java.util.List;
  * Created by Jonathan on 05.06.15.
  */
 public class World {
-    private final Geometry[] objects;
+    public final Geometry[] objects;
     public final Color backgroundColor;
     public final Color ambientLight;
     public final List<Light> lights;
