@@ -17,6 +17,7 @@ import Visualization.Painter;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +30,7 @@ public class Raytracer {
 
     private JFrame progressBarFrame;
     private JProgressBar progressBar;
+    private final double threshold = 0.1;
 
     public Raytracer(int width, int height) {
         this.height = height;
@@ -38,7 +40,7 @@ public class Raytracer {
 
     public void testScene1(){
         Geometry[] objects = new Geometry[1];
-        Plane plane =       new Plane(   new Point3(0.0, -1.0, 0.0), new Normal3(0.0, 1.0, 0.0), new SingleColorMaterial(new Scene.Color(0, 1, 0)));
+        Plane plane = new Plane(new Point3(0.0, -1.0, 0.0), new Normal3(0.0, 1.0, 0.0), new SingleColorMaterial(new Scene.Color(0, 1, 0)), this.threshold);
         objects[0] = plane;
 
         World world = new World(objects, new Color(0, 0, 0));
@@ -51,7 +53,7 @@ public class Raytracer {
     public void testScene2(){
         Geometry[] objects = new Geometry[1];
 
-        Sphere sphere = new Sphere( new Point3(0.0, 0.0, -3.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)));
+        Sphere sphere = new Sphere( new Point3(0.0, 0.0, -3.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)), this.threshold);
         objects[0] = sphere;
 
         World world = new World(objects, new Color(0, 0, 0));
@@ -65,7 +67,7 @@ public class Raytracer {
     public void testScene3(){
         Geometry[] objects = new Geometry[1];
 
-        AxisAlignedBox box = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new SingleColorMaterial(new Color(0,0,1)));
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new SingleColorMaterial(new Color(0,0,1)), this.threshold);
 
         objects[0] = box;
 
@@ -79,7 +81,7 @@ public class Raytracer {
     public void testScene4(){
         Geometry[] objects = new Geometry[1];
 
-        Triangle triangle = new Triangle(new Point3(-0.5,0.5,-3.0), new Point3(0.5,0.5,-3.0), new Point3(0.5,-0.5,-3.0), new SingleColorMaterial(new Scene.Color(1, 0, 1)));
+        Triangle triangle = new Triangle(new Point3(-0.5,0.5,-3.0), new Point3(0.5,0.5,-3.0), new Point3(0.5,-0.5,-3.0), new SingleColorMaterial(new Scene.Color(1, 0, 1)), this.threshold);
 
         objects[0] = triangle;
 
@@ -94,8 +96,8 @@ public class Raytracer {
     public void testScene5(){
         Geometry[] objects = new Geometry[2];
 
-        Sphere sphere1 = new Sphere( new Point3(-1.0,0.0,-3.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)));
-        Sphere sphere2 = new Sphere( new Point3(1.0,0.0,-6.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)));
+        Sphere sphere1 = new Sphere( new Point3(-1.0,0.0,-3.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)), this.threshold);
+        Sphere sphere2 = new Sphere( new Point3(1.0,0.0,-6.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)), this.threshold);
 
         objects[0] = sphere1;
         objects[1] = sphere2;
@@ -111,8 +113,8 @@ public class Raytracer {
     public void testScene6(){
         Geometry[] objects = new Geometry[2];
 
-        Sphere sphere1 = new Sphere( new Point3(-1.0,0.0,-3.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)));
-        Sphere sphere2 = new Sphere( new Point3(1.0,0.0,-6.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)));
+        Sphere sphere1 = new Sphere( new Point3(-1.0,0.0,-3.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)), this.threshold);
+        Sphere sphere2 = new Sphere( new Point3(1.0,0.0,-6.0), 0.5, new SingleColorMaterial(new Color(1, 0, 0)), this.threshold);
 
         objects[0] = sphere1;
         objects[1] = sphere2;
@@ -127,10 +129,10 @@ public class Raytracer {
     public void testLightning1(){
         Geometry[] objects = new Geometry[4];
 
-        Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new SingleColorMaterial(new Scene.Color(1, 0, 0)));
-        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new SingleColorMaterial(new Color(0, 1, 0)));
-        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new SingleColorMaterial(new Color(0,0,1)));
-        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new SingleColorMaterial(new Scene.Color(1, 1, 0)));
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new SingleColorMaterial(new Scene.Color(1, 0, 0)), this.threshold);
+        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new SingleColorMaterial(new Color(0, 1, 0)), this.threshold);
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new SingleColorMaterial(new Color(0,0,1)), this.threshold);
+        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new SingleColorMaterial(new Scene.Color(1, 1, 0)), this.threshold);
 
         objects[0] = plane;
         objects[1] = sphere;
@@ -146,10 +148,10 @@ public class Raytracer {
     public void testLambertLightning(){
         Geometry[] objects = new Geometry[4];
 
-        Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new LambertMaterial(new Color(0.6, 0, 0)));
-        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new LambertMaterial(new Color(0, 0.6, 0)));
-        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new LambertMaterial(new Color(0,0,0.6)));
-        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new LambertMaterial(new Scene.Color(0.999, 0.999, 0)));
+        Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new LambertMaterial(new Color(0.6, 0, 0)), this.threshold);
+        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new LambertMaterial(new Color(0, 0.6, 0)), this.threshold);
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new LambertMaterial(new Color(0,0,0.6)), this.threshold);
+        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new LambertMaterial(new Scene.Color(0.999, 0.999, 0)), this.threshold);
 
         objects[0] = plane;
         objects[1] = sphere;
@@ -167,10 +169,10 @@ public class Raytracer {
     public void testPhongLightning(){
         Geometry[] objects = new Geometry[4];
 //    public PhongMaterial(Color diffuse, Color specular, int exponent)
-        Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
-        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64));
-        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64));
-        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new PhongMaterial(new Color(0.999, 0.999, 0), new Color (1.0,1.0,1.0), 64));
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64), this.threshold);
+        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64), this.threshold);
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64), this.threshold);
+        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new PhongMaterial(new Color(0.999, 0.999, 0), new Color (1.0,1.0,1.0), 64), this.threshold);
 
         objects[0] = plane;
         objects[1] = sphere;
@@ -188,10 +190,10 @@ public class Raytracer {
     public void testPhongLightningDirectional(){
         Geometry[] objects = new Geometry[4];
 //    public PhongMaterial(Color diffuse, Color specular, int exponent)
-        Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
-        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64));
-        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64));
-        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new PhongMaterial(new Color(0.999, 0.999, 0), new Color (1.0,1.0,1.0), 64));
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64), this.threshold);
+        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64), this.threshold);
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64), this.threshold);
+        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new PhongMaterial(new Color(0.999, 0.999, 0), new Color (1.0,1.0,1.0), 64), this.threshold);
 
         objects[0] = plane;
         objects[1] = sphere;
@@ -210,10 +212,10 @@ public class Raytracer {
     public void testPhongLightningSpotLight(){
         Geometry[] objects = new Geometry[4];
 //    public PhongMaterial(Color diffuse, Color specular, int exponent)
-        Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
-        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64));
-        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64));
-        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new PhongMaterial(new Color(0.6, 0.6, 0.0), new Color (1.0,1.0,1.0), 64));
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64), this.threshold);
+        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64), this.threshold);
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64), this.threshold);
+        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new PhongMaterial(new Color(0.6, 0.6, 0.0), new Color (1.0,1.0,1.0), 64), this.threshold);
 
         objects[0] = plane;
         objects[1] = sphere;
@@ -232,10 +234,10 @@ public class Raytracer {
     public void testPhongLightningSpotLightandAmbientLight(){
         Geometry[] objects = new Geometry[4];
 //    public PhongMaterial(Color diffuse, Color specular, int exponent)
-        Plane plane = new Plane( new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
-        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64));
-        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64));
-        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new PhongMaterial(new Color(0.6, 0.6, 0.0), new Color (1.0,1.0,1.0), 64));
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64), this.threshold);
+        Sphere sphere = new Sphere( new Point3(1.0,1.0,1.0), 0.5, new PhongMaterial(new Color(0, 0.6, 0), new Color(1.0,1.0,1.0), 64), this.threshold);
+        AxisAlignedBox box = new AxisAlignedBox(new Point3(-1.5, 0.5, 0.5), new Point3(-0.5, 1.5, 1.5), new PhongMaterial(new Color(0,0,0.6), new Color (1.0,1.0,1.0), 64), this.threshold);
+        Triangle triangle = new Triangle(new Point3(0.0,0.0,-1.0), new Point3(1.0,0.0,-1.0), new Point3(1.0,1.0,-1.0), new PhongMaterial(new Color(0.6, 0.6, 0.0), new Color (1.0,1.0,1.0), 64), this.threshold);
 
         objects[0] = plane;
         objects[1] = sphere;
@@ -254,13 +256,13 @@ public class Raytracer {
     public void testSphere()
     {
         Geometry[] objects = new Geometry[4];
-        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(0.1, 0.1, 0.1), new Color(0.0, 0.0, 0.0), 64, new Color(0.5, 0.5, 0.5)));
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(0.1, 0.1, 0.1), new Color(0.0, 0.0, 0.0), 64, new Color(0.5, 0.5, 0.5)), this.threshold);
         // red sphere
-        Sphere sphere1 = new Sphere(new Point3(-3.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+        Sphere sphere1 = new Sphere(new Point3(-3.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)), this.threshold);
         // green sphere
-        Sphere sphere2 = new Sphere(new Point3(0.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+        Sphere sphere2 = new Sphere(new Point3(0.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)), this.threshold);
         // blue sphere
-        Sphere sphere3 = new Sphere(new Point3(3.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(0.0, 0.0, 1.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)));
+        Sphere sphere3 = new Sphere(new Point3(3.0, 1.0, 0.0), 1, new ReflectiveMaterial(new Color(0.0, 0.0, 1.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)), this.threshold);
 
         objects[0] = plane;
         objects[1] = sphere1;
@@ -281,9 +283,9 @@ public class Raytracer {
     {
         Geometry[] objects = new Geometry[2];
         // plane
-        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 0.1, 0.0), new LambertMaterial(new Color(1, 1, 1)));
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new LambertMaterial(new Color(0.8, 0.8, 0.8)), this.threshold);
         // box
-        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new LambertMaterial(new Color(1.0, 0.0, 0.0)));
+        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, -0.5), new Point3(0.5, 1.0, 0.5), new LambertMaterial(new Color(1.0, 0.0, 0.0)), this.threshold);
 
         objects[0] = plane;
         objects[1] = aab;
@@ -293,7 +295,7 @@ public class Raytracer {
         // camera
         PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
         // world
-        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.2, 0.2, 0.2), lights);
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.0, 0.0, 0.0), lights);
         // render the whole thing
         render(camera, world);
     }
@@ -302,13 +304,13 @@ public class Raytracer {
 
         //Setting up the Test-Sphere
         Geometry[] objects = new Geometry[1];
-        Sphere sphere = new Sphere(new Point3(0.0, 0.0, 0.0), 1, new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64));
+        Sphere sphere = new Sphere(new Point3(0.0, 0.0, 0.0), 1, new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64), this.threshold);
         objects[0] = sphere;
 
         //Transforming Objects
         List<Geometry> transobjects = new ArrayList<>();
         transobjects.add(sphere);
-        Node node = new Node(new Transform().rescale(6.0, 1.2, 4.0), transobjects);
+        Node node = new Node(new Transform().rescale(6.0, 1.2, 4.0), transobjects, this.threshold);
 
         // lights
         List<Light> lights = new ArrayList<Light>();
@@ -325,13 +327,13 @@ public class Raytracer {
 
         //Setting up the Test-Box
         Geometry[] objects = new Geometry[1];
-        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, -0.5, -0.5), new Point3(0.5, 0.5, 0.5), new LambertMaterial(new Color(1.0, 1.0, 0.0)));
+        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, -0.5, -0.5), new Point3(0.5, 0.5, 0.5), new LambertMaterial(new Color(1.0, 1.0, 0.0)), this.threshold);
         objects[0] = aab;
 
         //Transforming Objects
         List<Geometry> transobjects = new ArrayList<>();
         transobjects.add(aab);
-        Node node = new Node(new Transform().rescale(4.0, 1.0, 8.0).rotateZ(Math.toRadians(-20)).rotateY(Math.toRadians(-5)).rotationOnX(Math.toRadians(-30)), transobjects);
+        Node node = new Node(new Transform().rescale(4.0, 1.0, 8.0).rotateZ(Math.toRadians(-20)).rotateY(Math.toRadians(-5)).rotationOnX(Math.toRadians(-30)), transobjects, this.threshold);
 
         // lights
         List<Light> lights = new ArrayList<Light>();
@@ -347,9 +349,9 @@ public class Raytracer {
     public void testDisc()
     {
         Geometry[] objects = new Geometry[2];
-        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(0.0, 0.0, 0.0), 64, new Color(0.5, 0.5, 0.5)));
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(0.0, 0.0, 0.0), 64, new Color(0.5, 0.5, 0.5)), this.threshold);
         // red sphere
-       Disc disc1 = new Disc(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 2000, new Color(0.5, 0.5, 0.5)), 5.0);
+       Disc disc1 = new Disc(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 2000, new Color(0.5, 0.5, 0.5)), 5.0, this.threshold);
         // green sphere
         //Disc disc2 = new Disc(new Point3(0.0, 1.0, 0.0), new Normal3(1.0, 0.0, 0.0), new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)), 3.0);
         // blue sphere
@@ -470,5 +472,48 @@ public class Raytracer {
             }
         }
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Raytracer raytracer = (Raytracer) o;
+
+        if (width != raytracer.width) return false;
+        if (height != raytracer.height) return false;
+        if (Double.compare(raytracer.threshold, threshold) != 0) return false;
+        if (!Arrays.equals(pixels, raytracer.pixels)) return false;
+        if (progressBarFrame != null ? !progressBarFrame.equals(raytracer.progressBarFrame) : raytracer.progressBarFrame != null)
+            return false;
+        return !(progressBar != null ? !progressBar.equals(raytracer.progressBar) : raytracer.progressBar != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        result = width;
+        result = 31 * result + height;
+        result = 31 * result + (pixels != null ? Arrays.hashCode(pixels) : 0);
+        result = 31 * result + (progressBarFrame != null ? progressBarFrame.hashCode() : 0);
+        result = 31 * result + (progressBar != null ? progressBar.hashCode() : 0);
+        temp = Double.doubleToLongBits(threshold);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Raytracer{" +
+                "width=" + width +
+                ", height=" + height +
+                ", pixels=" + Arrays.toString(pixels) +
+                ", progressBarFrame=" + progressBarFrame +
+                ", progressBar=" + progressBar +
+                ", threshold=" + threshold +
+                '}';
     }
 }

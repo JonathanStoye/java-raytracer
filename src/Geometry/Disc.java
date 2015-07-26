@@ -20,9 +20,9 @@ public class Disc extends Plane
      * @param n        normal vector of the plane
      * @param material Material of the plane
      */
-    public Disc(Point3 a, Normal3 n, Material material, Double radius)
+    public Disc(Point3 a, Normal3 n, Material material, Double radius, double threshold)
     {
-        super(a, n, material);
+        super(a, n, material, threshold);
         this.radius = radius;
     }
 
@@ -60,5 +60,22 @@ public class Disc extends Plane
             }
         }
         return null;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return "Disc{" +
+                "radius=" + radius +
+                '}';
     }
 }

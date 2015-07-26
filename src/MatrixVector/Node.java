@@ -22,9 +22,9 @@ public class Node extends Geometry{
      * @param transformationObject This object is used to transformate rays
      * @param geometryList List of geometric objects
      */
-    public Node (Transform transformationObject, List<Geometry> geometryList)
+    public Node (Transform transformationObject, List<Geometry> geometryList, double threshold)
     {
-        super(new LambertMaterial(new Color(1.0, 1.0, 1.0)));
+        super(new LambertMaterial(new Color(1.0, 1.0, 1.0)), threshold);
         this.transformationObject=transformationObject;
         this.geometryList=geometryList;
     }

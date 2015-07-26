@@ -23,8 +23,8 @@ public class Sphere extends Geometry{
      * @param r radius of the sphere
      * @param material Material of the Geometric object sphere
      */
-    public Sphere( Point3 c, double r, Material material){
-        super(material);
+    public Sphere( Point3 c, double r, Material material, double threshold){
+        super(material, threshold);
         this.c=c;
         this.r=r;
     }
@@ -133,8 +133,7 @@ public class Sphere extends Geometry{
         // Pointing at the Border of the sphrere but on the negative z-axis
         Ray TestRay3DimensionalPositiveZOutsideSphereBorder = new Ray(new Point3(0.0, 50.0, 26.0), new Vector3(100.0, 0.0, 0.0));
         Ray TestRay3DimensionalNegativeZOutsideSphereBorder  = new Ray(new Point3(0.0, 50.0, -26.0), new Vector3(100.0, 0.0, 0.0));
-        Sphere testSphere = new Sphere(new Point3(50.0, 50.0, 0.0), 25.0, new SingleColorMaterial(new Color(1, 0, 0)) {
-        });
+        Sphere testSphere = new Sphere(new Point3(50.0, 50.0, 0.0), 25.0, new SingleColorMaterial(new Color(1, 0, 0)), 0.0001);
         if (testSphere.hit(testRayMiddle) != null) {
             Debugging.log("Successful: Vector testRayMiddle is hitting Sphere at t=" + testSphere.hit(testRayMiddle).t);
         }else {
@@ -191,5 +190,36 @@ public class Sphere extends Geometry{
         }else {
             Debugging.log("Unsuccessful: Vector TestRay3DimensionalNegativeZOutsideSphereBorder is hitting the Sphere at t=" + testSphere.hit(TestRay3DimensionalNegativeZOutsideSphereBorder).t);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Sphere sphere = (Sphere) o;
+
+        if (Double.compare(sphere.r, r) != 0) return false;
+        return c.equals(sphere.c);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        long temp;
+        result = 31 * result + c.hashCode();
+        temp = Double.doubleToLongBits(r);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Sphere{" +
+                "c=" + c +
+                ", r=" + r +
+                '}';
     }
 }

@@ -11,9 +11,9 @@ public class Main {
 //        Color.test();
         Raytracer raytracer = new Raytracer(800, 600);
 //        raytracer.testAllTransformations();
-//        raytracer.testDisc();
+        raytracer.testDisc();
         raytracer.testAAB();
-//        raytracer.testSphere();
+        raytracer.testSphere();
     }
 
     private static void testAll() {

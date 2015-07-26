@@ -15,15 +15,21 @@ public abstract class Geometry {
     public final Material material;
 
     /**
+     * threshold for hit calculation
+     */
+    public final double threshold;
+
+    /**
      * Initializes the geometric form with the given parameter.
      * @param material Specifies the color of a certain geometric form
      */
-    public Geometry(Material material){
+    public Geometry(Material material, double threshold){
         this.material = material;
+        this.threshold = threshold;
     }
 
     /**
-     * Determines wether the given ray is hitting the current object.
+     * Determines whether the given ray is hitting the current object.
      * @param ray if the form is hit, the method returns a Hit object giving information of the t-value, ray and hit Geometry-object.
      */
     public abstract Hit hit(final Ray ray);
