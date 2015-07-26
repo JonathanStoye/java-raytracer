@@ -100,11 +100,11 @@ public class Triangle extends Geometry{
 
         // In order to use PhongLightning, we need to calculate a Normal for the hit point.
         // This is why we calculate it here.
-        final Normal3 hitNormal = normalOnA;
+//        final Normal3 hitNormal = normalOnA;
 
         //Not sure if this is working:
         //found it in the internet, but did not understand unfortunately.
-//        final Normal3 hitNormal = normalOnA.mul(1 - beta - gamma).add(normalOnB.mul(beta).add(normalOnC.mul(gamma)));
+        final Normal3 hitNormal = normalOnA.mul(1 - beta - gamma).add(normalOnB.mul(beta).add(normalOnC.mul(gamma)));
 
         // As we now know that the ray is hitting the triangle, we can return a Hit-object giving the necessary information.
         return new Hit(t, ray, this, hitNormal);
