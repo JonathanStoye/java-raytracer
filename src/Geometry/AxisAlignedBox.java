@@ -27,23 +27,22 @@ public class AxisAlignedBox extends Geometry{
         this.lbf=lbf;
         this.run=run;
         this.axisAlignedBoxPlanes = new Plane[6];
-    }
 
-    @Override
-    public Hit hit(Ray ray){
         // A box consists of six planes (dices , ger: W�rfel).
         // Therefore six planes have to be declared.
         // in order to describe these Planes we just need a known Point and a normal vector.
         // the Points lbf and run are given
         // the normal-vector are defined by basic mathematics
-        this.axisAlignedBoxPlanes[0] = new Plane(run, new Normal3(0.0,1.0,0.0), this.material);
-        this.axisAlignedBoxPlanes[1] = new Plane(run, new Normal3(1.0,0.0,0.0), this.material);
-        this.axisAlignedBoxPlanes[2] = new Plane(run, new Normal3(0.0,0.0,1.0), this.material);
-        this.axisAlignedBoxPlanes[3] = new Plane(lbf, new Normal3(-1.0,0.0,0.0), this.material);
-        this.axisAlignedBoxPlanes[4] = new Plane(lbf, new Normal3(0.0,-1.0,0.0), this.material);
-        this.axisAlignedBoxPlanes[5] = new Plane(lbf, new Normal3(0.0,0.0,-1.0), this.material);
+        this.axisAlignedBoxPlanes[0] = new Plane(run, new Normal3(0.0,1.0,0.0), material);
+        this.axisAlignedBoxPlanes[1] = new Plane(run, new Normal3(1.0,0.0,0.0), material);
+        this.axisAlignedBoxPlanes[2] = new Plane(run, new Normal3(0.0,0.0,1.0), material);
+        this.axisAlignedBoxPlanes[3] = new Plane(lbf, new Normal3(-1.0,0.0,0.0), material);
+        this.axisAlignedBoxPlanes[4] = new Plane(lbf, new Normal3(0.0,-1.0,0.0), material);
+        this.axisAlignedBoxPlanes[5] = new Plane(lbf, new Normal3(0.0,0.0,-1.0), material);
+    }
 
-
+    @Override
+    public Hit hit(Ray ray){
         // Now we need to find out which planes are hit by the given Ray.
         // Therefore an ArrayList is declared in order to find out all hits of the planes
         ArrayList<Hit> foundHits = new ArrayList<Hit>();
