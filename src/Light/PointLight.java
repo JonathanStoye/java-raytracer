@@ -55,7 +55,7 @@ public class PointLight extends Light{
         double t = this.position.sub(point).magnitude/1;
 
         if (hit != null) {
-            if (hit.t < t && hit.t > 0.000000001) {
+            if (hit.t < t && hit.t > 0.001) {
                 return false;
             }
             else {

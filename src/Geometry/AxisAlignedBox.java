@@ -3,6 +3,8 @@ package Geometry;
 import MatrixVector.*;
 import Scene.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+
 import Material.*;
 
 /**
@@ -10,7 +12,7 @@ import Material.*;
  * implemented by David on 06.06.15
  * @author d.derichs
  */
-public class AxisAlignedBox extends Geometry{
+public class AxisAlignedBox extends Geometry {
     public final Point3 lbf;
     public final Point3 run;
     public final Plane[] axisAlignedBoxPlanes;
@@ -22,17 +24,17 @@ public class AxisAlignedBox extends Geometry{
      * @param run RIGT UPPER NEAR edge of the box (rechte, obere, nahe Ecke)
      * @param material Material of the Box
      */
-    public AxisAlignedBox(Point3 lbf, Point3 run, Material material){
-        super(material);
-        this.lbf=lbf;
-        this.run=run;
+    public AxisAlignedBox(Point3 lbf, Point3 run, Material material, double threshold){
+        super(material, threshold);
+        this.lbf = lbf;
+        this.run = run;
         this.axisAlignedBoxPlanes = new Plane[6];
-        this.axisAlignedBoxPlanes[0] = new Plane(run, new Normal3(0.0,1.0,0.0), material);
-        this.axisAlignedBoxPlanes[1] = new Plane(run, new Normal3(1.0,0.0,0.0), material);
-        this.axisAlignedBoxPlanes[2] = new Plane(run, new Normal3(0.0,0.0,1.0), material);
-        this.axisAlignedBoxPlanes[3] = new Plane(lbf, new Normal3(-1.0,0.0,0.0), material);
-        this.axisAlignedBoxPlanes[4] = new Plane(lbf, new Normal3(0.0,-1.0,0.0), material);
-        this.axisAlignedBoxPlanes[5] = new Plane(lbf, new Normal3(0.0,0.0,-1.0), material);
+        this.axisAlignedBoxPlanes[0] = new Plane(run, new Normal3(0.0,1.0,0.0), material, this.threshold);
+        this.axisAlignedBoxPlanes[1] = new Plane(run, new Normal3(1.0,0.0,0.0), material, this.threshold);
+        this.axisAlignedBoxPlanes[2] = new Plane(run, new Normal3(0.0,0.0,1.0), material, this.threshold);
+        this.axisAlignedBoxPlanes[3] = new Plane(lbf, new Normal3(-1.0,0.0,0.0), material, this.threshold);
+        this.axisAlignedBoxPlanes[4] = new Plane(lbf, new Normal3(0.0,-1.0,0.0), material, this.threshold);
+        this.axisAlignedBoxPlanes[5] = new Plane(lbf, new Normal3(0.0,0.0,-1.0), material, this.threshold);
 
 
     }
@@ -92,7 +94,7 @@ public class AxisAlignedBox extends Geometry{
             // We also Check that for the z-axis-normal-vector pointing "backwards"
             if (temporaryPlane.n.equals(new Normal3(0.0, 0.0, 1.0)) || temporaryPlane.n.equals(new Normal3(0.0, 0.0, -1.0))){
                 // Now we have to check, if the current intersectionPoint is actually visible for the viewer.
-                // This is necessary because there are always two Planes parralel to the y-axis
+                // This is necessary because there are always two Planes parallel to the y-axis
                 // We use the given Box-Points-values to check this
                 if (lbf.x <= intersectionPoint.x && intersectionPoint.x <= run.x && lbf.y <= intersectionPoint.y && intersectionPoint.y <= run.y){
                     visibleHits.add(hit);
@@ -104,15 +106,33 @@ public class AxisAlignedBox extends Geometry{
         // Also we check out which value for t is the smallest one
         Hit returnValue = null;
         for (Hit hit : visibleHits) {
-            if (returnValue == null && hit.t > 0.00000001) {
+            if (returnValue == null && hit.t > 0.0001) {
                 returnValue = hit;
                 continue;
             }
-            if (hit.t > 0.00000001 && hit.t < returnValue.t) {
+            if (0.0001 < hit.t && hit.t < returnValue.t) {
                 returnValue = hit;
             }
         }
         return returnValue;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return "AxisAlignedBox{" +
+                "lbf=" + lbf +
+                ", run=" + run +
+                ", axisAlignedBoxPlanes=" + Arrays.toString(axisAlignedBoxPlanes) +
+                '}';
+    }
 }

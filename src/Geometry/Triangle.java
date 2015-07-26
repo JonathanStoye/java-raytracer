@@ -26,8 +26,8 @@ public class Triangle extends Geometry{
      * @param c Point c of the triangle
      * @param material material of the Geometric form triangle
      */
-    public Triangle(Point3 a, Point3 b, Point3 c, Material material){
-        super(material);
+    public Triangle(Point3 a, Point3 b, Point3 c, Material material, double threshold){
+        super(material, threshold);
         this.a=a;
         this.b=b;
         this.c=c;
@@ -94,7 +94,7 @@ public class Triangle extends Geometry{
 
         // Now we have to check, if the values do correspond to the following rule.
         // If so, then they are definitely NOT intercepted by the ray
-        if (beta < 0 || gamma < 0 || Math.ceil(beta+gamma) != 1.0 || t<0.00000001) {
+        if (beta < 0 || gamma < 0 || Math.ceil(beta+gamma) != 1.0 || t<0.001) {
             return null;
         }
 

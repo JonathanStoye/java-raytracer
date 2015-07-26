@@ -71,7 +71,7 @@ public class ReflectiveMaterial extends Material{
         //
         //                                            this is the recursive function:
         //                                    |                                               |
-        Point3 point3 = hit.ray.at(hit.t - 0.00000001);
+        Point3 point3 = hit.ray.at(hit.t - 0.001);
         Ray ray = new Ray(point3, rd);
         Color color = tracer.trace(ray);
         Color cr = this.reflection.mul(color);

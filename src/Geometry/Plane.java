@@ -27,8 +27,8 @@ public class Plane extends Geometry {
      * @param n normal vector of the plane
      * @param material Material of the plane
      */
-    public Plane(final Point3 a, final Normal3 n, final Material material) {
-        super(material);
+    public Plane(final Point3 a, final Normal3 n, final Material material, final double threshold) {
+        super(material, threshold);
         this.a=a;
         this.n=n;
     }
@@ -55,7 +55,7 @@ public class Plane extends Geometry {
         // o ist the origin-vector of the ray
         // d ist the direction-vector of the ray
         final double t = (a.sub(ray.origin).dot(n)) / (ray.direction.dot(n));
-        if (t > 0){
+        if (t > super.threshold){
             return new Hit(t, ray, this, this.n);
         } else {
             return null;
@@ -63,7 +63,7 @@ public class Plane extends Geometry {
     }
 
     public static void testHit(){
-        Plane testPlane = new Plane(new Point3(50.0,50.0,0.0), new Normal3(0.0, 1.0, 0.0), new SingleColorMaterial(new Color(0,1,0)));
+        Plane testPlane = new Plane(new Point3(50.0,50.0,0.0), new Normal3(0.0, 1.0, 0.0), new SingleColorMaterial(new Color(0,1,0)), 0.0001);
 
         //Testvector, that is not hitting the Plane:
         Ray testRay1 = new Ray(new Point3(0.0, 60.0, 0), new Vector3(100.0, 0.0, 0.0));
@@ -89,5 +89,34 @@ public class Plane extends Geometry {
         }else {
             Debugging.log("Unsuccesssful: testRay3 is hitting the Plane at t=" + testPlane.hit(testRay3).t );
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Plane plane = (Plane) o;
+
+        if (!a.equals(plane.a)) return false;
+        return n.equals(plane.n);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + a.hashCode();
+        result = 31 * result + n.hashCode();
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Plane{" +
+                "a=" + a +
+                ", n=" + n +
+                '}';
     }
 }

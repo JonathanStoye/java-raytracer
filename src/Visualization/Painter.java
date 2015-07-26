@@ -9,6 +9,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
 
 /**
  * Created by Jonathan on 09.06.15.
@@ -89,5 +90,28 @@ public class Painter extends JFrame{
         }
         this.repaint();
         this.setVisible(true);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public String toString() {
+        return "Painter{" +
+                "progress=" + progress +
+                ", imageWidth=" + imageWidth +
+                ", imageHeight=" + imageHeight +
+                ", pixels=" + Arrays.toString(pixels) +
+                ", parent=" + parent +
+                ", image=" + image +
+                ", panel=" + panel +
+                '}';
     }
 }
