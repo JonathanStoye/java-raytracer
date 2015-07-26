@@ -42,7 +42,6 @@ public class PhongMaterial extends Material{
             // if the Point is illuminated by the current light source, then the color is added.
             if(currentLight.illuminates(hit.ray.at(hit.t), world)){
                 // Vector pointing to the light source
-                Point3 bla = hit.ray.at(hit.t);
                 Vector3 l = currentLight.directionFrom(hit.ray.at(hit.t)).normalized();
                 // Vector which is reflected by the Material using the Normal n
                 Vector3 rn = l.reflectedOn(n);
