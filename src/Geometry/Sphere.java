@@ -83,16 +83,16 @@ public class Sphere extends Geometry{
         // If t < 0 because in this case the sphere is not visible to the viewer.
         //
         // We check tNegative first, because it is obviously smaller than tPositive.
-        if (tNegative > 0.0000001){
+        if (tNegative > 0.001){
             return new Hit(tNegative, ray, this, ray.at(tNegative).sub(this.c).normalized().asNormal());
-        } else if (tPositive > 0.0000001){
+        } else if (tPositive > 0.001){
             return new Hit(tPositive, ray, this, ray.at(tPositive).sub(this.c).normalized().asNormal());
         }
 
         // But there is one possible result left, when there is only one intersection:
         if (d==0){
             final double tValue = -b / (2*a);
-            if (tValue < 0.0000001){
+            if (tValue < 0.001){
                 return null;
             }
             return new Hit(tValue, ray, this, ray.at(tValue).sub(this.c).normalized().asNormal());

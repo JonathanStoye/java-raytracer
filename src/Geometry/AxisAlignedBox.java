@@ -108,11 +108,11 @@ public class AxisAlignedBox extends Geometry{
         // Finally we just have to check if there is enough space between the Viewers location and the Box.
         Hit returnValue = null;
         for (Hit hit : visibleHits) {
-            if (returnValue == null && hit.t > 0.00000001) {
+            if (returnValue == null && hit.t > 0.0001) {
                 returnValue = hit;
                 continue;
             }
-            if (hit.t > 0.00000001 && hit.t < returnValue.t) {
+            if (0.0001 < hit.t && hit.t < returnValue.t) {
                 returnValue = hit;
             }
         }
