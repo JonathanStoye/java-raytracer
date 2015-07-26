@@ -45,14 +45,14 @@ public class LambertMaterial extends Material{
             Light currentLight = world.lights.get(i);
             // if the Point is illuminated by the current light source, then the color is added.
             if(currentLight.illuminates(hit.ray.at(hit.t), world)){
-                // Vector pointing to the light source
-                Vector3 l = currentLight.directionFrom(hit.ray.at(hit.t)).normalized();
-                // Color of the current Light (cl)
-                Color cl = currentLight.color;
-                // Sum of all the light generated colors
-                Color lambertColor = (cd.mul(cl)).mul(Math.max(0, n.dot(l)*10.0));
-                // Color is added to the return value.
-                c = c.add(lambertColor);
+                    // Vector pointing to the light source
+                    Vector3 l = currentLight.directionFrom(hit.ray.at(hit.t)).normalized();
+                    // Color of the current Light (cl)
+                    Color cl = currentLight.color;
+                    // Sum of all the light generated colors
+                    Color lambertColor = (cd.mul(cl)).mul(Math.max(0, n.dot(l)));
+                    // Color is added to the return value.
+                    c = c.add(lambertColor);
             }
         }
         return c;
