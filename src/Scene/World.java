@@ -2,6 +2,8 @@ package Scene;
 
 import Geometry.*;
 import Light.Light;
+
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -60,7 +62,41 @@ public class World {
         return hit;
     }
 
-    public static void test() {
+    @Override
+    public String toString() {
+        return "World{" +
+                "objects=" + Arrays.toString(objects) +
+                ", backgroundColor=" + backgroundColor +
+                ", ambientLight=" + ambientLight +
+                ", lights=" + lights +
+                ", refractionIndex=" + refractionIndex +
+                '}';
+    }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        World world = (World) o;
+
+        if (refractionIndex != world.refractionIndex) return false;
+        // Probably incorrect - comparing Object[] arrays with Arrays.equals
+        if (!Arrays.equals(objects, world.objects)) return false;
+        if (backgroundColor != null ? !backgroundColor.equals(world.backgroundColor) : world.backgroundColor != null)
+            return false;
+        if (ambientLight != null ? !ambientLight.equals(world.ambientLight) : world.ambientLight != null) return false;
+        return !(lights != null ? !lights.equals(world.lights) : world.lights != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = objects != null ? Arrays.hashCode(objects) : 0;
+        result = 31 * result + (backgroundColor != null ? backgroundColor.hashCode() : 0);
+        result = 31 * result + (ambientLight != null ? ambientLight.hashCode() : 0);
+        result = 31 * result + (lights != null ? lights.hashCode() : 0);
+        result = 31 * result + refractionIndex;
+        return result;
     }
 }

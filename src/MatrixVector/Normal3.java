@@ -69,4 +69,20 @@ public class Normal3 {
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Normal3{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int result = x != null ? x.hashCode() : 0;
+        result = 31 * result + (y != null ? y.hashCode() : 0);
+        result = 31 * result + (z != null ? z.hashCode() : 0);
+        return result;
+    }
 }

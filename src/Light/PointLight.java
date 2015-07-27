@@ -76,4 +76,30 @@ public class PointLight extends Light{
     public Vector3 directionFrom(Point3 point) {
         return this.position.sub(point);
     }
+
+    @Override
+    public String toString() {
+        return "PointLight{" +
+                "position=" + position +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        PointLight that = (PointLight) o;
+
+        return !(position != null ? !position.equals(that.position) : that.position != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + (position != null ? position.hashCode() : 0);
+        return result;
+    }
 }

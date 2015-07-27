@@ -124,4 +124,27 @@ public class ShowImage extends JFrame {
             e.printStackTrace();
         }
     }
+
+    @Override
+    public String toString() {
+        return "ShowImage{" +
+                "image=" + image +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ShowImage showImage = (ShowImage) o;
+
+        return !(image != null ? !image.equals(showImage.image) : showImage.image != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return image != null ? image.hashCode() : 0;
+    }
 }

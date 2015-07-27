@@ -122,41 +122,6 @@ public final class Mat3x3 {
         return new Mat3x3(this.m11,this.m12,v.x,this.m21,this.m22,v.y,this.m31,this.m32,v.z);
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Mat3x3 mat3x3 = (Mat3x3) o;
-
-        if (!m11.equals(mat3x3.m11)) return false;
-        if (!m12.equals(mat3x3.m12)) return false;
-        if (!m13.equals(mat3x3.m13)) return false;
-        if (!m21.equals(mat3x3.m21)) return false;
-        if (!m22.equals(mat3x3.m22)) return false;
-        if (!m23.equals(mat3x3.m23)) return false;
-        if (!m31.equals(mat3x3.m31)) return false;
-        if (!m32.equals(mat3x3.m32)) return false;
-        if (!m33.equals(mat3x3.m33)) return false;
-        return determinant.equals(mat3x3.determinant);
-
-    }
-
-    @Override
-    public int hashCode() {
-        int result = m11.hashCode();
-        result = 31 * result + m12.hashCode();
-        result = 31 * result + m13.hashCode();
-        result = 31 * result + m21.hashCode();
-        result = 31 * result + m22.hashCode();
-        result = 31 * result + m23.hashCode();
-        result = 31 * result + m31.hashCode();
-        result = 31 * result + m32.hashCode();
-        result = 31 * result + m33.hashCode();
-        result = 31 * result + determinant.hashCode();
-        return result;
-    }
-
     /**
      * this function is used to test the functionality of this class
      */
@@ -233,5 +198,56 @@ public final class Mat3x3 {
         else {
             Debugging.log("testColumnChange not successful");
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Mat3x3{" +
+                "m11=" + m11 +
+                ", m12=" + m12 +
+                ", m13=" + m13 +
+                ", m21=" + m21 +
+                ", m22=" + m22 +
+                ", m23=" + m23 +
+                ", m31=" + m31 +
+                ", m32=" + m32 +
+                ", m33=" + m33 +
+                ", determinant=" + determinant +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Mat3x3 mat3x3 = (Mat3x3) o;
+
+        if (m11 != null ? !m11.equals(mat3x3.m11) : mat3x3.m11 != null) return false;
+        if (m12 != null ? !m12.equals(mat3x3.m12) : mat3x3.m12 != null) return false;
+        if (m13 != null ? !m13.equals(mat3x3.m13) : mat3x3.m13 != null) return false;
+        if (m21 != null ? !m21.equals(mat3x3.m21) : mat3x3.m21 != null) return false;
+        if (m22 != null ? !m22.equals(mat3x3.m22) : mat3x3.m22 != null) return false;
+        if (m23 != null ? !m23.equals(mat3x3.m23) : mat3x3.m23 != null) return false;
+        if (m31 != null ? !m31.equals(mat3x3.m31) : mat3x3.m31 != null) return false;
+        if (m32 != null ? !m32.equals(mat3x3.m32) : mat3x3.m32 != null) return false;
+        if (m33 != null ? !m33.equals(mat3x3.m33) : mat3x3.m33 != null) return false;
+        return !(determinant != null ? !determinant.equals(mat3x3.determinant) : mat3x3.determinant != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = m11 != null ? m11.hashCode() : 0;
+        result = 31 * result + (m12 != null ? m12.hashCode() : 0);
+        result = 31 * result + (m13 != null ? m13.hashCode() : 0);
+        result = 31 * result + (m21 != null ? m21.hashCode() : 0);
+        result = 31 * result + (m22 != null ? m22.hashCode() : 0);
+        result = 31 * result + (m23 != null ? m23.hashCode() : 0);
+        result = 31 * result + (m31 != null ? m31.hashCode() : 0);
+        result = 31 * result + (m32 != null ? m32.hashCode() : 0);
+        result = 31 * result + (m33 != null ? m33.hashCode() : 0);
+        result = 31 * result + (determinant != null ? determinant.hashCode() : 0);
+        return result;
     }
 }

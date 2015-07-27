@@ -80,4 +80,37 @@ public class ReflectiveMaterial extends Material{
 
         return c;
     }
+
+    @Override
+    public String toString() {
+        return "ReflectiveMaterial{" +
+                "diffuse=" + diffuse +
+                ", specular=" + specular +
+                ", exponent=" + exponent +
+                ", reflection=" + reflection +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ReflectiveMaterial that = (ReflectiveMaterial) o;
+
+        if (exponent != that.exponent) return false;
+        if (diffuse != null ? !diffuse.equals(that.diffuse) : that.diffuse != null) return false;
+        if (specular != null ? !specular.equals(that.specular) : that.specular != null) return false;
+        return !(reflection != null ? !reflection.equals(that.reflection) : that.reflection != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = diffuse != null ? diffuse.hashCode() : 0;
+        result = 31 * result + (specular != null ? specular.hashCode() : 0);
+        result = 31 * result + exponent;
+        result = 31 * result + (reflection != null ? reflection.hashCode() : 0);
+        return result;
+    }
 }

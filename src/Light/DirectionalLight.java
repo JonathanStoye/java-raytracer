@@ -66,4 +66,27 @@ public class DirectionalLight extends Light {
     public Vector3 directionFrom(Point3 point) {
         return direction.mul(-1.0).normalized();
     }
+
+    @Override
+    public String toString() {
+        return "DirectionalLight{" +
+                "direction=" + direction +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        DirectionalLight that = (DirectionalLight) o;
+
+        return !(direction != null ? !direction.equals(that.direction) : that.direction != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return direction != null ? direction.hashCode() : 0;
+    }
 }
