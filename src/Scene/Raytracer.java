@@ -309,12 +309,13 @@ public class Raytracer {
         //Setting up the Test-Sphere
         Geometry[] objects = new Geometry[1];
         Sphere sphere = new Sphere(new Point3(0.0, 0.0, 0.0), 1, new PhongMaterial(new Color(0.6, 0.0, 0.0), new Color(1.0,1.0,1.0), 64), this.threshold);
-        objects[0] = sphere;
 
         //Transforming Objects
         List<Geometry> transobjects = new ArrayList<>();
         transobjects.add(sphere);
         Node node = new Node(new Transform().rescale(6.0, 1.2, 4.0), transobjects, this.threshold);
+
+        objects[0]=node;
 
         // lights
         List<Light> lights = new ArrayList<Light>();
