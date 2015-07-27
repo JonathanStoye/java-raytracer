@@ -8,11 +8,11 @@ import Scene.*;
 /**
  * Created by dave_digger on 27.07.2015.
  */
-public class TestTransparentMaterial extends Material{
+public class DavidsTransparentMaterial extends Material{
 
     final double refractionIndex;
 
-    public TestTransparentMaterial(double refractionIndex) {
+    public DavidsTransparentMaterial(double refractionIndex) {
         this.refractionIndex = refractionIndex;
     }
 
