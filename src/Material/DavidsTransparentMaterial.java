@@ -53,12 +53,13 @@ public class DavidsTransparentMaterial extends Material{
         Vector3 vec_t = vec_d.mul(n_1 / n_2).sub(normal_n.mul(alpha_2 - (n_1 / n_2) * alpha_2));
 
         Point3 calc_Point = hit.ray.at(hit.t);
+        if(vec_t == null){
+            return recursiveTracer.trace(new Ray(hit.ray.at(hit.t), vec_r_d));
+        } else {
+            RecursiveTracer newRecursiveTracer = new RecursiveTracer(world, recursiveTracer.recursion);
 
-        if(n_1 > n_2){
-//          big_R = Part of the Reflexion
-//          big_T = Part of the Tramsmission
-//          R and T have both a value between 0 and 1 and there sum is always 1
-//          bit_R_zero = Is used to calculate big_R
+
+
             double big_R_zero = Math.pow(((n_1-n_2) / (n_1 + n_2)),(2));
 
 //          Calculation of R:
@@ -73,13 +74,10 @@ public class DavidsTransparentMaterial extends Material{
             Hit reflection_Hit = world.hit(reflection_Ray);
             Hit refraction_Hit = world.hit(refraction_Ray);
 
-            Color reflection_Color = reflection_Hit.geo.material.colorFor(reflection_Hit, world, recursiveTracer).mul(big_R);
-            Color refraction_Color = refraction_Hit.geo.material.colorFor(refraction_Hit, world, recursiveTracer).mul(big_R);
+            Color reflection_Color = recursiveTracer.trace(new Ray(hit.ray.at(hit.t), vec_r_d)).mul(big_R);
+            Color refraction_Color = newRecursiveTracer.trace(new Ray(hit.ray.at(hit.t), vec_t)).mul(big_T);
 
-//          The following formula is used to calculate the right Color
-            Color c = reflection_Color.add(refraction_Color);
-
-            return c;
-        } else return null;
+            return reflection_Color.add(refraction_Color);
+        }
     }
 }
