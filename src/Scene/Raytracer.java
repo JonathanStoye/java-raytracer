@@ -408,7 +408,7 @@ public class Raytracer {
         //AAB
         AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, 3.0), new Point3(0.5, 1.0, 4.0), new TransparentMaterial(1.33), this.threshold);
         //Triangle
-        Triangle triangle = new Triangle(new Point3(0.7, 0.5, 3.0), new Point3(1.3, 0.5, 3.0), new Point3(0.7, 0.5, -4.0), new PhongMaterial(new Color(0.0, 1.0, 0.0), new Color (0.0, 1.0, 0.0), 20), this.threshold);
+        Triangle triangle = new Triangle(new Point3(1.3, 0.5, 3.0), new Point3(0.7, 0.5, 3.0), new Point3(0.7, 0.5, -4.0), new PhongMaterial(new Color(0.0, 1.0, 0.0), new Color (0.0, 1.0, 0.0), 20), this.threshold);
 
         objects[0] = plane;
         objects[1] = sphere1;

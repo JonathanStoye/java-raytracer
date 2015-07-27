@@ -29,11 +29,11 @@ public class TransparentMaterial extends Material
         Normal3 normal = hit.n;
         // Vector pointing in the negative direction of d (-d)
         Vector3 d = hit.ray.direction.mul(-1.0);
-        // nSnell = n1/n2 or n2/n1
+        // nSnell = n1/n2 or n2/n1, depends on Snell's Law and on the angle
         double nSnell;
         Normal3 nTemp;
 
-        // boundaries, where the light it refracted --> Snell's Law | < 0 Stumpfer Winkel, = 0 Rechter Winkel, > 0 Spitzer Winkel
+        // boundaries, where the light it refracted --> Snell's Law | < 0 obtuse angle, = 0 right Winkel, > 0 acute Winkel
         // if n > 0, it points from the surface toward the side where the light is coming from --> into the geometry
         // if n < 0, it points to the side without the light --> out of the geometry
         if(d.dot(normal) < 0) //
@@ -42,7 +42,7 @@ public class TransparentMaterial extends Material
             nSnell = indexOfRefraction / world.refractionIndex;
             nTemp = normal.mul(- 1.0); //n > 0
         }
-        else // e.dot(normal) >= 0
+        else // d.dot(normal) >= 0
         {
             // n = (n1 / n2)
             nSnell = world.refractionIndex / indexOfRefraction;
@@ -50,7 +50,7 @@ public class TransparentMaterial extends Material
         }
 
         // Angle cosTheta_1 = (-d) * n
-        Double cosTheta1 = nTemp.dot(d);
+        Double cosTheta1 = d.dot(nTemp);
 
         // Angle cosTheta_2 = Math.sqrt(1 - (n_1 / n_2)^2)*(1 - cosTheta_1^2))
         Double cosThetaTemp = 1 - (Math.pow(nSnell, 2.0)) * 1 - (Math.pow(cosTheta1, 2.0));
@@ -65,9 +65,11 @@ public class TransparentMaterial extends Material
         {
             return recursiveTracer.trace(frR);
         }
-        else
+        else //cosThetaTemp >= 0
         {
-            Vector3 t = d.mul(nSnell).sub(nTemp.mul(cosTheta2 - (nSnell * cosTheta1)));
+            // t = (n1/n2)*d - (cosTheta_2 - (n1/n2)*cosTheta_1))*normal
+            Vector3 t = d.mul(-1.0).mul(nSnell).sub(nTemp.mul(cosTheta2 - (nSnell * cosTheta1)));
+            //// fr[(pr, rt)]
             Ray frT = new Ray(pointR, t);
 
             // Schlicksche Approximation
@@ -84,9 +86,9 @@ public class TransparentMaterial extends Material
                 // R0 = ((n1 -n2)/(n1 + n2))^2
                 r0 = Math.pow(((world.refractionIndex - indexOfRefraction) / (world.refractionIndex + indexOfRefraction)), 2.0);
             }
-            // calculate R (Reflexion)
+            // calculate R (Reflexion) R = R0 + (1 - R0)(1 - cosTheta_1)^5
             Double rR = Math.pow((r0 + (1 - r0) * (1 - cosTheta1)), 5.0);
-            // calculate T (Transmission)
+            // calculate T (Transmission) T = 1 - R
             Double tT = 1- rR;
 
             // c = R * fr[(pr, rd)] + T * fr[(pr, rt)]
