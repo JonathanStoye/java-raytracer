@@ -1,8 +1,5 @@
 import Scene.Raytracer;
 
-import javax.swing.*;
-import java.awt.*;
-
 /**
  * Created by Jonathan on 28.04.15.
  * This is the main class which starts the raytracer and bootstraps the hole thing
@@ -16,9 +13,8 @@ public class Main {
 //        raytracer.testAllTransformations();
 //        raytracer.testDisc();
 //        raytracer.testAAB();
-        raytracer.testSphere();
-
-
+//        raytracer.testSphere();
+        raytracer.testSphereTransparent();
     }
 
     private static void testAll() {

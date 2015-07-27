@@ -13,6 +13,15 @@ public class World {
     public final Color backgroundColor;
     public final Color ambientLight;
     public final List<Light> lights;
+    public int refractionIndex;     //it won't allow me to set it to "final"
+
+    public World(Geometry[] objects, Color backgroundColor, Color ambientLight, List<Light> lights, int refractionIndex) {
+        this.objects = objects;
+        this.backgroundColor = backgroundColor;
+        this.ambientLight = ambientLight;
+        this.lights = lights;
+        this.refractionIndex = refractionIndex;
+    }
 
     public World(Geometry[] objects, Color backgroundColor, Color ambientLight, List<Light> lights) {
         this.objects = objects;

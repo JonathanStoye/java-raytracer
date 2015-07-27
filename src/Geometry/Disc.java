@@ -8,7 +8,7 @@ import Scene.Hit;
 import Scene.Ray;
 
 /**
- * Created by Vickarl on 25.07.15.
+ * Created by Viktoria de Koning on 25.07.15.
  */
 public class Disc extends Plane
 {

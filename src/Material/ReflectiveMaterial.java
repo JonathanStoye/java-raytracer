@@ -69,7 +69,7 @@ public class ReflectiveMaterial extends Material{
         // If the Ray is hitting another Material, then the Color is added to the Color c.
         Vector3 rd = e.reflectedOn(hit.n);
         //
-        //                                            this is the recursive function:
+        //this is the recursive function:
         //                                    |                                               |
         Point3 point3 = hit.ray.at(hit.t - 0.001);
         Ray ray = new Ray(point3, rd);

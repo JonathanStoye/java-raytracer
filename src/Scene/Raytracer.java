@@ -8,16 +8,11 @@ import Light.DirectionalLight;
 import Light.Light;
 import Light.PointLight;
 import Light.SpotLight;
-import Material.LambertMaterial;
-import Material.PhongMaterial;
-import Material.ReflectiveMaterial;
-import Material.SingleColorMaterial;
+import Material.*;
 import MatrixVector.*;
-import Utillities.Debugging;
 import Visualization.Painter;
 
 import javax.swing.*;
-import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -356,15 +351,9 @@ public class Raytracer {
         Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(0.0, 0.0, 0.0), 64, new Color(0.5, 0.5, 0.5)), this.threshold);
         // red sphere
        Disc disc1 = new Disc(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 2000, new Color(0.5, 0.5, 0.5)), 5.0, this.threshold);
-        // green sphere
-        //Disc disc2 = new Disc(new Point3(0.0, 1.0, 0.0), new Normal3(1.0, 0.0, 0.0), new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)), 3.0);
-        // blue sphere
-        //Disc disc3 = new Disc(new Point3(3.0, 1.0, 0.0), new Normal3(0.0, 0.0, 1.0), new ReflectiveMaterial(new Color(0.0, 0.0, 1.0), new Color(1.0, 1.0, 1.0), 64, new Color(0.5, 0.5, 0.5)), 4.0);
 
         objects[0] = disc1;
         objects[1] = plane;
-        //objects[2] = disc2;
-        //objects[3] = disc3;
         // lights
         List<Light> lights = new ArrayList<Light>();
         lights.add(new PointLight(new Color(1.0, 1.0, 1.0), new Point3(8.0, 8.0, 8.0), true));
@@ -391,6 +380,63 @@ public class Raytracer {
 
         Painter p = new Painter(this.width, this. height, this.pixels);
         p.draw();
+    }
+
+    public void testSphereTransparent()
+    {
+        Geometry[] objects = new Geometry[12];
+        Plane plane = new Plane(new Point3(0.0, 0.0, 0.0), new Normal3(0.0, 1.0, 0.0), new ReflectiveMaterial(new Color(1.0, 1.0, 1.0), new Color(1.0, 1.0, 1.0), 10, new Color(1.0, 1.0, 1.0)), this.threshold);
+        // red sphere
+        Sphere sphere1 = new Sphere(new Point3(0.0, 1.0, 0.0), 0.5, new ReflectiveMaterial(new Color(1.0, 0.0, 0.0), new Color(1.0, 1.0, 1.0), 10, new Color(1.0, 0.5, 0.5)), this.threshold);
+        // green sphere
+        Sphere sphere2 = new Sphere(new Point3(-1.5, 1.0, 0.0), 0.5, new ReflectiveMaterial(new Color(0.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 10, new Color(1.0, 0.5, 0.5)), this.threshold);
+        // blue sphere
+        Sphere sphere3 = new Sphere(new Point3(1.5, 1.0, 0.0), 0.5, new ReflectiveMaterial(new Color(0.0, 0.0, 1.0), new Color(1.0, 1.0, 1.0), 10, new Color(1.0, 0.5, 0.5)), this.threshold);
+        // red sphere
+        Sphere sphere4 = new Sphere(new Point3(0.0, 1.0, -1.5), 0.5, new ReflectiveMaterial(new Color(0.0, 1.0, 1.0), new Color(1.0, 1.0, 1.0), 10, new Color(1.0, 0.5, 0.5)), this.threshold);
+        // green sphere
+        Sphere sphere5 = new Sphere(new Point3(-1.5, 1.0, -1.5), 0.5, new ReflectiveMaterial(new Color(1.0, 0.0, 1.0), new Color(1.0, 1.0, 1.0), 10, new Color(1.0, 0.5, 0.5)), this.threshold);
+        // blue sphere
+        Sphere sphere6 = new Sphere(new Point3(1.5, 1.0, -1.5), 0.5, new ReflectiveMaterial(new Color(1.0, 1.0, 0.0), new Color(1.0, 1.0, 1.0), 10, new Color(1.0, 0.5, 0.5)), this.threshold);
+        // transparent sphere
+        Sphere sphere7 = new Sphere(new Point3(0.0, 2.0, 1.5), 0.5, new TransparentMaterial(1.33), this.threshold);
+        // transparent sphere
+        Sphere sphere8 = new Sphere(new Point3(-1.5, 2.0, 1.5), 0.5, new TransparentMaterial(1.33), this.threshold);
+        // transparent sphere
+        Sphere sphere9 = new Sphere(new Point3(1.5, 2.0, 1.5), 0.5, new TransparentMaterial(1.33), this.threshold);
+        //AAB
+        AxisAlignedBox aab = new AxisAlignedBox(new Point3(-0.5, 0.0, 3.0), new Point3(0.5, 1.0, 4.0), new TransparentMaterial(1.33), this.threshold);
+        //Triangle
+        Triangle triangle = new Triangle(new Point3(0.7, 0.5, 3.0), new Point3(1.3, 0.5, 3.0), new Point3(0.7, 0.5, -4.0), new PhongMaterial(new Color(0.0, 1.0, 0.0), new Color (0.0, 1.0, 0.0), 20), this.threshold);
+
+        objects[0] = plane;
+        objects[1] = sphere1;
+        objects[2] = sphere2;
+        objects[3] = sphere3;
+        objects[4] = sphere4;
+        objects[5] = sphere5;
+        objects[6] = sphere6;
+        objects[7] = sphere7;
+        objects[8] = sphere8;
+        objects[9] = sphere9;
+        objects[10] = aab;
+        objects[11] = triangle;
+        // lights
+        List<Light> lights = new ArrayList<Light>();
+        lights.add(new PointLight(new Color(0.3, 0.3, 0.3), new Point3(5.0, 5.0, -10.0), true));
+        lights.add(new SpotLight(new Color(0.3, 0.3, 0.3), new Point3(0.0, 5.0, -10.0), new Vector3(0.0, -1.0, 0.0), Math.PI/8, true));
+        lights.add(new DirectionalLight(new Color(0.3, 0.3, 0.3), new Vector3(1.0, -1.0, 0.0), true));
+        // camera
+        PerspectiveCamera camera = new PerspectiveCamera(new Point3(8.0, 8.0, 8.0), new Vector3(-1.0, -1.0, -1.0), new Vector3(0.0, 1.0, 0.0), Math.PI / 4);
+        // world
+        World world = new World(objects, new Color(0.0, 0.0, 0.0), new Color(0.1, 0.1, 0.1), lights, 1);
+        // render the whole thing
+        render(camera, world);
+    }
+
+    public void testTransparent()
+    {
+        testSphereTransparent();
     }
 
     public void testGeometries()
