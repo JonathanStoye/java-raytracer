@@ -114,4 +114,13 @@ public final class Point3 {
         result = 31 * result + (int) (temp ^ (temp >>> 32));
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Point3{" +
+                "x=" + x +
+                ", y=" + y +
+                ", z=" + z +
+                '}';
+    }
 }

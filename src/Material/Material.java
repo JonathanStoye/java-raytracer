@@ -19,4 +19,9 @@ public abstract class Material {
      * @return Color object which is describing the color of the analysed hit.
      */
     public abstract Scene.Color colorFor(Hit hit, World world, RecursiveTracer recursiveTracer);
+
+    @Override
+    public String toString() {
+        return "Material{}";
+    }
 }

@@ -509,7 +509,7 @@ public class Raytracer {
         double lastAverageTime;
 
         if(world.lights == null){
-            lastAverageTime = (this.width * this.height* world.objects.length + 100000) / 100000;
+            lastAverageTime = (this.width * this.height * world.objects.length + 100000) / 100000;
         } else if (world.objects == null) {
             lastAverageTime = (this.width * this.height * world.lights.size()  + 100000) / 100000;
         } else lastAverageTime = (this.width * this.height * world.lights.size() * world.objects.length + 100000) / 100000;

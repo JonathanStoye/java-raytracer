@@ -161,4 +161,42 @@ public class PaintDiagonal extends JFrame{
         }
     }
 
+    @Override
+    public String toString() {
+        return "PaintDiagonal{" +
+                "buff=" + buff +
+                ", panel=" + panel +
+                ", backGroundColor=" + backGroundColor +
+                ", pixelColor=" + pixelColor +
+                ", width=" + width +
+                ", height=" + height +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PaintDiagonal that = (PaintDiagonal) o;
+
+        if (backGroundColor != that.backGroundColor) return false;
+        if (pixelColor != that.pixelColor) return false;
+        if (width != that.width) return false;
+        if (height != that.height) return false;
+        if (buff != null ? !buff.equals(that.buff) : that.buff != null) return false;
+        return !(panel != null ? !panel.equals(that.panel) : that.panel != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = buff != null ? buff.hashCode() : 0;
+        result = 31 * result + (panel != null ? panel.hashCode() : 0);
+        result = 31 * result + backGroundColor;
+        result = 31 * result + pixelColor;
+        result = 31 * result + width;
+        result = 31 * result + height;
+        return result;
+    }
 }

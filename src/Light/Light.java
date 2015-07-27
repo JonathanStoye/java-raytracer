@@ -60,4 +60,30 @@ public abstract class Light {
      */
     public abstract Vector3 directionFrom(Point3 point);
 
+    @Override
+    public String toString() {
+        return "Light{" +
+                "color=" + color +
+                ", castsShadows=" + castsShadows +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Light light = (Light) o;
+
+        if (castsShadows != light.castsShadows) return false;
+        return !(color != null ? !color.equals(light.color) : light.color != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = color != null ? color.hashCode() : 0;
+        result = 31 * result + (castsShadows ? 1 : 0);
+        return result;
+    }
 }

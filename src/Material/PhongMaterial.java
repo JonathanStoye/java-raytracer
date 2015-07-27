@@ -55,4 +55,34 @@ public class PhongMaterial extends Material{
         }
         return c;
     }
+
+    @Override
+    public String toString() {
+        return "PhongMaterial{" +
+                "diffuse=" + diffuse +
+                ", specular=" + specular +
+                ", exponent=" + exponent +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PhongMaterial that = (PhongMaterial) o;
+
+        if (exponent != that.exponent) return false;
+        if (diffuse != null ? !diffuse.equals(that.diffuse) : that.diffuse != null) return false;
+        return !(specular != null ? !specular.equals(that.specular) : that.specular != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = diffuse != null ? diffuse.hashCode() : 0;
+        result = 31 * result + (specular != null ? specular.hashCode() : 0);
+        result = 31 * result + exponent;
+        return result;
+    }
 }

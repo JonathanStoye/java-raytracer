@@ -246,4 +246,17 @@ public class Color {
         final String s = "color("+this.r+", "+this.g+", "+this.b+")";
         return s;
     }
+
+    @Override
+    public int hashCode() {
+        int result;
+        long temp;
+        temp = Double.doubleToLongBits(r);
+        result = (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(g);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        temp = Double.doubleToLongBits(b);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }

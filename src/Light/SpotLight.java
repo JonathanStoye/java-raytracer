@@ -79,4 +79,38 @@ public class SpotLight extends Light {
     public Vector3 directionFrom(Point3 point) {
         return this.position.sub(point);
     }
+
+    @Override
+    public String toString() {
+        return "SpotLight{" +
+                "position=" + position +
+                ", direction=" + direction +
+                ", halfAngle=" + halfAngle +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        SpotLight spotLight = (SpotLight) o;
+
+        if (Double.compare(spotLight.halfAngle, halfAngle) != 0) return false;
+        if (position != null ? !position.equals(spotLight.position) : spotLight.position != null) return false;
+        return !(direction != null ? !direction.equals(spotLight.direction) : spotLight.direction != null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        long temp;
+        result = 31 * result + (position != null ? position.hashCode() : 0);
+        result = 31 * result + (direction != null ? direction.hashCode() : 0);
+        temp = Double.doubleToLongBits(halfAngle);
+        result = 31 * result + (int) (temp ^ (temp >>> 32));
+        return result;
+    }
 }
