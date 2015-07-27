@@ -78,10 +78,8 @@ public class DavidsTransparentMaterial extends Material{
 
 //          The following formula is used to calculate the right Color
             Color c = reflection_Color.add(refraction_Color);
-//
 
-        }
-
-        return null;
+            return c;
+        } else return null;
     }
 }
