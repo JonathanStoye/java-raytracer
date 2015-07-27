@@ -28,7 +28,7 @@ public class TransparentMaterial extends Material
         // Normal of the hit object
         Normal3 normal = hit.n;
         // Vector pointing in the negative direction of d (-d)
-        Vector3 e = hit.ray.direction.mul(-1.0);
+        Vector3 e = hit.ray.direction;
         // Vector which is reflected by the Material using the Normal normal
         Vector3 r = e.reflectedOn(normal);
         // Vector pointing to the light source
@@ -88,7 +88,7 @@ public class TransparentMaterial extends Material
             // calculate R (Reflexion) R = R0 + (1 - R0)(1 - cosTheta_1)^5
             Double rR = Math.pow((r0 + (1 - r0) * (1 - cosThetaI)), 5.0);
             // calculate T (Transmission) T = 1 - R
-            Double tT = 1- rR;
+            Double tT = 1 - rR;
 
             // c = R * fr[(pr, rd)] + T * fr[(pr, rt)]
             // Reflexion added to the color
