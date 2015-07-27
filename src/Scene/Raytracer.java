@@ -401,9 +401,8 @@ public class Raytracer {
 
     public void testAllTransformations()
     {
-       // testSphereTransformation();
-        testBoxTransformation();
         testSphereTransformation();
+        testBoxTransformation();
     }
 
     public void testAllMaterialScenes()
