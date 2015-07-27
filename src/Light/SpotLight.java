@@ -58,20 +58,20 @@ public class SpotLight extends Light {
      */
     @Override
     public boolean illuminates(Point3 point, World world) {
-
         final Vector3 diffVector = this.directionFrom(point).mul(-1.0);
-
         double angle = (diffVector.dot(this.direction)) / (diffVector.magnitude * this.direction.magnitude);
         angle = Math.acos(angle);
 
-        Hit hit = world.hit(new Ray(point, diffVector));
-        double t = diffVector.magnitude/1;
-
-        if (angle > this.halfAngle || (hit != null && hit.t < t)){
-            return false;
-        }
-        else {
-            return true;
+        if (!this.castsShadows) {
+            if (angle > this.halfAngle) {
+                return false;
+            } else return true;
+        } else {
+            Hit hit = world.hit(new Ray(point, diffVector));
+            double t = diffVector.magnitude/1;
+            if (angle > this.halfAngle || (hit != null && hit.t < t)){
+                return false;
+            } else return true;
         }
     }
 

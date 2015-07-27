@@ -42,7 +42,7 @@ public class Transform {
      * @param point The coordinates of this points are used to translate the object.
      * @return returns the current object translated to the new location
      */
-    private Transform translation(final Point3 point){
+    public Transform translation(final Point3 point){
         Mat4x4 transformationMatrix = new Mat4x4(1.0, 0.0, 0.0, point.x, 0.0, 1.0, 0.0, point.y, 0.0, 0.0, 1.0, point.z, 0.0, 0.0, 0.0, 1.0);
         Mat4x4 transformationInverse = new Mat4x4(1.0, 0.0, 0.0, -point.x, 0.0, 1.0, 0.0, -point.y, 0.0, 0.0, 1.0, -point.z, 0.0, 0.0, 0.0, 1.0);
         return new Transform(m.mul(transformationMatrix), i.mul(transformationInverse));
@@ -128,7 +128,7 @@ public class Transform {
     }
 
     /**
-     * Multiplies the given ray with the matrix of the tramsform-object
+     * Multiplies the given Normal with the matrix of the tramsform-object
      * @param normal Normal vector which is supposed to be multiplied with the transform-object.
      * @return new Normal vector with its values multiplied with the transformation-object
      */
