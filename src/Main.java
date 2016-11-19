@@ -9,12 +9,12 @@ public class Main {
     public static void main(String [] args) {
         //testAll();
 //        Color.test();
-        Raytracer raytracer = new Raytracer(500, 500);
+        Raytracer raytracer = new Raytracer(1024, 768);
 //        raytracer.testAllTransformations();
 //        raytracer.testDisc();
 //        raytracer.testAAB();
-//        raytracer.testSphere();
-        raytracer.testSphereTransparent();
+        raytracer.testSphere();
+//        raytracer.testSphereTransparent();
     }
 
     private static void testAll() {
